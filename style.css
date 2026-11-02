@@ -131,13 +131,13 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .menu-item:active { transform: scale(.97); }
 .menu-item.menu-pressed { animation: menu-press 220ms ease-out; }
 @keyframes dome-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.018); } }
-@keyframes city-orb-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+@keyframes city-orb-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @keyframes city-window-light { 0%, 65%, 100% { filter: brightness(1); } 80% { filter: brightness(1.09); } }
-@keyframes pink-plant-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.8px); } }
-@keyframes leaf-green-sway { 0%, 100% { transform: rotate(-1.8deg); } 50% { transform: rotate(1.8deg); } }
-@keyframes leaf-tall-sway { 0%, 100% { transform: rotate(1.4deg); } 50% { transform: rotate(-1.4deg); } }
-@keyframes leaf-slant-sway { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(2deg); } }
-@keyframes home-nav-drift { 0%, 100% { translate: -1px 0; } 50% { translate: 1px -2.5px; } }
+@keyframes pink-plant-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes leaf-green-sway { 0%, 100% { transform: rotate(-3.5deg); } 50% { transform: rotate(3.5deg); } }
+@keyframes leaf-tall-sway { 0%, 100% { transform: rotate(2.7deg); } 50% { transform: rotate(-2.7deg); } }
+@keyframes leaf-slant-sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(3deg); } }
+@keyframes home-nav-drift { 0%, 100% { translate: -2px 0; } 50% { translate: 2px -4px; } }
 @keyframes menu-press { 0%, 100% { transform: scale(1); } 45% { transform: scale(.96); } }
 @media (prefers-reduced-motion: reduce) {
   .home-yellow-dome, .home-pink-orb, .home-tower-windows, .home-pink-windows, .home-blue-windows, .home-pink-stem, .leaf-motion, .home .nav-button, .menu-item.menu-pressed { animation: none; }
