@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome — Convenience Tax Bureau</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="scene welcome" aria-label="Welcome to Convenience Tax Bureau">
+    <svg class="illustration" viewBox="0 0 600 338" aria-hidden="true">
+      <defs>
+        <linearGradient id="sunset" x2="0" y2="1"><stop stop-color="#ee3d08"/><stop offset=".22" stop-color="#f25616"/><stop offset=".88" stop-color="#f5f5ee"/></linearGradient>
+        <filter id="grain" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="1" seed="12" stitchTiles="stitch"/><feComponentTransfer result="coloredGrain"><feFuncR type="linear" slope="2" intercept="-.5"/><feFuncG type="linear" slope="2" intercept="-.5"/><feFuncB type="linear" slope="2" intercept="-.5"/><feFuncA type="linear" slope="1"/></feComponentTransfer><feComposite in="SourceGraphic" in2="coloredGrain" operator="arithmetic" k1="0" k2="1" k3=".36" k4="-.18"/></filter>
+      </defs>
+      <path fill="url(#sunset)" filter="url(#grain)" d="M0 0h600v338H0z"/>
+      <path fill="#ffd322" d="M44 303V76L66 16h27l24 60v227z"/>
+      <ellipse cx="80" cy="79" rx="24" ry="25" fill="#fffbed"/>
+      <path d="M80 62v22h18" stroke="#f44b35" stroke-width="2" fill="none"/>
+      <path fill="#f7f0b0" d="M85 208h119v95H85z"/>
+      <path fill="#fcfaf0" d="M85 180h109l29 47H85z"/>
+      <path fill="#00a500" d="M0 138h85v165H0z"/>
+      <path fill="#ffdd2e" d="M12 161h54v122H12z"/>
+      <path fill="#fffbed" d="M12 183h54v13H12zm0 35h54v13H12zm0 34h54v13H12z"/>
+      <path fill="#5898e9" d="M98 245h88v35H98z"/>
+      <path fill="#fffbed" d="M112 245h9v35h-9zm25 0h9v35h-9zm25 0h9v35h-9z"/>
+      <path fill="#fffbed" d="m519 140-1-51 24-1 2 52z"/>
+      <path fill="#f7f0b0" d="M420 200h159v103H420z"/>
+      <path fill="#5896e6" d="m392 203 28-60 148-3 26 63z"/>
+      <path fill="#fffbed" d="M446 220h42v45h-42z"/>
+      <path fill="#dd85d2" d="M459 220h29v45h-29z"/>
+      <ellipse cx="536" cy="283" rx="21" ry="34" fill="#00a500"/>
+      <path fill="#baa5ca" d="M0 303h600v35H0z"/>
+    </svg>
+    <h1>Welcome to<br><span>Convenience Tax Bureau</span></h1>
+    <div class="welcome-actions">
+      <a class="welcome-button" href="home.html">START</a>
+      <button class="welcome-button" data-action="continue">CONTINUE</button>
+      <button class="welcome-button" data-action="record">RECORD</button>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
