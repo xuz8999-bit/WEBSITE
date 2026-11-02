@@ -72,7 +72,6 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .window-glow { animation: window-breathe 9s ease-in-out -4.7s infinite; }
 .building-detail { animation: detail-breathe 8s ease-in-out -3.6s infinite; }
 .plant-sway { transform-origin: 536px 303px; animation: plant-breathe 4s ease-in-out -.9s infinite; }
-.poster-cloud { animation: cloud-drift 30s ease-in-out -8s infinite alternate; }
 .welcome.start-playing .clock-hands { animation: clock-turn 250ms ease-in-out both; }
 @keyframes tower-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @keyframes house-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
@@ -80,9 +79,8 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 @keyframes plant-breathe { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 @keyframes window-breathe { 0%, 65%, 100% { filter: brightness(1); } 82% { filter: brightness(1.07); } }
 @keyframes detail-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .91; } }
-@keyframes cloud-drift { from { transform: translateX(-14px); } to { transform: translateX(14px); } }
 @media (prefers-reduced-motion: reduce) {
-  .welcome .clock-hands, .welcome.start-playing .clock-hands, .tower-float, .house-float, .roof-sway, .window-glow, .building-detail, .plant-sway, .poster-cloud { animation: none; }
+  .welcome .clock-hands, .welcome.start-playing .clock-hands, .tower-float, .house-float, .roof-sway, .window-glow, .building-detail, .plant-sway { animation: none; }
   .welcome .welcome-button { transition: none; }
   .welcome .welcome-button:hover, .welcome .welcome-button:active { transform: none; }
 }
