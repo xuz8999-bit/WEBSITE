@@ -7,51 +7,10 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="scene home" aria-label="Home">
-    <svg class="illustration" viewBox="0 0 600 338" aria-hidden="true">
-      <defs>
-        <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#5799e9"/><stop offset=".28" stop-color="#8dbdeb"/><stop offset=".94" stop-color="#f4f5ee"/></linearGradient>
-        <filter id="grain" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="1" seed="18" stitchTiles="stitch"/><feComponentTransfer result="coloredGrain"><feFuncR type="linear" slope="2" intercept="-.5"/><feFuncG type="linear" slope="2" intercept="-.5"/><feFuncB type="linear" slope="2" intercept="-.5"/><feFuncA type="linear" slope="1"/></feComponentTransfer><feComposite in="SourceGraphic" in2="coloredGrain" operator="arithmetic" k1="0" k2="1" k3=".36" k4="-.18"/></filter>
-      </defs>
-      <path fill="url(#sky)" filter="url(#grain)" d="M0 0h600v338H0z"/>
-      <circle cx="512" cy="49" r="34" fill="#d881cb"/>
-      <path fill="#b7a0c7" d="m12 19-7 30h35l-8-30zM0 78h53v260H0z"/>
-      <path fill="#f6edac" d="M0 46c28-20 48-3 53 25v9h35v14H0z"/>
-      <path fill="#ffd329" d="M8 115h29v27H8zm0 45h29v27H8zm0 40h29v27H8zm0 42h29v27H8z"/>
-      <path fill="#fff9ec" d="M8 134h29v8H8zm0 45h29v8H8zm0 40h29v8H8zm0 42h29v8H8z"/>
-      <path fill="#dc4b2d" d="M53 175q21-16 39 0v163H53z"/>
-      <path fill="#ffd31f" d="M86 137 178 205v133H86z"/>
-      <path fill="#fff9ec" d="M106 223h46v33h-46z"/>
-      <path fill="#dc86ce" d="M117 223h35v33h-35zM106 268h46v34h-46z"/>
-      <path fill="#f7edac" d="m43 276 19-1 11-10 13 10 20-10 4 13h21l7 15 15 7-6 16 16 3-26 19H51l-17-8 17-12-18-18 17-11z"/>
-      <g fill="#de4b2d"><circle cx="70" cy="307" r="5"/><circle cx="107" cy="295" r="5"/><circle cx="119" cy="319" r="5"/></g>
-      <path fill="#00a600" d="M241 188h121v150H266c6-29-7-64-25-80z"/>
-      <path fill="#ffd329" d="M259 211h85v113h-78c2-23-2-46-7-58z"/>
-      <path fill="#fff1a0" d="M259 230h85v8h-85zm0 32h85v8h-85zm0 32h85v8h-85z"/>
-      <path fill="#f4edac" d="M176 338c-12-45-2-111 38-111s61 66 51 111z"/>
-      <path d="M218 338v-81m0 22 14-13m-14 28-24-20m24 51 32-28m-9 12 16 7" stroke="#e84f30" stroke-width="2.7" fill="none"/>
-      <path fill="#fffaf0" d="M463 121h65v217h-65z"/>
-      <path fill="#dd83ce" d="M475 139h44v17h-44zm0 27h44v7h-44zm0 18h44v17h-44zm0 27h44v7h-44z"/>
-      <path fill="#b79fc6" d="M438 230h79v108h-79z"/>
-      <path fill="#fffbed" d="M447 244h14v83h-14zm24 0h14v42h-14zm24 0h13v77h-13z"/>
-      <path fill="#f5efb1" d="M517 207h83v131h-83z"/>
-      <path fill="#5895e5" d="M529 227h58v21h-58zm0 36h58v21h-58zm0 35h58v21h-58z"/>
-      <path d="M365 347c-22-36-28-66-5-96 14-18 36-24 57-21" fill="none" stroke="#d981cb" stroke-width="20"/>
-      <ellipse cx="419" cy="202" rx="9" ry="33" fill="#ffda29"/>
-      <ellipse cx="421" cy="261" rx="8" ry="31" fill="#f7efaf"/>
-      <ellipse cx="435" cy="254" rx="9" ry="31" transform="rotate(-34 435 254)" fill="#ffda29"/>
-      <ellipse cx="444" cy="214" rx="33" ry="8" transform="rotate(-28 444 214)" fill="#00a600"/>
-      <ellipse cx="451" cy="235" rx="33" ry="8" transform="rotate(8 451 235)" fill="#dc84cf"/>
-    </svg>
-    <nav class="home-nav" aria-label="Main navigation">
-      <button class="nav-button nav-home" data-nav="Home" aria-pressed="true"><svg viewBox="0 0 85 100" aria-hidden="true"><path d="M4 82 5 57l7-56q7-3 12 0l-3 28 26 6 3-13 4-17q7-3 13 1l-5 35 3 27-2 24-9 5-29-4z"/></svg><span>Home</span></button>
-      <button class="nav-button nav-about" data-nav="About" aria-pressed="false"><svg viewBox="0 0 90 95" aria-hidden="true"><path d="M26 31C10 25 2 14 6 12c5-5 13 14 22 15-5-17 9-26 23-22 14 1 15 9 17 17 18 5 16 27 15 50L35 82 23 53l-4-16z"/></svg><span>About</span></button>
-      <button class="nav-button nav-consume" data-nav="Consume" aria-pressed="false"><svg viewBox="0 0 100 75" aria-hidden="true"><path d="M9 64C3 65 3 58 5 48 7 33 12 17 18 11 21 8 25 10 27 14L36 16 38 19 48 20 51 23 64 25Q69 25 69 30L83 34Q92 36 94 42L92 59Q91 69 85 69L68 70 65 68 48 68 45 65 33 65 30 62 20 63 17 60Q12 65 9 64Z"/></svg><span>Consume</span></button>
-      <button class="nav-button nav-tax" data-nav="Tax System" aria-pressed="false"><svg viewBox="0 0 130 85" aria-hidden="true"><path d="M8 17C20 0 50 8 69 12c19 6 24 21 22 36l27 9c8 2 7 13-2 12l-29-9C76 83 62 77 42 69 17 59-2 43 8 17z"/></svg><span>Tax system</span></button>
-    </nav>
-    <div class="building-labels" aria-hidden="true"><span>Record</span><span>Account</span><span>Labor</span><span>Receipt</span></div>
-    <output class="sr-only" aria-live="polite" id="feedback"></output>
-  </main>
+  <div id="root"></div>
+  <script src="vendor/react.production.min.js"></script>
+  <script src="vendor/react-dom.production.min.js"></script>
+  <script src="scenes.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

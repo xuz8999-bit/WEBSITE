@@ -31,3 +31,28 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 .welcome-button[data-action="continue"] { font-size: 2.7cqw; }
+
+/* Motion only: the settled scenes retain their original styles and proportions. */
+#root { display: contents; }
+.transition-stage { position: relative; width: min(100vw, calc(100vh * 600 / 338)); aspect-ratio: 600 / 338; overflow: hidden; isolation: isolate; }
+.scene-content { display: contents; }
+.transition-stage .scene { width: 100%; }
+.clock-hands { transform-origin: 80px 84px; }
+.start-playing .clock-hands { animation: clock-turn 250ms ease-in-out both; }
+.start-playing [data-start] { animation: start-press 180ms ease-out both; pointer-events: none; }
+.transition-mask { position: absolute; inset: 0; z-index: 10; background: linear-gradient(90deg, #ffd329 0% 25%, #00a600 25% 50%, #5895e5 50% 75%, #dd83ce 75%); transform: translateX(-101%); animation: color-wipe 280ms cubic-bezier(.65,0,.35,1) 120ms both; pointer-events: all; }
+.home.entering .city, .home.entering .building-labels { animation: city-enter 340ms ease-out 80ms both; }
+.home.entering .nav-button { animation: nav-enter 220ms cubic-bezier(.2,.8,.3,1.15) both; }
+.home.entering .nav-home { animation-delay: 180ms; }
+.home.entering .nav-about { animation-delay: 230ms; }
+.home.entering .nav-consume { animation-delay: 280ms; }
+.home.entering .nav-tax { animation-delay: 330ms; }
+.route-notice { position: absolute; z-index: 5; bottom: 2%; left: 50%; transform: translateX(-50%); padding: .55em 1em; border-radius: .5em; background: #fffbed; color: #241b18; font: 700 clamp(12px, 1.6vw, 20px) 'Bureau Serif', serif; white-space: nowrap; }
+@keyframes start-press { 0%, 100% { transform: scale(1); } 45% { transform: translateY(.35cqw) scale(.95); } }
+@keyframes clock-turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes color-wipe { 0% { transform: translateX(-101%); } 50% { transform: translateX(0); } 100% { transform: translateX(101%); } }
+@keyframes city-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes nav-enter { 0% { opacity: 0; transform: translateY(7px) scale(.96); } 75% { opacity: 1; transform: translateY(-1px) scale(1.01); } 100% { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .transition-mask, .start-playing .clock-hands, .start-playing [data-start], .home.entering .city, .home.entering .building-labels, .home.entering .nav-button { animation: none; }
+}
