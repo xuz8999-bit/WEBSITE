@@ -102,6 +102,6 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 
 .left-building-float { animation: left-building-breathe 6.5s ease-in-out -1.8s infinite; }
 .left-house-float { animation: left-house-breathe 5.5s ease-in-out -3.9s infinite; }
-@keyframes left-building-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-@keyframes left-house-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes left-building-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes left-house-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 @media (prefers-reduced-motion: reduce) { .left-building-float, .left-house-float { animation: none; } }
