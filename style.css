@@ -74,13 +74,13 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .plant-sway { transform-origin: 536px 303px; animation: plant-breathe 4s ease-in-out -.9s infinite; }
 .poster-cloud { animation: cloud-drift 30s ease-in-out -8s infinite alternate; }
 .welcome.start-playing .clock-hands { animation: clock-turn 250ms ease-in-out both; }
-@keyframes tower-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.8px); } }
-@keyframes house-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.2px); } }
-@keyframes roof-breathe { 0%, 100% { transform: rotate(-.3deg); } 50% { transform: rotate(.3deg); } }
-@keyframes plant-breathe { 0%, 100% { transform: rotate(-1.2deg); } 50% { transform: rotate(1.2deg); } }
+@keyframes tower-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes house-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes roof-breathe { 0%, 100% { transform: rotate(-.7deg); } 50% { transform: rotate(.7deg); } }
+@keyframes plant-breathe { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 @keyframes window-breathe { 0%, 65%, 100% { filter: brightness(1); } 82% { filter: brightness(1.07); } }
 @keyframes detail-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .91; } }
-@keyframes cloud-drift { from { transform: translateX(-8px); } to { transform: translateX(8px); } }
+@keyframes cloud-drift { from { transform: translateX(-14px); } to { transform: translateX(14px); } }
 @media (prefers-reduced-motion: reduce) {
   .welcome .clock-hands, .welcome.start-playing .clock-hands, .tower-float, .house-float, .roof-sway, .window-glow, .building-detail, .plant-sway, .poster-cloud { animation: none; }
   .welcome .welcome-button { transition: none; }
