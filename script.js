@@ -21,7 +21,7 @@
     const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
     const enterHome = () => {
       setEntering(true);
-      schedule(() => setEntering(false), reduced() ? 0 : 2300);
+      schedule(() => setEntering(false), reduced() ? 0 : 2600);
     };
     const navigate = (next) => {
       if (readRoute() !== next) history.pushState({}, '', '#' + next);
@@ -43,12 +43,35 @@
         schedule(() => setNotice(''), 2200);
       }
     }, [route]);
+    const respondToIllustration = (target) => {
+      if (reduced() || entering || route === '/') return;
+      if (target.hasAttribute('data-fruit')) {
+        if (target.classList.contains('fruit-falling')) return;
+        target.classList.add('fruit-falling');
+        schedule(() => target.classList.remove('fruit-falling'), 3600);
+      } else if (target.hasAttribute('data-window')) {
+        if (target.classList.contains('window-wiggle')) return;
+        target.classList.add('window-wiggle');
+        schedule(() => target.classList.remove('window-wiggle'), 480);
+      }
+    };
+    const onPointerOver = (event) => {
+      const target = event.target.closest('[data-fruit], [data-window]');
+      if (target && !target.contains(event.relatedTarget)) respondToIllustration(target);
+    };
+    const onKeyDown = (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      const target = event.target.closest('[data-fruit], [data-window]');
+      if (target) { event.preventDefault(); respondToIllustration(target); }
+    };
     const onClick = (event) => {
-      const control = event.target.closest('[data-start], [data-nav], [data-action], [data-menu]');
+      const control = event.target.closest('[data-start], [data-nav], [data-action], [data-menu], [data-fruit], [data-window]');
       if (!control) return;
       event.preventDefault();
       if (locked.current) return;
-      if (control.hasAttribute('data-start')) {
+      if (control.hasAttribute('data-fruit') || control.hasAttribute('data-window')) {
+        respondToIllustration(control);
+      } else if (control.hasAttribute('data-start')) {
         locked.current = true;
         if (reduced()) {
           navigate('/home'); locked.current = false;
@@ -72,7 +95,7 @@
     };
     const page = route === '/' ? 'welcome' : 'home';
     const markup = BUREAU_SCENES[page].replace(`scene ${page}`, `scene ${page}${phase === 'leaving' && page === 'welcome' ? ' start-playing' : ''}${entering && page === 'home' ? ' entering' : ''}`);
-    return h('div', { className: 'transition-stage', onClick, 'aria-busy': phase !== 'idle' },
+    return h('div', { className: 'transition-stage', onClick, onPointerOver, onKeyDown, 'aria-busy': phase !== 'idle' },
       h('div', { className: 'scene-content', dangerouslySetInnerHTML: { __html: markup } }),
       phase !== 'idle' && h('div', { className: 'transition-mask', 'aria-hidden': true }),
       h('output', { className: notice ? 'route-notice' : 'sr-only', role: 'status', 'aria-live': 'polite' }, notice)
