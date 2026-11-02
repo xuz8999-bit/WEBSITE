@@ -21,7 +21,7 @@
     const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
     const enterHome = () => {
       setEntering(true);
-      schedule(() => setEntering(false), reduced() ? 0 : 600);
+      schedule(() => setEntering(false), reduced() ? 0 : 2300);
     };
     const navigate = (next) => {
       if (readRoute() !== next) history.pushState({}, '', '#' + next);

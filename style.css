@@ -41,12 +41,12 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .start-playing .clock-hands { animation: clock-turn 250ms ease-in-out both; }
 .start-playing [data-start] { animation: start-press 180ms ease-out both; pointer-events: none; }
 .transition-mask { position: absolute; inset: 0; z-index: 10; background: linear-gradient(90deg, #ffd329 0% 25%, #00a600 25% 50%, #5895e5 50% 75%, #dd83ce 75%); transform: translateX(-101%); animation: color-wipe 280ms cubic-bezier(.65,0,.35,1) 120ms both; pointer-events: all; }
-.home.entering .building-labels { animation: city-enter 300ms ease-out 120ms both; }
-.home.entering .nav-button { animation: nav-enter 220ms cubic-bezier(.2,.8,.3,1.15) both; }
-.home.entering .nav-home { animation-delay: 180ms; }
-.home.entering .nav-about { animation-delay: 230ms; }
-.home.entering .nav-consume { animation-delay: 280ms; }
-.home.entering .nav-tax { animation-delay: 330ms; }
+.home.entering .building-labels { animation: city-enter 650ms ease-out 400ms both; }
+.home.entering .nav-button { animation: nav-enter 650ms ease-in-out both; }
+.home.entering .nav-home { animation-delay: 800ms; }
+.home.entering .nav-about { animation-delay: 1000ms; }
+.home.entering .nav-consume { animation-delay: 1200ms; }
+.home.entering .nav-tax { animation-delay: 1400ms; }
 .route-notice { position: absolute; z-index: 5; bottom: 2%; left: 50%; transform: translateX(-50%); padding: .55em 1em; border-radius: .5em; background: #fffbed; color: #241b18; font: 700 clamp(12px, 1.6vw, 20px) 'Bureau Serif', serif; white-space: nowrap; }
 @keyframes start-press { 0%, 100% { transform: scale(1); } 45% { transform: translateY(.35cqw) scale(.96); } }
 @keyframes clock-turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -142,9 +142,9 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 }
 
 /* HOME arrival: foreground greenery, city, drifting cloud buttons, rising sun. */
-.home.entering .home-reveal-plant { animation: foreground-arrive 260ms ease-out both; }
-.home.entering .home-reveal-building { animation: city-enter 300ms ease-out 120ms both; }
-.home.entering .home-reveal-sun { animation: sun-rise 250ms ease-out 330ms both; }
+.home.entering .home-reveal-plant { animation: foreground-arrive 650ms ease-out both; }
+.home.entering .home-reveal-building { animation: city-enter 650ms ease-out 400ms both; }
+.home.entering .home-reveal-sun { animation: sun-rise 700ms ease-out 1500ms both; }
 @keyframes foreground-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @keyframes sun-rise { from { opacity: 0; transform: translateY(38px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
