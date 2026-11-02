@@ -69,7 +69,6 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .tower-float { animation: tower-breathe 5s ease-in-out -1.4s infinite; }
 .house-float { animation: house-breathe 6s ease-in-out -3.2s infinite; }
 .roof-sway { transform-origin: 494px 203px; animation: roof-breathe 7s ease-in-out -2.3s infinite; }
-.window-glow { animation: window-breathe 9s ease-in-out -4.7s infinite; }
 .building-detail { animation: detail-breathe 8s ease-in-out -3.6s infinite; }
 .plant-sway { transform-origin: 536px 303px; animation: plant-breathe 4s ease-in-out -.9s infinite; }
 .welcome.start-playing .clock-hands { animation: clock-turn 250ms ease-in-out both; }
@@ -77,10 +76,9 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 @keyframes house-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 @keyframes roof-breathe { 0%, 100% { transform: rotate(-.7deg); } 50% { transform: rotate(.7deg); } }
 @keyframes plant-breathe { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
-@keyframes window-breathe { 0%, 65%, 100% { filter: brightness(1); } 82% { filter: brightness(1.07); } }
 @keyframes detail-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .91; } }
 @media (prefers-reduced-motion: reduce) {
-  .welcome .clock-hands, .welcome.start-playing .clock-hands, .tower-float, .house-float, .roof-sway, .window-glow, .building-detail, .plant-sway { animation: none; }
+  .welcome .clock-hands, .welcome.start-playing .clock-hands, .tower-float, .house-float, .roof-sway, .building-detail, .plant-sway { animation: none; }
   .welcome .welcome-button { transition: none; }
   .welcome .welcome-button:hover, .welcome .welcome-button:active { transform: none; }
 }
@@ -89,16 +87,14 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .sound-lines { pointer-events: none; }
 .clock-sound { animation: sound-hint 7s ease-in-out -1.6s infinite; }
 .roof-sound { animation: sound-hint 9s ease-in-out -5.2s infinite; }
-.window-shutter { transform-box: fill-box; transform-origin: left center; animation: shutter-open 12s ease-in-out -2s infinite, window-breathe 9s ease-in-out -4.7s infinite; }
 .smoke-puff { transform-origin: 531px 82px; opacity: 0; animation: smoke-rise 5.4s ease-out infinite; }
 .puff-one { animation-delay: -1.2s; }
 .puff-two { animation-delay: -3s; }
 .puff-three { animation-delay: -4.8s; }
 @keyframes sound-hint { 0%, 14%, 48%, 100% { opacity: 0; } 23%, 36% { opacity: .8; } }
-@keyframes shutter-open { 0%, 18%, 82%, 100% { transform: perspective(100px) rotateY(0deg); } 36%, 64% { transform: perspective(100px) rotateY(-70deg); } }
 @keyframes smoke-rise { 0% { opacity: 0; transform: translate(0, 0) scale(.45); } 18% { opacity: .65; } 65% { opacity: .4; } 100% { opacity: 0; transform: translate(12px, -40px) scale(1.5); } }
 @media (prefers-reduced-motion: reduce) {
-  .clock-sound, .roof-sound, .window-shutter, .smoke-puff { animation: none; }
+  .clock-sound, .roof-sound, .smoke-puff { animation: none; }
   .sound-lines { opacity: .7; }
   .smoke-puff { opacity: 0; }
   .window-shutter { transform: none; }
