@@ -105,3 +105,42 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 @keyframes left-building-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 @keyframes left-house-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6.5px); } }
 @media (prefers-reduced-motion: reduce) { .left-building-float, .left-house-float { animation: none; } }
+
+/* HOME: an operating city, with stationary building silhouettes. */
+.home-yellow-dome { transform-origin: 25px 79px; animation: dome-breathe 8s ease-in-out -2s infinite; }
+.home-pink-orb { animation: city-orb-float 9s ease-in-out -4.3s infinite; }
+.home-tower-windows { animation: city-window-light 13s ease-in-out -3s infinite; }
+.home-pink-windows { animation: city-window-light 15s ease-in-out -8s infinite; }
+.home-blue-windows { animation: city-window-light 17s ease-in-out -12s infinite; }
+.home-pink-stem { animation: pink-plant-float 7.5s ease-in-out -3s infinite; }
+.leaf-motion { transform-origin: 420px 230px; }
+.leaf-green-motion { animation: leaf-green-sway 5.8s ease-in-out -1.2s infinite; }
+.leaf-yellow-tall-motion { animation: leaf-tall-sway 6.7s ease-in-out -4s infinite; }
+.leaf-yellow-slant-motion { animation: leaf-slant-sway 5.2s ease-in-out -2.6s infinite; }
+.leaf-cream-motion { animation: leaf-slant-sway 7s ease-in-out -5.1s infinite; }
+.leaf-pink-motion { animation: pink-plant-float 7.5s ease-in-out -3s infinite; }
+.home .nav-button { transition: transform 180ms ease; animation: home-nav-drift 8s ease-in-out -2s infinite; }
+.home .nav-about { animation-duration: 9.5s; animation-delay: -5s; }
+.home .nav-consume { animation-duration: 11s; animation-delay: -7.8s; }
+.home .nav-tax { animation-duration: 10s; animation-delay: -3.6s; }
+@media (hover: hover) { .home .nav-button:hover { transform: scale(1.05); } }
+.home .nav-button:active { transform: scale(.96); }
+.home .building-labels { pointer-events: auto; }
+.building-labels .menu-item { position: relative; display: flex; align-items: flex-start; justify-content: center; width: 100%; height: 5.33cqw; padding: .6cqw 0 0; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; transition: transform 160ms ease, background-color 160ms ease; }
+@media (hover: hover) { .menu-item:hover { background: #ffd329; transform: scale(1.035); z-index: 1; } }
+.menu-item:active { transform: scale(.97); }
+.menu-item.menu-pressed { animation: menu-press 220ms ease-out; }
+@keyframes dome-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.018); } }
+@keyframes city-orb-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+@keyframes city-window-light { 0%, 65%, 100% { filter: brightness(1); } 80% { filter: brightness(1.09); } }
+@keyframes pink-plant-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.8px); } }
+@keyframes leaf-green-sway { 0%, 100% { transform: rotate(-1.8deg); } 50% { transform: rotate(1.8deg); } }
+@keyframes leaf-tall-sway { 0%, 100% { transform: rotate(1.4deg); } 50% { transform: rotate(-1.4deg); } }
+@keyframes leaf-slant-sway { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(2deg); } }
+@keyframes home-nav-drift { 0%, 100% { translate: -1px 0; } 50% { translate: 1px -2.5px; } }
+@keyframes menu-press { 0%, 100% { transform: scale(1); } 45% { transform: scale(.96); } }
+@media (prefers-reduced-motion: reduce) {
+  .home-yellow-dome, .home-pink-orb, .home-tower-windows, .home-pink-windows, .home-blue-windows, .home-pink-stem, .leaf-motion, .home .nav-button, .menu-item.menu-pressed { animation: none; }
+  .home .nav-button, .building-labels .menu-item { transition: none; }
+  .home .nav-button:hover, .home .nav-button:active, .building-labels .menu-item:hover, .building-labels .menu-item:active { transform: none; }
+}

@@ -44,7 +44,7 @@
       }
     }, [route]);
     const onClick = (event) => {
-      const control = event.target.closest('[data-start], [data-nav], [data-action]');
+      const control = event.target.closest('[data-start], [data-nav], [data-action], [data-menu]');
       if (!control) return;
       event.preventDefault();
       if (locked.current) return;
@@ -57,6 +57,12 @@
         setPhase('leaving');
         schedule(() => { navigate('/home'); enterHome(); }, 260);
         schedule(() => { setPhase('idle'); locked.current = false; }, 400);
+      } else if (control.dataset.menu) {
+        control.classList.remove('menu-pressed');
+        void control.offsetWidth;
+        control.classList.add('menu-pressed');
+        schedule(() => control.classList.remove('menu-pressed'), reduced() ? 0 : 220);
+        document.getElementById('feedback').textContent = `${control.dataset.menu} selected`;
       } else if (control.dataset.nav) {
         const next = { Home: '/', About: '/about', Consume: '/consumption', 'Tax System': '/tax-system' }[control.dataset.nav];
         setNotice(''); navigate(next);
