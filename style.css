@@ -100,10 +100,6 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
   .window-shutter { transform: none; }
 }
 
-.left-building-float { animation: left-building-breathe 6.5s ease-in-out -1.8s infinite; }
-.left-house-float { animation: left-house-breathe 5.5s ease-in-out -3.9s infinite; }
-@keyframes left-building-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-@keyframes left-house-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6.5px); } }
 @media (prefers-reduced-motion: reduce) { .left-building-float, .left-house-float { animation: none; } }
 
 /* HOME: an operating city, with stationary building silhouettes. */
@@ -154,3 +150,6 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 @media (prefers-reduced-motion: reduce) {
  .home.entering .home-reveal-plant, .home.entering .home-reveal-building, .home.entering .home-reveal-sun { animation: none; }
 }
+
+/* Keep both left WELCOME buildings and their stripe decoration still. */
+.welcome .left-building-float, .welcome .left-house-float, .welcome .building-detail { animation: none; transform: none; }
