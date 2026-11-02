@@ -41,7 +41,7 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .start-playing .clock-hands { animation: clock-turn 250ms ease-in-out both; }
 .start-playing [data-start] { animation: start-press 180ms ease-out both; pointer-events: none; }
 .transition-mask { position: absolute; inset: 0; z-index: 10; background: linear-gradient(90deg, #ffd329 0% 25%, #00a600 25% 50%, #5895e5 50% 75%, #dd83ce 75%); transform: translateX(-101%); animation: color-wipe 280ms cubic-bezier(.65,0,.35,1) 120ms both; pointer-events: all; }
-.home.entering .city, .home.entering .building-labels { animation: city-enter 340ms ease-out 80ms both; }
+.home.entering .building-labels { animation: city-enter 300ms ease-out 120ms both; }
 .home.entering .nav-button { animation: nav-enter 220ms cubic-bezier(.2,.8,.3,1.15) both; }
 .home.entering .nav-home { animation-delay: 180ms; }
 .home.entering .nav-about { animation-delay: 230ms; }
@@ -52,7 +52,7 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 @keyframes clock-turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes color-wipe { 0% { transform: translateX(-101%); } 50% { transform: translateX(0); } 100% { transform: translateX(101%); } }
 @keyframes city-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes nav-enter { 0% { opacity: 0; transform: translateY(7px) scale(.96); } 75% { opacity: 1; transform: translateY(-1px) scale(1.01); } 100% { opacity: 1; transform: none; } }
+@keyframes nav-enter { from { opacity: 0; transform: translateX(-35px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   .transition-mask, .start-playing .clock-hands, .start-playing [data-start], .home.entering .city, .home.entering .building-labels, .home.entering .nav-button { animation: none; }
 }
@@ -143,4 +143,14 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
   .home-yellow-dome, .home-pink-orb, .home-tower-windows, .home-pink-windows, .home-blue-windows, .home-pink-stem, .leaf-motion, .home .nav-button, .menu-item.menu-pressed { animation: none; }
   .home .nav-button, .building-labels .menu-item { transition: none; }
   .home .nav-button:hover, .home .nav-button:active, .building-labels .menu-item:hover, .building-labels .menu-item:active { transform: none; }
+}
+
+/* HOME arrival: foreground greenery, city, drifting cloud buttons, rising sun. */
+.home.entering .home-reveal-plant { animation: foreground-arrive 260ms ease-out both; }
+.home.entering .home-reveal-building { animation: city-enter 300ms ease-out 120ms both; }
+.home.entering .home-reveal-sun { animation: sun-rise 250ms ease-out 330ms both; }
+@keyframes foreground-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes sun-rise { from { opacity: 0; transform: translateY(38px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+ .home.entering .home-reveal-plant, .home.entering .home-reveal-building, .home.entering .home-reveal-sun { animation: none; }
 }
