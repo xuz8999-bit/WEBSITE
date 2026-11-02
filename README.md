@@ -17,3 +17,9 @@ The composition keeps the reference's 600:338 proportions and scales to fit the 
 Chromium checks covered START navigation, all four HOME controls, no browser runtime errors, and no horizontal overflow at 1024×768, 1440×900 and 1920×1080. Local screenshots are saved under the ignored `artifacts/` directory.
 
 React migration validation: Chromium exercised START press/clock/wipe, same-document navigation, all placeholder routes, Home returning to WELCOME, back/forward, back during animation, reduced motion and direct home.html entry. Both settled 1200×676 screenshots were pixel-identical to the pre-migration screenshots.
+
+## WELCOME poster refinement
+
+WELCOME now uses 82% side-building scale, wider central negative space, greater button spacing, and one slow-moving flat cloud. Existing colors, grain, font, purple ground and HOME artwork are retained. Idle CSS animation periods: clock hands 12s, tower 5s, house 6s, roof 7s, plant 4s; phases are offset. Building stripes and the pink window have small opacity/brightness variations. Hover uses scale(1.04), active uses scale(.96). Reduced-motion disables all nonessential scene motion and hover scaling. START still uses the short clock/wipe transition.
+
+Chromium verified these periods, changing clock transforms, hover scale, zero running animations under reduced-motion, non-overlapping buttons at three desktop sizes, and all existing routes/history behavior. HOME remained pixel-identical to its prior screenshot. WELCOME's new screenshot is `artifacts/welcome-poster-v2.png`; compare the previous layout in `artifacts/welcome-color-v4.png`. Artifacts are local and ignored by Git.

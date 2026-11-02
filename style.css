@@ -48,11 +48,41 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .home.entering .nav-consume { animation-delay: 280ms; }
 .home.entering .nav-tax { animation-delay: 330ms; }
 .route-notice { position: absolute; z-index: 5; bottom: 2%; left: 50%; transform: translateX(-50%); padding: .55em 1em; border-radius: .5em; background: #fffbed; color: #241b18; font: 700 clamp(12px, 1.6vw, 20px) 'Bureau Serif', serif; white-space: nowrap; }
-@keyframes start-press { 0%, 100% { transform: scale(1); } 45% { transform: translateY(.35cqw) scale(.95); } }
+@keyframes start-press { 0%, 100% { transform: scale(1); } 45% { transform: translateY(.35cqw) scale(.96); } }
 @keyframes clock-turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes color-wipe { 0% { transform: translateX(-101%); } 50% { transform: translateX(0); } 100% { transform: translateX(101%); } }
 @keyframes city-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes nav-enter { 0% { opacity: 0; transform: translateY(7px) scale(.96); } 75% { opacity: 1; transform: translateY(-1px) scale(1.01); } 100% { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   .transition-mask, .start-playing .clock-hands, .start-playing [data-start], .home.entering .city, .home.entering .building-labels, .home.entering .nav-button { animation: none; }
+}
+
+/* WELCOME round two: smaller side silhouettes and an open central column. */
+.welcome h1 { left: 20%; top: 9%; width: 60%; font-size: 5.1cqw; }
+.welcome h1 span { font-size: 4.5cqw; }
+.welcome .welcome-actions { left: 41%; top: 40.8%; width: 18%; gap: 2.8cqw; }
+.welcome .welcome-button { height: 6.3cqw; transition: transform 180ms ease; }
+.welcome .welcome-button:last-child { margin-top: 0; }
+@media (hover: hover) { .welcome .welcome-button:hover { transform: scale(1.04); } }
+.welcome .welcome-button:active { transform: scale(.96); }
+.welcome .clock-hands { transform-origin: 80px 79px; animation: clock-turn 12s linear infinite; }
+.tower-float { animation: tower-breathe 5s ease-in-out -1.4s infinite; }
+.house-float { animation: house-breathe 6s ease-in-out -3.2s infinite; }
+.roof-sway { transform-origin: 494px 203px; animation: roof-breathe 7s ease-in-out -2.3s infinite; }
+.window-glow { animation: window-breathe 9s ease-in-out -4.7s infinite; }
+.building-detail { animation: detail-breathe 8s ease-in-out -3.6s infinite; }
+.plant-sway { transform-origin: 536px 303px; animation: plant-breathe 4s ease-in-out -.9s infinite; }
+.poster-cloud { animation: cloud-drift 30s ease-in-out -8s infinite alternate; }
+.welcome.start-playing .clock-hands { animation: clock-turn 250ms ease-in-out both; }
+@keyframes tower-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.8px); } }
+@keyframes house-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.2px); } }
+@keyframes roof-breathe { 0%, 100% { transform: rotate(-.3deg); } 50% { transform: rotate(.3deg); } }
+@keyframes plant-breathe { 0%, 100% { transform: rotate(-1.2deg); } 50% { transform: rotate(1.2deg); } }
+@keyframes window-breathe { 0%, 65%, 100% { filter: brightness(1); } 82% { filter: brightness(1.07); } }
+@keyframes detail-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .91; } }
+@keyframes cloud-drift { from { transform: translateX(-8px); } to { transform: translateX(8px); } }
+@media (prefers-reduced-motion: reduce) {
+  .welcome .clock-hands, .welcome.start-playing .clock-hands, .tower-float, .house-float, .roof-sway, .window-glow, .building-detail, .plant-sway, .poster-cloud { animation: none; }
+  .welcome .welcome-button { transition: none; }
+  .welcome .welcome-button:hover, .welcome .welcome-button:active { transform: none; }
 }
