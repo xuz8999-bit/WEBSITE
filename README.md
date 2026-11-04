@@ -139,3 +139,15 @@ LABOR also has a visible cream Continue → button on the blue ground, aligned w
 ## Click-to-print receipt
 
 RECEIPT starts with its paper concealed. Clicking the printer (mouse, touch or keyboard) starts the existing 2.8-second feed and displays small retro sound rays beside the machine. The rays stop when printing finishes; reduced-motion keeps them static and reveals the sheet immediately on request. The source content remains real saved consumption/repayment data. Reprinting does not modify that data, and repeated clicks during printing are ignored. Back to LABOR is a separate visible cream button, so the printer itself no longer navigates away. Navigating back into RECEIPT again waits for a new print request; receipt pagination prints the requested next sheet.
+
+## LABOR entrance sequence
+
+Entering LABOR, including a direct visit, moves only the original worker/cart group from the left to its existing destination over 2.8 seconds, with alternating leg motion. Once it arrives, the cup, carton, bag and phone reveal in sequence (2.9–3.8 seconds); their independent idle motion continues afterwards. Background, plant, labels and controls retain their positions. Task/worker activation waits until entry ends, while Back and Continue remain available. Reduced-motion displays the settled scene immediately.
+
+## Select into the blue shopping bag
+
+On CONSUMPTION, selecting stock now adds it to the original blue bag without leaving the shelf. A copy of that original product flies into the bag, a soft local Web Audio pick cue plays after the gesture (honoring mute), and a small badge shows quantity. The bag is a native keyboard/touch target; clicking it opens the next product-display page with only the chosen goods in the existing seven source positions. Repeated picks increase quantity. Goods can be removed one at a time, and additional selected types are paginated rather than dropped. The original shop illustration remains stationary and is not remounted on selection.
+
+Recording the selection creates an actual consumption row per chosen unit and adds exactly their combined time tax, then empties the bag. Merely adding/selecting/opening the bag does not change debt or consumption records. Bag contents survive reload and browser navigation; direct standalone product links retain their previous single-product flow. A small sound toggle is available in the shop. Reduced-motion skips the flight while keeping immediate count feedback.
+
+`tests/shop-bag.cjs` covers flight/selection sound, fixed original SVG nodes, bag navigation, quantities/removal, batch ledger math, saved bag state, keyboard, mute, reduced-motion and selection pagination. `tests/labor-entrance.cjs` samples the actual worker/cart animation and delayed objects, fixed controls and reduced-motion. Earlier shop/flow tests now explicitly open the bag before expecting the next page.

@@ -161,3 +161,41 @@
 @media (prefers-reduced-motion: reduce) { .receipt-sounding .receipt-sound-lines { opacity: 1; animation: none; } }
 .receipt-sounding .source-receipt-pagination { visibility: hidden; }
 @media (prefers-reduced-motion: reduce) { .source-receipt.receipt-printed .source-receipt-pagination { visibility: visible; } }
+
+/* LABOR story: walk to the original spot, then reveal the four objects. */
+.source-labor.world-entering .labor-convoy { animation: labor-walk-in 2800ms cubic-bezier(.3,.05,.32,1) both; }
+.source-labor.world-entering .source-worker-leg-29 { animation: labor-walking-step 480ms ease-in-out infinite; }
+.source-labor.world-entering .source-worker-leg-30 { animation: labor-walking-step 480ms ease-in-out -240ms infinite; }
+.source-labor.world-entering .source-cart { animation: none; }
+.source-labor.world-entering .labor-item-reveal { transform-box: view-box; transform-origin: 98px 578px; animation: labor-object-appear 450ms ease-out 2900ms both; }
+.source-labor.world-entering [data-labor-item="carton"] { animation-delay: 3050ms; transform-origin: 245px 570px; }
+.source-labor.world-entering [data-labor-item="bag"] { animation-delay: 3200ms; transform-origin: 442px 575px; }
+.source-labor.world-entering [data-labor-item="phone"] { animation-delay: 3350ms; transform-origin: 654px 570px; }
+.source-labor.world-entering [data-task], .source-labor.world-entering [data-complete-labor] { pointer-events: none; }
+@keyframes labor-walk-in { from { translate: -1110px 0; } to { translate: 0 0; } }
+@keyframes labor-walking-step { 0%,100% { rotate: -6deg; } 50% { rotate: 6deg; } }
+@keyframes labor-object-appear { from { opacity: 0; scale: .94; } to { opacity: 1; scale: 1; } }
+@media (prefers-reduced-motion: reduce) { .source-labor .labor-convoy, .source-labor .labor-item-reveal { animation: none !important; } }
+/* Original blue bag: fixed target, source-product flight and a small count. */
+.original-shop-bag { position: absolute; left: 43.7%; top: 35%; width: 26.5%; height: 46.3%; z-index: 2; border: 0; padding: 0; background: transparent; cursor: pointer; }
+.original-shop-bag:focus-visible { outline: .2cqw solid #fff8dc; outline-offset: .3cqw; }
+.shop-bag-count { position: absolute; left: 79%; top: 39%; min-width: 2.3cqw; padding: .35cqw; border-radius: 50%; background: #fff8dc; color: #231815; font: 1.25cqw/1.2 'Source Britannic',serif; text-align: center; }
+.shop-bag-count[hidden] { display: none; }
+.bag-count-pop { animation: bag-count-pop 350ms ease-out; }
+.shop-audio-toggle { position: absolute; right: 1.2%; bottom: 2.5%; z-index: 5; background: transparent; border: 0; padding: .2cqw; font: 2cqw/1 serif; cursor: pointer; }
+.shop-flying-product { position: absolute; z-index: 20; pointer-events: none; animation: shop-product-into-bag 620ms cubic-bezier(.3,.05,.45,1) both; }
+.shop-flying-product .product-icon { width: 100%; height: 100%; }
+@keyframes shop-product-into-bag { 0% { translate: 0 0; scale: 1; opacity: 1; } 45% { translate: calc(var(--bag-dx) * .5) calc(var(--bag-dy) * .4 - 50px); scale: .8; opacity: 1; } 100% { translate: var(--bag-dx) var(--bag-dy); scale: .12; opacity: 0; } }
+@keyframes bag-count-pop { 0%,100% { scale: 1; } 50% { scale: 1.2; } }
+.basket-gallery [data-source-part^="source-product-"] { visibility: hidden; }
+.basket-gallery .source-chosen-product { animation: source-product-float 7s ease-in-out var(--picked-delay,-1s) infinite; }
+.basket-gallery .source-product-hit:nth-of-type(4n) .source-chosen-product { animation-delay: -3.5s; }
+.basket-quantity { position: absolute; left: 0; bottom: 0; background: #fff8dc; border-radius: .3cqw; padding: .25cqw .45cqw; font: 1cqw 'Bureau Serif',serif; }
+.basket-remove { position: absolute; z-index: 5; background: #fff8dc; border: 0; border-radius: 50%; width: 1.7cqw; height: 1.7cqw; padding: 0; font: 1.2cqw/1 'Source Britannic',serif; }
+.basket-gallery-paging { position: absolute; right: 3%; top: 2%; display: flex; align-items: center; gap: .6cqw; font: 1.2cqw 'Source Britannic',serif; }
+.basket-gallery-paging button { border: 0; background: #fff8dc; border-radius: .3cqw; font: inherit; padding: .3cqw .6cqw; }
+.basket-empty { position: absolute; top: 40%; left: 30%; width: 40%; text-align: center; font: 2.2cqw 'Source Britannic',serif; }
+.source-product-actions button:disabled { opacity: .5; cursor: default; }
+@media (prefers-reduced-motion: reduce) { .shop-flying-product, .bag-count-pop { animation: none; } .basket-gallery .source-chosen-product { animation: none; } }
+
+.source-story.source-products { background: linear-gradient(90deg,#ffe163,#faf8ef 52%,#ffe163); }

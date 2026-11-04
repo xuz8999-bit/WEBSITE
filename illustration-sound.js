@@ -24,11 +24,12 @@
   };
   const play=item=>{
     if(!unlocked||muted||context?.state!=='running')return;
-    const now=performance.now();if(now-previousTime<250)return;previousTime=now;
+    const now=performance.now();if(now-previousTime<(item==='pick'?80:250))return;previousTime=now;
     if(item==='flour')rustle(.18,1500,.04);
     else if(item==='donuts'){rustle(.13,2500,.028);tone(720,.08,.016,.025);}
     else if(item==='sundae'){tone(660,.24,.035);tone(990,.18,.01,.01);}
     else if(item==='cone'){tone(280,.12,.04);tone(190,.09,.018,.015);}
+    else if(item==='pick'){tone(520,.09,.025);tone(780,.13,.016,.045);rustle(.09,1800,.012);}
     else return;
     lastItem=item;playCount++;notify();
   };
@@ -39,5 +40,5 @@
   };
   document.addEventListener('pointerdown',e=>{if(!e.target.closest('[data-toggle-sound]'))unlock();},{capture:true,passive:true});
   document.addEventListener('keydown',e=>{if(['Enter',' ','Tab'].includes(e.key)&&!e.target.closest('[data-toggle-sound]'))unlock();},{capture:true});
-  window.BUREAU_SOUND={play,toggle,state};
+  window.BUREAU_SOUND={play,toggle,state,select:async()=>{await unlock();play('pick');}};
 })();

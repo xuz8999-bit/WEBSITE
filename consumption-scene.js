@@ -9,6 +9,6 @@
     BUREAU_WORLD.items.push({id,name:p.name,convenience:Math.ceil(p.tax/2),garbage:Math.floor(p.tax/2),tax:p.tax});
   }
   window.BUREAU_SHOP={art,icon:(id,cls='')=>`<svg class="product-icon ${cls}" viewBox="${art[id].box}" aria-hidden="true">${art[id].body}</svg>`};
-  const controls=hitboxes.map(p=>`<button class="original-shop-hit" data-product="${p.sku}" data-stock-hit="${p.slot}" aria-label="View ${p.name}" style="left:${p.x}%;top:${p.y}%;width:${p.w}%;height:${p.h}%"></button>`).join('');
-  BUREAU_SCENES.consumption=`<main class="scene world consumption source-shop" aria-label="Consumption"><h1 class="sr-only">CONSUMPTION</h1>${sourceSvg}${controls}<button class="original-shop-back" data-route="/tax-system" aria-label="CONSUMPTION — return to TAX SYSTEM"></button></main>`;
+  const controls=hitboxes.map(p=>`<button class="original-shop-hit" data-product="${p.sku}" data-stock-hit="${p.slot}" aria-label="Add ${p.name} to bag" style="left:${p.x}%;top:${p.y}%;width:${p.w}%;height:${p.h}%"></button>`).join('');
+  BUREAU_SCENES.consumption=`<main class="scene world consumption source-shop" aria-label="Consumption"><h1 class="sr-only">CONSUMPTION</h1>${sourceSvg}${controls}<button class="original-shop-bag" data-open-bag aria-label="Open shopping bag" title="Open bag and continue"><output class="shop-bag-count" data-bag-count aria-live="polite" hidden>0</output></button><button class="shop-audio-toggle" data-toggle-sound aria-label="Enable illustration sounds" aria-pressed="false" title="Click to enable illustration sounds">♪</button><button class="original-shop-back" data-route="/tax-system" aria-label="CONSUMPTION — return to TAX SYSTEM"></button></main>`;
 })();

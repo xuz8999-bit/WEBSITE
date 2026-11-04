@@ -1,6 +1,6 @@
 /* One timing/route registry for all ten pages. Durations are milliseconds. */
 window.BUREAU_MOTION = Object.freeze({
-  transition: 760, homeEntrance: 2600, pageEntrance: 900, hover: 240,
+  transition: 760, homeEntrance: 2600, laborEntrance: 4000, pageEntrance: 900, hover: 240,
   float: 6000, cloud: 20000, person: 3000,
   routes: {
     '/': { page: 'welcome', title: 'Welcome' }, '/home': { page: 'home', title: 'Home' },

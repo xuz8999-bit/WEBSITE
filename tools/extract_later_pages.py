@@ -117,7 +117,28 @@ for pn,name in enumerate(['products','record','account','labor','receipt'],1):
   # Keep only its paper silhouette and edge details; the raw SVG stays archived.
   for i,label in labels.items():
    if label=='source-paper' and i not in range(2,9):parents[paths[i]].remove(paths[i])
+ if name=='labor':
+  # Move only the original worker and cart together, retaining paint order.
+  convoy_members=set(paths[27:42])
+  for parent in list(root.iter()):
+   children=[];convoy=None
+   for child in list(parent):
+    if child in convoy_members:
+     if convoy is None:
+      convoy=ET.Element(NS+'g',{'class':'labor-convoy'});children.append(convoy)
+     convoy.append(child)
+    else:children.append(child);convoy=None
+   parent[:]=children
  wrap(root,paths,labels)
+ if name=='labor':
+  for parent in list(root.iter()):
+   children=[]
+   for child in list(parent):
+    label=child.get('data-source-part','')
+    if label.startswith('source-labor-object-'):
+     reveal=ET.Element(NS+'g',{'class':'labor-item-reveal','data-labor-item':label[len('source-labor-object-'):]});reveal.append(child);children.append(reveal)
+    else:children.append(child)
+   parent[:]=children
  if name=='receipt':
   window=ET.SubElement(root,NS+'g',{'class':'source-paper-window','clip-path':'url(#story-paper-reveal)'})
   content=ET.SubElement(window,NS+'g',{'class':'source-part source-paper source-printed-content'})

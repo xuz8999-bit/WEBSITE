@@ -8,29 +8,30 @@
     return routes[value]?value:(location.pathname.endsWith('/home.html')?'/home':'/');
   };
   const initial=()=>{
-    const defaults={debt:63,selected:'chips',minutes:'10',records:[],receipt:null,filterDate:'',task:0,productReady:false,calculatorUsed:false,receiptExpanded:false,taskChosen:false,receiptPage:0,receiptPrinted:false};
+    const defaults={debt:63,selected:'chips',minutes:'10',records:[],receipt:null,filterDate:'',task:0,productReady:false,calculatorUsed:false,receiptExpanded:false,taskChosen:false,receiptPage:0,receiptPrinted:false,basket:[],basketView:false,basketPage:0};
     try{
       const saved=JSON.parse(localStorage.getItem('temporal-federation-v1')||'null');
       if(!saved)return defaults;
       return {...defaults,debt:Number.isFinite(saved.debt)?Math.max(0,saved.debt):63,
+        basket:Array.isArray(saved.basket)?saved.basket.filter(id=>BUREAU_WORLD.items.some(p=>p.id===id)).slice(0,100):[],basketView:!!saved.basketView,
         selected:BUREAU_WORLD.items.some(p=>p.id===saved.selected)?saved.selected:'chips',
         records:Array.isArray(saved.records)?saved.records.filter(r=>r&&typeof r.name==='string'&&Number.isFinite(r.tax)).slice(0,100):[],
         receipt:saved.receipt&&typeof saved.receipt.id==='string'?saved.receipt:null};
     }catch{return defaults;}
   };
   function App(){
-    const [route,setRoute]=useState(routeNow),[data,setData]=useState(initial),[motion,setMotion]=useState(null),[arrival,setArrival]=useState(''),[aboutTab,setAboutTab]=useState('Background'),[notice,setNotice]=useState(''),[soundState,setSoundState]=useState(()=>BUREAU_SOUND.state());
+    const [route,setRoute]=useState(routeNow),[data,setData]=useState(initial),[motion,setMotion]=useState(null),[arrival,setArrival]=useState(()=>routeNow()==='/labor'&&!matchMedia('(prefers-reduced-motion: reduce)').matches?'labor':''),[aboutTab,setAboutTab]=useState('Background'),[notice,setNotice]=useState(''),[soundState,setSoundState]=useState(()=>BUREAU_SOUND.state());
     const inputFocus=useRef(null);
     const timers=useRef(new Set()),locked=useRef(false),pending=useRef(null),frame=useRef(0),previousDebt=useRef(0),serial=useRef(0);
     const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
     const schedule=(fn,ms)=>{const id=setTimeout(()=>{timers.current.delete(id);fn();},ms);timers.current.add(id);return id;};
-    const clearTimers=()=>{timers.current.forEach(clearTimeout);timers.current.clear();cancelAnimationFrame(frame.current);};
+    const clearTimers=()=>{document.querySelectorAll('.shop-flying-product').forEach(el=>el.remove());timers.current.forEach(clearTimeout);timers.current.clear();cancelAnimationFrame(frame.current);};
     const showNotice=text=>{setNotice(text);schedule(()=>setNotice(''),2400);};
     const commit=(next,push=true)=>{if(next==='/receipt')setData(d=>({...d,receiptPrinted:false}));if(push&&routeNow()!==next)history.pushState({},'',`#${next}`);setRoute(next);};
     const beginArrival=next=>{
       if(reduced()){setArrival('');return;}
       const page=routes[next].page;setArrival(page);
-      schedule(()=>setArrival(''),page==='home'?M.homeEntrance:M.pageEntrance);
+      schedule(()=>setArrival(''),page==='home'?M.homeEntrance:page==='labor'?M.laborEntrance:M.pageEntrance);
     };
     const navigate=(next,origin=null)=>{
       if(!routes[next]){showNotice('This page is not available yet.');return;}
@@ -53,9 +54,10 @@
       window.addEventListener('popstate',sync);window.addEventListener('hashchange',sync);preference.addEventListener('change',stop);
       return()=>{clearTimers();window.removeEventListener('popstate',sync);window.removeEventListener('hashchange',sync);preference.removeEventListener('change',stop);};
     },[]);
+    useEffect(()=>{if(routeNow()==='/labor')beginArrival('/labor');},[]);
     useEffect(()=>{const update=e=>setSoundState(e.detail);window.addEventListener('bureau-sound-state',update);return()=>window.removeEventListener('bureau-sound-state',update);},[]);
     useEffect(()=>{document.title=`${routes[route].title} — Convenience Tax Bureau`;},[route]);
-    useEffect(()=>{try{localStorage.setItem('temporal-federation-v1',JSON.stringify({debt:data.debt,selected:data.selected,records:data.records,receipt:data.receipt}));}catch{/* Browsing remains functional without storage. */}},[data]);
+    useEffect(()=>{try{localStorage.setItem('temporal-federation-v1',JSON.stringify({debt:data.debt,selected:data.selected,records:data.records,receipt:data.receipt,basket:data.basket,basketView:data.basketView}));}catch{/* Browsing remains functional without storage. */}},[data]);
     const respond=target=>{
       if(reduced()||arrival||route!=='/home')return;
       const fruit=target.hasAttribute('data-fruit'),cls=fruit?'fruit-falling':'window-wiggle';
@@ -67,11 +69,27 @@
       const target=e.target.closest('[data-fruit],[data-window]');if(target&&!target.contains(e.relatedTarget))respond(target);
     };
     const onFocus=e=>{const item=e.target.closest('[data-about-sound]');if(item)BUREAU_SOUND.play(item.dataset.aboutSound);const tab=e.target.closest('[data-about]');if(tab)setAboutTab(tab.dataset.about);};
-    const onKeyDown=e=>{if(!['Enter',' '].includes(e.key))return;const product=e.target.closest('[data-product]');if(product){e.preventDefault();setData(d=>({...d,selected:product.dataset.product,productReady:true}));navigate('/products',product);return;}const item=e.target.closest('[data-about-sound]');if(item){e.preventDefault();BUREAU_SOUND.play(item.dataset.aboutSound);return;}const target=e.target.closest('[data-fruit],[data-window]');if(target){e.preventDefault();respond(target);}};
+    const addToBag=(id,origin)=>{
+      if(!BUREAU_WORLD.items.some(p=>p.id===id))return;
+      if(data.basket.length>=100){showNotice('Your bag is full (100 items).');return;}
+      BUREAU_SOUND.select();
+      const scene=document.querySelector('.source-shop'),bag=scene?.querySelector('[data-open-bag]');
+      if(scene&&bag&&!reduced()){
+        const pageBox=scene.getBoundingClientRect(),from=origin.getBoundingClientRect(),to=bag.getBoundingClientRect();
+        const width=Math.min(120,Math.max(30,from.width)),height=Math.min(140,Math.max(45,from.height));
+        const fly=document.createElement('div');fly.className='shop-flying-product';fly.setAttribute('aria-hidden','true');fly.innerHTML=BUREAU_WORLD.icon(id);
+        fly.style.cssText=`left:${from.x-pageBox.x+(from.width-width)/2}px;top:${from.y-pageBox.y+(from.height-height)/2}px;width:${width}px;height:${height}px;--bag-dx:${to.x+to.width*.65-from.x-from.width/2}px;--bag-dy:${to.y+to.height*.65-from.y-from.height/2}px;`;
+        scene.appendChild(fly);fly.addEventListener('animationend',()=>fly.remove(),{once:true});schedule(()=>fly.remove(),650);
+      }
+      setData(d=>({...d,basket:[...d.basket,id],selected:id,productReady:true}));
+      schedule(()=>{const count=document.querySelector('[data-bag-count]');if(count){count.classList.remove('bag-count-pop');void count.offsetWidth;count.classList.add('bag-count-pop');}},reduced()?0:500);
+    };
+    const onKeyDown=e=>{if(!['Enter',' '].includes(e.key))return;const product=e.target.closest('[data-product]');if(product){e.preventDefault();if(route==='/consumption'){addToBag(product.dataset.product,product);return;}setData(d=>({...d,selected:product.dataset.product,productReady:true,basketView:false}));navigate('/products',product);return;}const item=e.target.closest('[data-about-sound]');if(item){e.preventDefault();BUREAU_SOUND.play(item.dataset.aboutSound);return;}const target=e.target.closest('[data-fruit],[data-window]');if(target){e.preventDefault();respond(target);}};
     const purchase=()=>{
-      const item=BUREAU_WORLD.items.find(p=>p.id===data.selected)||BUREAU_WORLD.items[2],now=new Date();
-      const entry={...item,id:`purchase-${Date.now()}-${Math.random().toString(36).slice(2,6)}`,date:now.toLocaleDateString('en-CA'),time:now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),paid:false};
-      setData(d=>({...d,records:[entry,...d.records].slice(0,100),debt:d.debt+item.tax}));navigate('/record',document.querySelector('.selected-product .product-icon'));
+      const chosen=data.basketView?data.basket.map(id=>BUREAU_WORLD.items.find(p=>p.id===id)).filter(Boolean):[BUREAU_WORLD.items.find(p=>p.id===data.selected)||BUREAU_WORLD.items[2]];
+      if(!chosen.length){showNotice('Choose an item from the shop first.');return;}
+      const now=new Date();const entries=chosen.map((item,i)=>({...item,productId:item.id,id:`purchase-${Date.now()}-${i}-${Math.random().toString(36).slice(2,6)}`,date:now.toLocaleDateString('en-CA'),time:now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),paid:false}));
+      setData(d=>({...d,records:[...entries,...d.records].slice(0,100),debt:d.debt+chosen.reduce((sum,item)=>sum+item.tax,0),basket:data.basketView?[]:d.basket,basketView:false,basketPage:0}));navigate('/record',document.querySelector('.selected-product .product-icon'));
     };
     const complete=()=>{
       const issuedAt=new Date();
@@ -86,8 +104,8 @@
       schedule(()=>scene.classList.remove('receipt-sounding'),2800);
     };
     const onClick=e=>{
-      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle],[data-reprint-receipt],[data-receipt-page],[data-account-stock]');
-      if(!control)return;e.preventDefault();if(locked.current)return;
+      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle],[data-reprint-receipt],[data-receipt-page],[data-account-stock],[data-open-bag],[data-remove-basket],[data-basket-page]');
+      if(!control)return;e.preventDefault();if(locked.current)return;if(route==='/labor'&&arrival==='labor'&&(control.dataset.task!==undefined||control.hasAttribute('data-complete-labor')))return;
       if(control.hasAttribute('data-toggle-sound')){BUREAU_SOUND.toggle();return;}
       if(control.dataset.aboutSound){BUREAU_SOUND.play(control.dataset.aboutSound);return;}
       if(control.dataset.about){setAboutTab(control.dataset.about);return;}
@@ -96,7 +114,10 @@
       if(control.dataset.route){navigate(control.dataset.route);return;}
       if(control.dataset.nav){navigate({Home:'/',About:'/about',Consume:'/consumption','Tax System':'/tax-system'}[control.dataset.nav]);return;}
       if(control.dataset.menu){navigate({Record:'/record',Account:'/account',Labor:'/labor',Receipt:'/receipt'}[control.dataset.menu]);return;}
-      if(control.dataset.product){setData(d=>({...d,selected:control.dataset.product,productReady:true}));navigate('/products',control);return;}
+      if(control.hasAttribute('data-open-bag')){setData(d=>({...d,basketView:true,basketPage:0,productReady:true}));navigate('/products',control);return;}
+      if(control.dataset.removeBasket){setData(d=>{const basket=[...d.basket],index=basket.indexOf(control.dataset.removeBasket);if(index>=0)basket.splice(index,1);return {...d,basket};});return;}
+      if(control.dataset.basketPage!==undefined){setData(d=>({...d,basketPage:Math.max(0,Number(control.dataset.basketPage)||0)}));return;}
+      if(control.dataset.product){if(route==='/consumption'){addToBag(control.dataset.product,control);return;}setData(d=>({...d,selected:control.dataset.product,productReady:true,basketView:false}));navigate('/products',control);return;}
       if(control.dataset.select){setData(d=>({...d,selected:control.dataset.select,productReady:true}));return;}
       if(control.hasAttribute('data-purchase')){purchase();return;}
       if(control.hasAttribute('data-receipt-toggle')){const card=document.querySelector('.source-receipt-summary');const open=card?.classList.toggle('is-open');document.querySelectorAll('[data-receipt-toggle]').forEach(el=>el.setAttribute('aria-expanded',String(!!open)));return;}
@@ -119,6 +140,7 @@
       Structure: 'Personal time accounts connect consumption with public labor. Citizens repay the time debt created by convenience through work, forming a social system sustained by the circulation of time.'
     };    const page=routes[route].page;
     useLayoutEffect(()=>{if(page==='receipt'&&data.receiptPrinted)runPrinter();},[page,data.receiptPrinted,data.receiptPage]);
+    useLayoutEffect(()=>{const bag=document.querySelector('[data-open-bag]'),count=document.querySelector('[data-bag-count]');if(bag)bag.setAttribute('aria-label',`Open shopping bag, ${data.basket.length} items`);if(count){count.textContent=data.basket.length;count.hidden=data.basket.length===0;}},[page,data.basket]);
     // Updating section text does not replace the illustration DOM or restart its animations.
     useLayoutEffect(()=>{
       if(page==='about'){
