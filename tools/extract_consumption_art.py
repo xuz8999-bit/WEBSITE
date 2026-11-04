@@ -128,6 +128,13 @@ for parent in list(root.iter()):
 print('Independent contiguous motion groups:',wrapper_count)
 for node in root.iter(NS+'image'):
     node.set('href','assets/consumption/original/'+node.get('href'))
+defs=root.find(NS+'defs')
+clip=ET.SubElement(defs,NS+'clipPath',{'id':'shop-bag-pocket-clip','clipPathUnits':'userSpaceOnUse'})
+ET.SubElement(clip,NS+'path',{'d':'M596 290H950V421Q855 424 778 416Q679 410 596 415Z'})
+pocket=ET.Element(NS+'g',{'data-bag-contents':'','clip-path':'url(#shop-bag-pocket-clip)','aria-hidden':'true'})
+current_parents={child:parent for parent in root.iter() for child in parent}
+anchor_path=original_paths[1451]
+parent=current_parents[anchor_path];parent.insert(list(parent).index(anchor_path),pocket)
 root.set('class','illustration original-shop-svg');root.set('aria-hidden','true')
 root.attrib.pop('role',None);root.attrib.pop('aria-label',None)
 source_svg=ET.tostring(root,encoding='unicode')

@@ -21,7 +21,7 @@
   };
   function App(){
     const [route,setRoute]=useState(routeNow),[data,setData]=useState(initial),[motion,setMotion]=useState(null),[arrival,setArrival]=useState(()=>routeNow()==='/labor'&&!matchMedia('(prefers-reduced-motion: reduce)').matches?'labor':''),[aboutTab,setAboutTab]=useState('Background'),[notice,setNotice]=useState(''),[soundState,setSoundState]=useState(()=>BUREAU_SOUND.state());
-    const inputFocus=useRef(null);
+    const inputFocus=useRef(null),bagPreview=useRef({page:null,qty:0,version:0});
     const timers=useRef(new Set()),locked=useRef(false),pending=useRef(null),frame=useRef(0),previousDebt=useRef(0),serial=useRef(0);
     const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
     const schedule=(fn,ms)=>{const id=setTimeout(()=>{timers.current.delete(id);fn();},ms);timers.current.add(id);return id;};
@@ -48,9 +48,9 @@
       schedule(()=>{setMotion(null);pending.current=null;locked.current=false;},duration);
     };
     useEffect(()=>{
-      const sync=()=>{setData(d=>({...d,receiptPrinted:false}));clearTimers();locked.current=false;pending.current=null;setMotion(null);setArrival('');setNotice('');setRoute(routeNow());};
+      const sync=()=>{setData(d=>({...d,receiptPrinted:false,basket:[...d.basket]}));clearTimers();locked.current=false;pending.current=null;setMotion(null);setArrival('');setNotice('');setRoute(routeNow());};
       const preference=matchMedia('(prefers-reduced-motion: reduce)');
-      const stop=()=>{if(!preference.matches)return;const next=pending.current?.next;clearTimers();document.querySelector('.source-receipt')?.classList.remove('receipt-sounding','receipt-printing');if(next)commit(next);pending.current=null;locked.current=false;setMotion(null);setArrival('');document.querySelectorAll('.fruit-falling,.window-wiggle,.menu-pressed').forEach(e=>e.classList.remove('fruit-falling','window-wiggle','menu-pressed'));};
+      const stop=()=>{if(!preference.matches)return;const next=pending.current?.next;clearTimers();setData(d=>({...d,basket:[...d.basket]}));document.querySelector('.source-receipt')?.classList.remove('receipt-sounding','receipt-printing');if(next)commit(next);pending.current=null;locked.current=false;setMotion(null);setArrival('');document.querySelectorAll('.fruit-falling,.window-wiggle,.menu-pressed').forEach(e=>e.classList.remove('fruit-falling','window-wiggle','menu-pressed'));};
       window.addEventListener('popstate',sync);window.addEventListener('hashchange',sync);preference.addEventListener('change',stop);
       return()=>{clearTimers();window.removeEventListener('popstate',sync);window.removeEventListener('hashchange',sync);preference.removeEventListener('change',stop);};
     },[]);
@@ -118,7 +118,7 @@
       if(control.dataset.removeBasket){setData(d=>{const basket=[...d.basket],index=basket.indexOf(control.dataset.removeBasket);if(index>=0)basket.splice(index,1);return {...d,basket};});return;}
       if(control.dataset.basketPage!==undefined){setData(d=>({...d,basketPage:Math.max(0,Number(control.dataset.basketPage)||0)}));return;}
       if(control.dataset.product){if(route==='/consumption'){addToBag(control.dataset.product,control);return;}setData(d=>({...d,selected:control.dataset.product,productReady:true,basketView:false}));navigate('/products',control);return;}
-      if(control.dataset.select){setData(d=>({...d,selected:control.dataset.select,productReady:true}));return;}
+      if(control.dataset.select){setData(d=>({...d,selected:control.dataset.select,productReady:true,basketView:false}));return;}
       if(control.hasAttribute('data-purchase')){purchase();return;}
       if(control.hasAttribute('data-receipt-toggle')){const card=document.querySelector('.source-receipt-summary');const open=card?.classList.toggle('is-open');document.querySelectorAll('[data-receipt-toggle]').forEach(el=>el.setAttribute('aria-expanded',String(!!open)));return;}
       if(control.dataset.receiptPage!==undefined){setData(d=>({...d,receiptPage:Math.max(0,Number(control.dataset.receiptPage)||0)}));return;}
@@ -140,7 +140,21 @@
       Structure: 'Personal time accounts connect consumption with public labor. Citizens repay the time debt created by convenience through work, forming a social system sustained by the circulation of time.'
     };    const page=routes[route].page;
     useLayoutEffect(()=>{if(page==='receipt'&&data.receiptPrinted)runPrinter();},[page,data.receiptPrinted,data.receiptPage]);
-    useLayoutEffect(()=>{const bag=document.querySelector('[data-open-bag]'),count=document.querySelector('[data-bag-count]');if(bag)bag.setAttribute('aria-label',`Open shopping bag, ${data.basket.length} items`);if(count){count.textContent=data.basket.length;count.hidden=data.basket.length===0;}},[page,data.basket]);
+    useLayoutEffect(()=>{
+      const bag=document.querySelector('[data-open-bag]'),count=document.querySelector('[data-bag-count]'),pocket=document.querySelector('[data-bag-contents]');
+      const quantities=new Map();data.basket.forEach(id=>quantities.set(id,(quantities.get(id)||0)+1));
+      const names=[...quantities].map(([id,qty])=>`${BUREAU_WORLD.items.find(p=>p.id===id)?.name} × ${qty}`).join(', ');
+      if(bag){bag.setAttribute('aria-label',`Open shopping bag, ${data.basket.length} items`);bag.title=names?`${names}. Click bag to continue.`:'Open bag and continue';}
+      if(count){count.textContent=data.basket.length;count.hidden=data.basket.length===0;}
+      const adding=bagPreview.current.page===page&&page==='consumption'&&data.basket.length>bagPreview.current.qty,version=bagPreview.current.version+1;
+      bagPreview.current={page,qty:data.basket.length,version};
+      if(pocket){
+        const visible=data.basket.slice(-8),step=visible.length>1?Math.min(53,275/(visible.length-1)):0;
+        const content=visible.map((id,i)=>{const art=BUREAU_SHOP.art[id];if(!art)return '';const x=visible.length===1?729:610+i*step,y=318+(i%2)*11,angle=[-7,5,-3,7][i%4];return `<g data-bag-item="${id}" transform="rotate(${angle} ${x+38} 425)"><svg x="${x}" y="${y}" width="76" height="116" viewBox="${art.box}">${art.body}</svg></g>`;}).join('');
+        const paint=()=>{if(pocket.isConnected&&version===bagPreview.current.version)pocket.innerHTML=content;};
+        if(adding&&!reduced())schedule(paint,500);else paint();
+      }
+    },[page,data.basket]);
     // Updating section text does not replace the illustration DOM or restart its animations.
     useLayoutEffect(()=>{
       if(page==='about'){

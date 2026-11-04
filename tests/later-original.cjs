@@ -11,7 +11,7 @@ const fs=require('node:fs'),assert=require('node:assert/strict');const{chromium}
  }
  await p.goto('http://127.0.0.1:5173/');await p.evaluate(()=>localStorage.clear());await p.reload();await p.evaluate(()=>window.documentMarker='same');
  await p.locator('[data-start]').click();await p.locator('[data-nav="Consume"]').click();await p.locator('[data-product="shop-rice"]').click();await p.locator('[data-open-bag]').click();
- await p.locator('.selected-product').waitFor();assert.equal(await p.locator('.selected-product').getAttribute('data-select'),'shop-rice');
+ await p.locator('.selected-product').waitFor();assert.equal(await p.locator('.source-product-hit').count(),7);assert(await p.evaluate(()=>JSON.parse(localStorage.getItem('temporal-federation-v1')).basket.includes('shop-rice')));
  await p.locator('[data-purchase]').click();await p.locator('tbody').waitFor();assert((await p.locator('tbody').innerText()).includes('Brown rice'));
  await p.locator('[data-filter-date]').fill('1900-01-01');assert(!(await p.locator('tbody').innerText()).includes('Brown rice'));await p.locator('[data-filter-all]').click();assert((await p.locator('tbody').innerText()).includes('Brown rice'));
  await p.getByRole('button',{name:'Details — view account',exact:true}).click();const debt=Number(await p.locator('[data-debt-counter]').textContent());assert(debt>63);

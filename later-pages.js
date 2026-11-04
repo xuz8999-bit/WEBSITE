@@ -13,25 +13,16 @@
   const hit=(bounds,attributes,label,extra='')=>`<button class="source-hit ${extra}" style="${boxStyle(bounds)}" ${attributes} aria-label="${esc(label)}" title="${esc(label)}"><span class="source-tip">${esc(label)}</span></button>`;
   const nativeControls=(back,next)=>`<nav class="story-controls source-native-controls" aria-label="Page navigation">${back}${next}</nav>`;
   const frame=(page,label,body='',flags='',art=scenes[page])=>`<main class="scene world ${page} source-story source-${page} ${flags}" aria-label="${label}"><h1 class="sr-only">${label}</h1>${art}${body}</main>`;
-  const basketProducts=state=>{
-    const counts=new Map();state.basket.forEach(id=>counts.set(id,(counts.get(id)||0)+1));
-    const ids=[...counts.keys()],pageCount=Math.max(1,Math.ceil(ids.length/7)),pageIndex=Math.min(state.basketPage||0,pageCount-1),shown=ids.slice(pageIndex*7,pageIndex*7+7);
-    const selected=shown.includes(state.selected)?state.selected:shown[0];
-    const body=shown.map((id,i)=>{const p=BUREAU_WORLD.items.find(p=>p.id===id),bounds=goods[['bag','sundae','chips','box','icepop','cup','donuts'][i]].bounds;return `<button class="source-hit source-product-hit${selected===id?' selected-product':''}" data-select="${id}" aria-label="Select ${esc(p.name)}" aria-pressed="${selected===id}" style="${boxStyle(bounds)};--picked-delay:-${i*.8}s">${BUREAU_WORLD.icon(id,'source-chosen-product')}<span class="basket-quantity">Qty ${counts.get(id)}</span><span class="source-tip">${esc(p.name)} · ${p.tax} min each</span></button><button class="basket-remove" data-remove-basket="${id}" aria-label="Remove one ${esc(p.name)} from bag" style="left:${bounds[2]/13.66-1.3}%;top:${bounds[1]/7.68}%">×</button>`;}).join('');
-    const total=state.basket.reduce((sum,id)=>sum+(BUREAU_WORLD.items.find(p=>p.id===id)?.tax||0),0);
-    const paging=pageCount>1?`<div class="basket-gallery-paging">${pageIndex>0?`<button data-basket-page="${pageIndex-1}" aria-label="Previous bag page">‹</button>`:''}<span>${pageIndex+1}/${pageCount}</span>${pageIndex<pageCount-1?`<button data-basket-page="${pageIndex+1}" aria-label="Next bag page">›</button>`:''}</div>`:'';
-    return frame('products','Selected products',body+paging+(!shown.length?'<p class="basket-empty">Your bag is empty.</p>':'')+`<nav class="source-product-actions is-ready" aria-label="Product actions"><button data-route="/consumption">Back</button><button data-purchase ${!state.basket.length?'disabled':''}>Record selection · ${total} min</button><button data-route="/record">Records →</button></nav>`,'basket-gallery');
-  };
   const products=state=>{
-    if(state.basketView)return basketProducts(state);
-    const item=BUREAU_WORLD.items.find(p=>p.id===state.selected)||BUREAU_WORLD.items[2];
+    const displayId=state.basketView&&!sourceIds.includes(state.selected)?'chips':state.selected;
+    const item=BUREAU_WORLD.items.find(p=>p.id===displayId)||BUREAU_WORLD.items[2];
     const replacement=!sourceIds.includes(item.id);
     const body=sourceIds.map(id=>{
       const shown=id==='chips'&&replacement?item.id:id;
       const p=BUREAU_WORLD.items.find(p=>p.id===shown);
       return `<button class="source-hit source-product-hit${shown===item.id?' selected-product':''}" data-select="${shown}" data-gallery-slot="${id}" aria-label="Select ${esc(p.name)}" aria-pressed="${shown===item.id}" style="${boxStyle(goods[id].bounds)}">${id==='chips'&&replacement?BUREAU_WORLD.icon(item.id,'source-chosen-product'):''}<span class="source-tip">${esc(p.name)} · ${p.tax} min</span></button>`;
     }).join('');
-    const actions=`<nav class="source-product-actions${state.productReady?' is-ready':''}" aria-label="Product actions"><button data-route="/consumption">Back</button><button data-purchase>Record ${esc(item.name)} · ${item.tax} min</button><button data-route="/record">Records →</button></nav>`;
+    const actions=`<nav class="source-product-actions${state.productReady?' is-ready':''}" aria-label="Product actions"><button data-route="/consumption">Back</button><button data-purchase ${state.basketView&&!state.basket.length?'disabled':''}>${state.basketView?`Record selection · ${state.basket.reduce((sum,id)=>sum+(BUREAU_WORLD.items.find(p=>p.id===id)?.tax||0),0)} min`:`Record ${esc(item.name)} · ${item.tax} min`}</button><button data-route="/record">Records →</button></nav>`;
     return frame('products','Product display',body+actions, replacement?'source-replaced-product':'');
   };
   const record=state=>{
