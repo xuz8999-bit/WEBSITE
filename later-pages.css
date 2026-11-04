@@ -1,0 +1,104 @@
+/* Native 1366 × 768 source artboards. Never restyle the settled source artwork. */
+@font-face { font-family: Source Britannic; src: url('assets/story/original/britannic.ttf') format('truetype'); font-weight: 400 900; font-display: swap; }
+.transition-stage:has(.source-story) { width: min(100vw, calc(100vh * 1366 / 768)); aspect-ratio: 1366 / 768; }
+.source-story.scene { aspect-ratio: 1366 / 768; background: white; }
+.source-story-svg, .source-live-debt { pointer-events: none; }
+.source-story .source-hit { position: absolute; display: block; border: 0; padding: 0; margin: 0; background: transparent; z-index: 3; cursor: pointer; }
+.source-story .source-hit:active { transform: none; background: #fff8dc18; }
+.source-story .source-hit:focus-visible { outline: .15cqw solid #343121; outline-offset: .2cqw; border-radius: .3cqw; }
+.source-story .source-native-controls { position: absolute; inset: 0; display: block; pointer-events: none; z-index: 4; }
+.source-story .source-native-controls .source-hit { pointer-events: auto; }
+.source-tip { position: absolute; left: 50%; bottom: calc(100% + .5cqw); width: max-content; max-width: 28cqw; transform: translateX(-50%); padding: .45cqw .7cqw; border-radius: .3cqw; background: #fff8dc; color: #231815; font: 1.1cqw/1.25 'Bureau Serif',serif; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 240ms ease; }
+.source-hit:hover > .source-tip, .source-hit:focus-visible > .source-tip { opacity: 1; visibility: visible; }
+.source-native-controls .source-tip { bottom: auto; top: 100%; }
+.source-story .source-key-hit .source-tip { inset: 0; max-width: none; transform: none; display: grid; place-items: center; width: 100%; padding: 0; background: transparent; font: 1cqw/1 'Source Britannic',serif; }
+.source-product-actions { position: absolute; bottom: 1.5%; left: 3%; right: 3%; display: flex; justify-content: space-between; gap: 1cqw; z-index: 6; opacity: 0; transition: opacity 240ms ease; }
+.source-product-actions.is-ready, .source-product-actions:hover, .source-product-actions:focus-within { opacity: 1; }
+.source-product-actions button { border: 0; border-radius: .4cqw; background: #fff8dc; padding: .6cqw 1cqw; font: 1.25cqw/1.2 'Source Britannic',serif; }
+.source-product-actions button:hover { scale: 1.04; }
+.source-product-actions button:active { scale: .96; }
+.source-product-hit .source-chosen-product { width: 100%; height: 100%; animation: none; }
+.source-replaced-product .source-product-chips { visibility: hidden; }
+.source-product-bag, .source-product-sundae, .source-product-chips, .source-product-box, .source-product-icepop, .source-product-cup, .source-product-donuts { animation: source-product-float 7s ease-in-out var(--part-delay,0s) infinite; }
+.source-product-bag { transform-origin: 330px 400px; }
+.source-product-sundae { transform-origin: 685px 230px; }
+.source-product-chips { transform-origin: 910px 240px; }
+.source-product-box { transform-origin: 1160px 250px; }
+.source-product-icepop { transform-origin: 690px 540px; }
+.source-product-cup { transform-origin: 930px 530px; }
+.source-product-donuts { transform-origin: 1180px 540px; }
+.source-record-data { position: absolute; left: 0; right: 0; top: 34.48%; height: 36.33%; overflow: auto; z-index: 2; scrollbar-width: thin; }
+.source-record-data:focus:not(:focus-visible) { outline: 0; }
+.source-record-data:focus-visible { outline: .15cqw solid #5895e5; outline-offset: -.2cqw; }
+.source-story .source-record-data table { width: 100%; height: auto; border-collapse: collapse; table-layout: fixed; font: 1.45cqw/1.2 'Source Britannic',serif; color: #231815; }
+.source-story .source-record-data tr { height: 6.81cqw; }
+.source-story .source-record-data td { border: 0; padding: .5cqw; overflow-wrap: anywhere; vertical-align: middle; }
+.source-story .source-record-data tr:nth-child(n+4) td { border-top: .15cqw solid #86b8e8; }
+.source-story .source-record-data th { border: 0; padding: 0; }
+.source-date-control { position: absolute; z-index: 3; }
+.source-date-control input { width: 100%; height: 100%; padding: .4cqw; border: 0; background: transparent; color: transparent; font: 2.5cqw 'Source Britannic',serif; cursor: pointer; }
+.source-date-control input::-webkit-calendar-picker-indicator { opacity: 0; width: 100%; height: 100%; position: absolute; inset: 0; cursor: pointer; }
+.has-date-filter .source-record-date-glyph { visibility: hidden; }
+.has-date-filter .source-date-control input { color: #231815; font-size: 2cqw; }
+.source-record-can, .source-record-icepop, .source-record-cup, .source-record-snack, .source-record-mug { animation: source-record-bob 7s ease-in-out -2s infinite; }
+.source-record-icepop { animation-delay: -4.3s; }
+.source-record-cup { animation-delay: -.8s; }
+.source-record-snack { animation-delay: -5.5s; }
+.source-record-mug { animation-delay: -3.6s; }
+.has-live-debt .source-debt-glyph { visibility: hidden; }
+.source-avatar { animation: source-avatar-bob 6s ease-in-out -2s infinite; }
+.source-story .source-time-input { position: absolute; border: 0; padding: 0 .8cqw; background: transparent; text-align: right; font: 2.3cqw 'Source Britannic',serif; color: #231815; z-index: 3; }
+.source-worker-arms { transform-origin: 850px 413px; animation: source-work-arms 3s ease-in-out infinite; }
+.source-worker-leg-29 { transform-origin: 825px 480px; animation: source-work-leg 3s ease-in-out -1.5s infinite; }
+.source-worker-leg-30 { transform-origin: 809px 480px; animation: source-work-leg 3s ease-in-out infinite; }
+.source-cart { animation: source-cart-roll 8s ease-in-out -2.5s infinite; }
+.source-leaf-43, .source-leaf-44, .source-leaf-45, .source-leaf-46, .source-leaf-47 { transform-origin: 1115px 370px; animation: source-leaf-sway 6s ease-in-out -2.8s infinite; }
+.source-leaf-44 { animation-duration: 5.3s; animation-delay: -1.2s; }
+.source-leaf-45 { animation-duration: 7s; animation-delay: -4s; }
+.source-leaf-46 { animation-duration: 6.5s; animation-delay: -.7s; }
+.source-leaf-47 { animation-duration: 8s; animation-delay: -3.6s; }
+.source-task-hit[aria-pressed="true"]:focus-visible { outline-color: #00a600; }
+.source-receipt-summary { position: absolute; left: 65%; top: 36%; width: 29%; z-index: 7; background: #fff8dc; color: #231815; padding: 1.3cqw; border-radius: .4cqw; box-shadow: .3cqw .3cqw 0 #0002; font: 1.2cqw/1.4 'Source Britannic',serif; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity 240ms ease; }
+.source-receipt-summary.is-open { visibility: visible; opacity: 1; pointer-events: auto; }
+.source-receipt-summary h2 { font-size: 1.45cqw; margin: 0 0 .8cqw; }
+.source-receipt-summary p { margin: .55cqw 0; }
+.source-receipt-summary button { margin-top: .8cqw; background: transparent; border: 0; font: inherit; text-decoration: underline; }
+.source-story.world-entering .source-record-data tr { animation: row-reveal 450ms ease-out both; animation-delay: calc(var(--row) * 90ms); }
+.source-story.world-entering .source-paper-clip { transform-origin: 665px 244px; animation: source-paper-print 900ms ease-in-out both; }
+.source-story.world-entering .source-printer { animation: source-printer-tap 400ms ease-in-out; }
+.source-story.exit-return .source-paper { transform-origin: 665px 244px; animation: source-paper-roll 380ms ease-in both; }
+@keyframes source-product-float { 0%,100% { translate: 0 0; rotate: -.45deg; } 50% { translate: 0 -4px; rotate: .45deg; } }
+@keyframes source-record-bob { 0%,75%,100% { translate: 0 0; } 88% { translate: 0 -1.5px; } }
+@keyframes source-avatar-bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -2.5px; } }
+@keyframes source-work-arms { 0%,100% { rotate: -.8deg; } 50% { rotate: .8deg; } }
+@keyframes source-work-leg { 0%,100% { rotate: -.5deg; } 50% { rotate: .5deg; } }
+@keyframes source-cart-roll { 0%,100% { translate: 0 0; } 50% { translate: 2px 0; } }
+@keyframes source-leaf-sway { 0%,100% { rotate: -1.2deg; } 50% { rotate: 1.2deg; } }
+@keyframes source-paper-print { from { scale: 1 0; } to { scale: 1 1; } }
+@keyframes source-printer-tap { 0%,100% { translate: 0 0; } 25%,75% { translate: .8px 0; } 50% { translate: -.8px 0; } }
+@keyframes source-paper-roll { to { scale: 1 0; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+ .source-story .source-part, .source-story.world-entering .source-record-data tr, .source-story.world-entering .source-paper-clip, .source-story.exit-return .source-paper { animation: none; }
+ .source-story *, .source-story *::before, .source-story *::after { transition: none !important; }
+}
+
+/* Selection/focus feedback belongs to the individual object, never its hit area. */
+.source-products .selected-product:not(:focus-visible) { outline: 0; }
+.source-products:has([data-gallery-slot="bag"]:hover) .source-product-bag, .source-products:has([data-gallery-slot="bag"]:focus-visible) .source-product-bag { scale: 1.035; }
+.source-products:has([data-gallery-slot="bag"]:active) .source-product-bag { scale: .97; }
+.source-products:has([data-gallery-slot="sundae"]:hover) .source-product-sundae, .source-products:has([data-gallery-slot="sundae"]:focus-visible) .source-product-sundae { scale: 1.035; }
+.source-products:has([data-gallery-slot="sundae"]:active) .source-product-sundae { scale: .97; }
+.source-products:has([data-gallery-slot="chips"]:hover) .source-product-chips, .source-products:has([data-gallery-slot="chips"]:focus-visible) .source-product-chips { scale: 1.035; }
+.source-products:has([data-gallery-slot="chips"]:active) .source-product-chips { scale: .97; }
+.source-products:has([data-gallery-slot="box"]:hover) .source-product-box, .source-products:has([data-gallery-slot="box"]:focus-visible) .source-product-box { scale: 1.035; }
+.source-products:has([data-gallery-slot="box"]:active) .source-product-box { scale: .97; }
+.source-products:has([data-gallery-slot="icepop"]:hover) .source-product-icepop, .source-products:has([data-gallery-slot="icepop"]:focus-visible) .source-product-icepop { scale: 1.035; }
+.source-products:has([data-gallery-slot="icepop"]:active) .source-product-icepop { scale: .97; }
+.source-products:has([data-gallery-slot="cup"]:hover) .source-product-cup, .source-products:has([data-gallery-slot="cup"]:focus-visible) .source-product-cup { scale: 1.035; }
+.source-products:has([data-gallery-slot="cup"]:active) .source-product-cup { scale: .97; }
+.source-products:has([data-gallery-slot="donuts"]:hover) .source-product-donuts, .source-products:has([data-gallery-slot="donuts"]:focus-visible) .source-product-donuts { scale: 1.035; }
+.source-products:has([data-gallery-slot="donuts"]:active) .source-product-donuts { scale: .97; }
+@media (prefers-reduced-motion: reduce) { .source-products .source-part { scale: none !important; } }
+
+.source-labor.task-chosen .source-task-hit[aria-pressed="true"] { outline: .15cqw dashed #7f4477; outline-offset: .3cqw; border-radius: .3cqw; }
+.source-part { transition: scale var(--hover-time,240ms) ease; }

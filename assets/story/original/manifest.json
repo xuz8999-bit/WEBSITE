@@ -1,0 +1,152 @@
+{
+  "source_sha256": "872cecf857cb01668f5f6e08467cd378613bbf4a6cdfc04578320d61ee3e3b53",
+  "pages": {
+    "products": {
+      "page": 2,
+      "vector_paths": 490,
+      "textures": [
+        "e16235a1d10fb0c2.png",
+        "a7424924b06a48ea.png",
+        "793c69eea6c71613.png",
+        "bf8ad838b12d9ed3.png"
+      ],
+      "bytes": 230050
+    },
+    "record": {
+      "page": 3,
+      "vector_paths": 150,
+      "textures": [
+        "1dcf35239f12b0cc.png",
+        "477026f28519c3b6.png",
+        "87a7925746e0b2dd.png",
+        "4db34e92cb6b66d9.png",
+        "cb2617f9e73b3bb8.png",
+        "a3f96c72fe98affb.png"
+      ],
+      "bytes": 83336
+    },
+    "account": {
+      "page": 4,
+      "vector_paths": 937,
+      "textures": [
+        "21bb82144dce27c2.png",
+        "e9728c3bfcfda355.png",
+        "e16235a1d10fb0c2.png",
+        "5da2ec216ae63065.png",
+        "479ffa9978fea424.png",
+        "793c69eea6c71613.png"
+      ],
+      "bytes": 465311
+    },
+    "labor": {
+      "page": 5,
+      "vector_paths": 48,
+      "textures": [
+        "feb54ef63955b1ae.png",
+        "8cccd4a7467825ce.png",
+        "52e422cc89b1a90a.png",
+        "ab949b9cb1d3fdc7.png",
+        "586df69868b6b982.png",
+        "eb7e8fd6a1b8728d.png"
+      ],
+      "bytes": 44139
+    },
+    "receipt": {
+      "page": 6,
+      "vector_paths": 462,
+      "textures": [
+        "f1f71073f2aa3b9f.png",
+        "feb54ef63955b1ae.png",
+        "b496d1c9fef59601.png",
+        "a6e3b7520baeb108.png"
+      ],
+      "bytes": 148365
+    }
+  },
+  "goods": {
+    "sundae": {
+      "bounds": [
+        606.299,
+        140.2153,
+        761.1583,
+        327.467
+      ],
+      "width": 156.85930000000008,
+      "height": 189.25169999999997,
+      "file": "assets/story/original/items/sundae.svg",
+      "paths": 27
+    },
+    "icepop": {
+      "bounds": [
+        639.2264,
+        462.5071,
+        738.975,
+        622.2381
+      ],
+      "width": 101.74860000000001,
+      "height": 161.73100000000005,
+      "file": "assets/story/original/items/icepop.svg",
+      "paths": 3
+    },
+    "bag": {
+      "bounds": [
+        145.2881,
+        140.9654,
+        485.9999,
+        632.7784
+      ],
+      "width": 342.71180000000004,
+      "height": 493.81300000000005,
+      "file": "assets/story/original/items/bag.svg",
+      "paths": 177
+    },
+    "box": {
+      "bounds": [
+        1081.5057,
+        162.884,
+        1261.5398,
+        339.731
+      ],
+      "width": 182.03410000000008,
+      "height": 178.847,
+      "file": "assets/story/original/items/box.svg",
+      "paths": 11
+    },
+    "donuts": {
+      "bounds": [
+        1078.5332,
+        446.5084,
+        1296.2472,
+        611.9573
+      ],
+      "width": 219.71399999999994,
+      "height": 167.44890000000004,
+      "file": "assets/story/original/items/donuts.svg",
+      "paths": 165
+    },
+    "chips": {
+      "bounds": [
+        845.1285,
+        155.1169,
+        988.1423,
+        326.3708
+      ],
+      "width": 145.01379999999995,
+      "height": 173.2539,
+      "file": "assets/story/original/items/chips.svg",
+      "paths": 85
+    },
+    "cup": {
+      "bounds": [
+        865.9937,
+        431.875,
+        990.4667,
+        625.0968
+      ],
+      "width": 126.47299999999996,
+      "height": 195.22180000000003,
+      "file": "assets/story/original/items/cup.svg",
+      "paths": 22
+    }
+  }
+}

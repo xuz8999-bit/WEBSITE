@@ -1,0 +1,28 @@
+const fs=require('node:fs'),assert=require('node:assert/strict');const{chromium}=require('playwright');
+(async()=>{
+ fs.mkdirSync('artifacts',{recursive:true});
+ const b=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
+ const p=await b.newPage({viewport:{width:1366,height:768},reducedMotion:'reduce'});const errors=[];p.on('pageerror',e=>errors.push(e.message));
+ for(const name of ['products','record','account','labor','receipt']){
+  await p.goto('http://127.0.0.1:5173/#/'+name);await p.locator('.source-story').waitFor();
+  await p.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.querySelectorAll('.source-story-svg image')].map(e=>new Promise((resolve,reject)=>{const im=new Image();im.onload=resolve;im.onerror=reject;im.src=e.getAttribute('href');})));});
+  await p.mouse.move(0,0);await p.screenshot({path:`artifacts/original-${name}.png`});
+  assert.equal(await p.locator('.source-story-svg').count(),1);assert.equal(await p.evaluate(()=>document.getAnimations().filter(a=>a.playState==='running').length),0,name);
+ }
+ await p.goto('http://127.0.0.1:5173/');await p.evaluate(()=>localStorage.clear());await p.reload();await p.evaluate(()=>window.documentMarker='same');
+ await p.locator('[data-start]').click();await p.locator('[data-nav="Consume"]').click();await p.locator('[data-product="shop-rice"]').click();
+ await p.locator('.selected-product').waitFor();assert.equal(await p.locator('.selected-product').getAttribute('data-select'),'shop-rice');
+ await p.locator('[data-purchase]').click();await p.locator('tbody').waitFor();assert((await p.locator('tbody').innerText()).includes('Brown rice'));
+ await p.locator('[data-filter-date]').fill('1900-01-01');assert(!(await p.locator('tbody').innerText()).includes('Brown rice'));await p.locator('[data-filter-all]').click();assert((await p.locator('tbody').innerText()).includes('Brown rice'));
+ await p.getByRole('button',{name:'Details — view account',exact:true}).click();const debt=Number(await p.locator('[data-debt-counter]').textContent());assert(debt>63);
+ await p.locator('[data-key="C"]').first().click();await p.locator('[data-key="5"]').click();assert.equal(await p.locator('.account-time-input').inputValue(),'5');
+ await p.getByRole('button',{name:'Account status — repay time',exact:true}).click();await p.locator('[data-task="1"]').first().click();await p.locator('[data-complete-labor]').click();
+ await p.getByRole('button',{name:'View repayment details',exact:true}).click();const details=p.locator('.source-receipt-summary');await details.waitFor({state:'visible'});assert((await details.innerText()).includes('REPAID 5 MIN'));assert((await details.innerText()).includes(`BALANCE ${debt-5} MIN`));await p.getByRole('button',{name:'Close',exact:true}).click();
+ await p.getByRole('button',{name:'Return home',exact:true}).click();assert.equal(new URL(p.url()).hash,'#/home');assert.equal(await p.evaluate(()=>window.documentMarker),'same');await p.goBack();assert.equal(new URL(p.url()).hash,'#/receipt');await p.goForward();await p.reload();await p.locator('[data-menu="Account"]').click();assert.equal(Number(await p.locator('[data-debt-counter]').textContent()),debt-5);
+ for(const [width,height]of [[390,844],[1024,768],[1920,1080]]){await p.setViewportSize({width,height});for(const name of ['products','record','account','labor','receipt']){await p.goto('http://127.0.0.1:5173/#/'+name);await p.locator('.source-story').waitFor();assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${name} overflow ${width}`);}}
+ await p.setViewportSize({width:1366,height:768});await p.emulateMedia({reducedMotion:'no-preference'});
+ await p.goto('http://127.0.0.1:5173/#/products');const bag=p.locator('[data-gallery-slot="bag"]');const fixed=await bag.boundingBox();await bag.hover();await p.waitForTimeout(300);assert.deepEqual(await bag.boundingBox(),fixed);assert(Math.abs(Number(await p.locator('.source-product-bag').first().evaluate(e=>getComputedStyle(e).scale))-1.035)<.001);assert(await p.locator('.source-product-bag').first().evaluate(e=>e.getAnimations().some(a=>a.playState==='running')));
+ await p.goto('http://127.0.0.1:5173/#/account');const input=p.locator('[data-repayment-minutes]');await input.fill('');await input.pressSequentially('25');assert.equal(await p.locator('[data-repayment-minutes]').inputValue(),'25');assert.equal(await p.locator('[data-repayment-minutes]').evaluate(e=>e===document.activeElement),true);
+ await p.getByRole('button',{name:'Account status — repay time',exact:true}).click();await p.waitForTimeout(900);const cart=p.locator('[data-complete-labor]');const fixedCart=await cart.boundingBox();await p.waitForTimeout(350);assert.deepEqual(await cart.boundingBox(),fixedCart);assert(await p.locator('.source-leaf-47').first().evaluate(e=>e.getAnimations().some(a=>a.playState==='running')));await cart.click();await p.waitForTimeout(430);const printing=await p.locator('.source-paper-clip').evaluate(e=>e.getAnimations().some(a=>a.playState==='running'));assert(printing,'Original paper must print gradually');await p.waitForTimeout(1000);assert.equal(await p.locator('.source-paper-clip').evaluate(e=>e.getAnimations().some(a=>a.playState==='running')),false);
+ assert.deepEqual(errors,[]);console.log('PASS original artboards 2–6, textures, reduced motion, purchase/filter/debt/keypad/labor/receipt, persistence/history and 15 responsive layouts.');await b.close();
+})().catch(e=>{console.error(e.message);process.exit(1)});

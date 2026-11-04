@@ -1,0 +1,46 @@
+/* Generated native calculator key centers; hit regions remain fixed. */
+.source-account .source-key-11 { transform-origin: 908.6069px 352.44550000000004px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="11"]:active) .source-key-11 { scale: .94; }
+.source-account .source-key-12 { transform-origin: 954.9801px 352.01210000000003px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="12"]:active) .source-key-12 { scale: .94; }
+.source-account .source-key-13 { transform-origin: 1000.0531px 352.01210000000003px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="13"]:active) .source-key-13 { scale: .94; }
+.source-account .source-key-14 { transform-origin: 1045.12615px 351.1453px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="14"]:active) .source-key-14 { scale: .94; }
+.source-account .source-key-15 { transform-origin: 1136.1390999999999px 353.3123px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="15"]:active) .source-key-15 { scale: .94; }
+.source-account .source-key-16 { transform-origin: 1181.2121000000002px 353.3123px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="16"]:active) .source-key-16 { scale: .94; }
+.source-account .source-key-17 { transform-origin: 1226.2851px 352.44550000000004px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="17"]:active) .source-key-17 { scale: .94; }
+.source-account .source-key-18 { transform-origin: 1135.7056px 392.31780000000003px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="18"]:active) .source-key-18 { scale: .94; }
+.source-account .source-key-19 { transform-origin: 1180.77875px 392.31780000000003px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="19"]:active) .source-key-19 { scale: .94; }
+.source-account .source-key-20 { transform-origin: 1225.85175px 391.451px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="20"]:active) .source-key-20 { scale: .94; }
+.source-account .source-key-21 { transform-origin: 910.7737999999999px 390.5842px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="21"]:active) .source-key-21 { scale: .94; }
+.source-account .source-key-22 { transform-origin: 957.1471px 390.1508px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="22"]:active) .source-key-22 { scale: .94; }
+.source-account .source-key-23 { transform-origin: 1002.2201px 390.1508px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="23"]:active) .source-key-23 { scale: .94; }
+.source-account .source-key-24 { transform-origin: 1047.29315px 389.284px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="24"]:active) .source-key-24 { scale: .94; }
+.source-account .source-key-25 { transform-origin: 909.90705px 430.0231px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="25"]:active) .source-key-25 { scale: .94; }
+.source-account .source-key-26 { transform-origin: 956.2803px 429.58979999999997px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="26"]:active) .source-key-26 { scale: .94; }
+.source-account .source-key-27 { transform-origin: 1001.3533px 429.58979999999997px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="27"]:active) .source-key-27 { scale: .94; }
+.source-account .source-key-28 { transform-origin: 1046.4263px 428.72299999999996px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="28"]:active) .source-key-28 { scale: .94; }
+.source-account .source-key-29 { transform-origin: 909.4737px 467.2951px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="29"]:active) .source-key-29 { scale: .94; }
+.source-account .source-key-30 { transform-origin: 955.8469px 466.86170000000004px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="30"]:active) .source-key-30 { scale: .94; }
+.source-account .source-key-31 { transform-origin: 1000.92005px 466.86170000000004px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="31"]:active) .source-key-31 { scale: .94; }
+.source-account .source-key-32 { transform-origin: 1045.993px 465.99490000000003px; transition: scale 160ms ease; }
+.source-account:has([data-source-key="32"]:active) .source-key-32 { scale: .94; }
+@media (prefers-reduced-motion: reduce) { .source-account .source-part { scale: none !important; } }

@@ -8,7 +8,7 @@
     return routes[value]?value:(location.pathname.endsWith('/home.html')?'/home':'/');
   };
   const initial=()=>{
-    const defaults={debt:63,selected:'chips',minutes:'10',records:[],receipt:null,filterDate:'',task:0};
+    const defaults={debt:63,selected:'chips',minutes:'10',records:[],receipt:null,filterDate:'',task:0,productReady:false,calculatorUsed:false,receiptExpanded:false,taskChosen:false};
     try{
       const saved=JSON.parse(localStorage.getItem('temporal-federation-v1')||'null');
       if(!saved)return defaults;
@@ -20,6 +20,7 @@
   };
   function App(){
     const [route,setRoute]=useState(routeNow),[data,setData]=useState(initial),[motion,setMotion]=useState(null),[arrival,setArrival]=useState(''),[aboutTab,setAboutTab]=useState('Background'),[notice,setNotice]=useState(''),[soundState,setSoundState]=useState(()=>BUREAU_SOUND.state());
+    const inputFocus=useRef(null);
     const timers=useRef(new Set()),locked=useRef(false),pending=useRef(null),frame=useRef(0),previousDebt=useRef(0),serial=useRef(0);
     const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
     const schedule=(fn,ms)=>{const id=setTimeout(()=>{timers.current.delete(id);fn();},ms);timers.current.add(id);return id;};
@@ -66,7 +67,7 @@
       const target=e.target.closest('[data-fruit],[data-window]');if(target&&!target.contains(e.relatedTarget))respond(target);
     };
     const onFocus=e=>{const item=e.target.closest('[data-about-sound]');if(item)BUREAU_SOUND.play(item.dataset.aboutSound);const tab=e.target.closest('[data-about]');if(tab)setAboutTab(tab.dataset.about);};
-    const onKeyDown=e=>{if(!['Enter',' '].includes(e.key))return;const product=e.target.closest('[data-product]');if(product){e.preventDefault();setData(d=>({...d,selected:product.dataset.product}));navigate('/products',product);return;}const item=e.target.closest('[data-about-sound]');if(item){e.preventDefault();BUREAU_SOUND.play(item.dataset.aboutSound);return;}const target=e.target.closest('[data-fruit],[data-window]');if(target){e.preventDefault();respond(target);}};
+    const onKeyDown=e=>{if(!['Enter',' '].includes(e.key))return;const product=e.target.closest('[data-product]');if(product){e.preventDefault();setData(d=>({...d,selected:product.dataset.product,productReady:true}));navigate('/products',product);return;}const item=e.target.closest('[data-about-sound]');if(item){e.preventDefault();BUREAU_SOUND.play(item.dataset.aboutSound);return;}const target=e.target.closest('[data-fruit],[data-window]');if(target){e.preventDefault();respond(target);}};
     const purchase=()=>{
       const item=BUREAU_WORLD.items.find(p=>p.id===data.selected)||BUREAU_WORLD.items[2],now=new Date();
       const entry={...item,id:`purchase-${Date.now()}-${Math.random().toString(36).slice(2,6)}`,date:now.toLocaleDateString('en-CA'),time:now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),paid:false};
@@ -74,12 +75,12 @@
     };
     const complete=()=>{
       const amount=Math.min(Math.max(1,Number(data.minutes)||10),data.debt),remaining=data.debt-amount;
-      const tasks=['Paper cup recycling','Carton disassembly','Plastic bag sorting','Packaging sorting'];
+      const tasks=['Paper cup recycling','Carton disassembly','Plastic bag sorting','E-waste disassembly'];
       setData(d=>({...d,debt:remaining,records:remaining===0?d.records.map(r=>({...r,paid:true})):d.records,
-        receipt:{id:`TF-${Date.now().toString().slice(-8)}`,date:new Date().toLocaleString('en-GB'),minutes:amount,task:tasks[d.task]}}));navigate('/receipt');
+        receipt:{id:`TF-${Date.now().toString().slice(-8)}`,date:new Date().toLocaleString('en-GB'),minutes:amount,task:tasks[d.task]},receiptExpanded:false}));navigate('/receipt');
     };
     const onClick=e=>{
-      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound]');
+      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle]');
       if(!control)return;e.preventDefault();if(locked.current)return;
       if(control.hasAttribute('data-toggle-sound')){BUREAU_SOUND.toggle();return;}
       if(control.dataset.aboutSound){BUREAU_SOUND.play(control.dataset.aboutSound);return;}
@@ -89,17 +90,19 @@
       if(control.dataset.route){navigate(control.dataset.route);return;}
       if(control.dataset.nav){navigate({Home:'/',About:'/about',Consume:'/consumption','Tax System':'/tax-system'}[control.dataset.nav]);return;}
       if(control.dataset.menu){navigate({Record:'/record',Account:'/account',Labor:'/labor',Receipt:'/receipt'}[control.dataset.menu]);return;}
-      if(control.dataset.product){setData(d=>({...d,selected:control.dataset.product}));navigate('/products',control);return;}
-      if(control.dataset.select){setData(d=>({...d,selected:control.dataset.select}));return;}
+      if(control.dataset.product){setData(d=>({...d,selected:control.dataset.product,productReady:true}));navigate('/products',control);return;}
+      if(control.dataset.select){setData(d=>({...d,selected:control.dataset.select,productReady:true}));return;}
       if(control.hasAttribute('data-purchase')){purchase();return;}
-      if(control.dataset.key){const key=control.dataset.key;setData(d=>({...d,minutes:key==='C'?'':key==='⌫'?d.minutes.slice(0,-1):(d.minutes+key).slice(-3)}));return;}
-      if(control.dataset.task!==undefined){setData(d=>({...d,task:Number(control.dataset.task)}));return;}
+      if(control.hasAttribute('data-receipt-toggle')){setData(d=>({...d,receiptExpanded:!d.receiptExpanded}));return;}
+      if(control.dataset.setMinutes){setData(d=>({...d,minutes:control.dataset.setMinutes,calculatorUsed:true}));return;}
+      if(control.dataset.key){const key=control.dataset.key;setData(d=>({...d,calculatorUsed:true,minutes:key==='C'?'':key==='⌫'?d.minutes.slice(0,-1):(d.minutes+key).slice(-3)}));return;}
+      if(control.dataset.task!==undefined){setData(d=>({...d,task:Number(control.dataset.task),taskChosen:true}));return;}
       if(control.hasAttribute('data-complete-labor')){complete();return;}
       if(control.hasAttribute('data-filter-all')){setData(d=>({...d,filterDate:''}));return;}
       if(control.dataset.action==='continue'){navigate('/home');return;}
       if(control.dataset.action==='record'){navigate('/record');}
     };
-    const onChange=e=>{if(e.target.hasAttribute('data-filter-date')){const value=e.target.value;setData(d=>({...d,filterDate:value}));}};
+    const onChange=e=>{if(e.target.hasAttribute('data-repayment-minutes')){const value=e.target.value.replace(/\D/g,'').slice(0,3);inputFocus.current={start:e.target.selectionStart,end:e.target.selectionEnd};setData(d=>({...d,minutes:value,calculatorUsed:true}));return;}if(e.target.hasAttribute('data-filter-date')){const value=e.target.value;setData(d=>({...d,filterDate:value}));}};
     const aboutCopy = {
       History: 'As technology and convenience services developed, people gained more personal time. Yet waste, resource use and public labor became a shared burden. The government introduced the Convenience Tax to redistribute these hidden costs.',
       Background: 'The Temporal Federation is a future state built around time as a shared resource. The Convenience Tax turns the public labor behind consumption into time debt in personal accounts. Citizens repay it through work, keeping time in circulation.',
@@ -122,6 +125,7 @@
       const time=performance.now();const tick=now=>{const p=Math.min(1,(now-time)/700);el.textContent=Math.round(start+(end-start)*(1-Math.pow(1-p,3)));if(p<1)frame.current=requestAnimationFrame(tick);};frame.current=requestAnimationFrame(tick);
       return()=>cancelAnimationFrame(frame.current);
     },[page,data.debt]);
+    useLayoutEffect(()=>{if(page!=='account'||!inputFocus.current)return;const el=document.querySelector('[data-repayment-minutes]');if(el){el.focus({preventScroll:true});el.setSelectionRange(inputFocus.current.start,inputFocus.current.end);}inputFocus.current=null;},[page,data.minutes,data.calculatorUsed]);
     let markup=page==='about'?BUREAU_SCENES.about.replace('{{ABOUT_TITLE}}','Temporal Federation').replace('{{ABOUT_COPY}}',aboutCopy.Background):BUREAU_SCENES[page]||BUREAU_WORLD.render(page,data);
     const classes=`scene ${page}${page==='home'&&arrival==='home'?' entering':''}${page==='about'&&arrival==='about'?' about-entering':''}${!['welcome','home','about'].includes(page)&&arrival===page?' world-entering':''}${motion?.variant==='clock'&&page==='welcome'?' start-playing':''}${motion&&route===motion.from?' exiting exit-'+motion.variant:''}`;
     markup=markup.replace(/(<main\b[^>]*\bclass=")([^"]*)(")/,(_,prefix,original,suffix)=>{
