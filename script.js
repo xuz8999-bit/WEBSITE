@@ -8,7 +8,7 @@
     return routes[value]?value:(location.pathname.endsWith('/home.html')?'/home':'/');
   };
   const initial=()=>{
-    const defaults={debt:63,selected:'chips',minutes:'10',records:[],receipt:null,filterDate:'',task:0,productReady:false,calculatorUsed:false,receiptExpanded:false,taskChosen:false,receiptPage:0};
+    const defaults={debt:63,selected:'chips',minutes:'10',records:[],receipt:null,filterDate:'',task:0,productReady:false,calculatorUsed:false,receiptExpanded:false,taskChosen:false};
     try{
       const saved=JSON.parse(localStorage.getItem('temporal-federation-v1')||'null');
       if(!saved)return defaults;
@@ -74,14 +74,13 @@
       setData(d=>({...d,records:[entry,...d.records].slice(0,100),debt:d.debt+item.tax}));navigate('/record',document.querySelector('.selected-product .product-icon'));
     };
     const complete=()=>{
-      const issuedAt=new Date();
       const amount=Math.min(Math.max(1,Number(data.minutes)||10),data.debt),remaining=data.debt-amount;
       const tasks=['Paper cup recycling','Carton disassembly','Plastic bag sorting','E-waste disassembly'];
       setData(d=>({...d,debt:remaining,records:remaining===0?d.records.map(r=>({...r,paid:true})):d.records,
-        receipt:{id:`TF-${Date.now().toString().slice(-8)}`,date:issuedAt.toLocaleString('en-GB'),issuedAt:issuedAt.toISOString(),minutes:amount,task:tasks[d.task],balanceBefore:d.debt,balance:remaining,records:d.records.map(r=>({...r,paid:remaining===0?true:r.paid}))},receiptExpanded:false,receiptPage:0}));navigate('/receipt');
+        receipt:{id:`TF-${Date.now().toString().slice(-8)}`,date:new Date().toLocaleString('en-GB'),minutes:amount,task:tasks[d.task]},receiptExpanded:false}));navigate('/receipt');
     };
     const onClick=e=>{
-      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle],[data-reprint-receipt],[data-account-stock],[data-receipt-page]');
+      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle]');
       if(!control)return;e.preventDefault();if(locked.current)return;
       if(control.hasAttribute('data-toggle-sound')){BUREAU_SOUND.toggle();return;}
       if(control.dataset.aboutSound){BUREAU_SOUND.play(control.dataset.aboutSound);return;}
@@ -94,10 +93,7 @@
       if(control.dataset.product){setData(d=>({...d,selected:control.dataset.product,productReady:true}));navigate('/products',control);return;}
       if(control.dataset.select){setData(d=>({...d,selected:control.dataset.select,productReady:true}));return;}
       if(control.hasAttribute('data-purchase')){purchase();return;}
-      if(control.hasAttribute('data-receipt-toggle')){const card=document.querySelector('.source-receipt-summary');const open=card?.classList.toggle('is-open');document.querySelectorAll('[data-receipt-toggle]').forEach(el=>el.setAttribute('aria-expanded',String(!!open)));return;}
-      if(control.dataset.receiptPage!==undefined){setData(d=>({...d,receiptPage:Math.max(0,Number(control.dataset.receiptPage)||0)}));return;}
-      if(control.dataset.accountStock){const part=control.dataset.accountStock;control.classList.add('stock-tapped');document.querySelectorAll('.source-account-stock-'+part).forEach(el=>{el.style.animation='none';void el.getBoundingClientRect();el.style.animation='';});schedule(()=>control.classList.remove('stock-tapped'),900);return;}
-      if(control.hasAttribute('data-reprint-receipt')){const scene=control.closest('.source-receipt');scene.classList.remove('receipt-printing');void scene.offsetWidth;scene.classList.add('receipt-printing');return;}
+      if(control.hasAttribute('data-receipt-toggle')){setData(d=>({...d,receiptExpanded:!d.receiptExpanded}));return;}
       if(control.dataset.setMinutes){setData(d=>({...d,minutes:control.dataset.setMinutes,calculatorUsed:true}));return;}
       if(control.dataset.key){const key=control.dataset.key;setData(d=>({...d,calculatorUsed:true,minutes:key==='C'?'':key==='⌫'?d.minutes.slice(0,-1):(d.minutes+key).slice(-3)}));return;}
       if(control.dataset.task!==undefined){setData(d=>({...d,task:Number(control.dataset.task),taskChosen:true}));return;}
@@ -132,7 +128,7 @@
     },[page,data.debt]);
     useLayoutEffect(()=>{if(page!=='account'||!inputFocus.current)return;const el=document.querySelector('[data-repayment-minutes]');if(el){el.focus({preventScroll:true});el.setSelectionRange(inputFocus.current.start,inputFocus.current.end);}inputFocus.current=null;},[page,data.minutes,data.calculatorUsed]);
     let markup=page==='about'?BUREAU_SCENES.about.replace('{{ABOUT_TITLE}}','Temporal Federation').replace('{{ABOUT_COPY}}',aboutCopy.Background):BUREAU_SCENES[page]||BUREAU_WORLD.render(page,data);
-    const classes=`scene ${page}${page==='home'&&arrival==='home'?' entering':''}${page==='about'&&arrival==='about'?' about-entering':''}${!['welcome','home','about','receipt'].includes(page)&&arrival===page?' world-entering':''}${motion?.variant==='clock'&&page==='welcome'?' start-playing':''}${motion&&route===motion.from?' exiting exit-'+motion.variant:''}`;
+    const classes=`scene ${page}${page==='home'&&arrival==='home'?' entering':''}${page==='about'&&arrival==='about'?' about-entering':''}${!['welcome','home','about'].includes(page)&&arrival===page?' world-entering':''}${motion?.variant==='clock'&&page==='welcome'?' start-playing':''}${motion&&route===motion.from?' exiting exit-'+motion.variant:''}`;
     markup=markup.replace(/(<main\b[^>]*\bclass=")([^"]*)(")/,(_,prefix,original,suffix)=>{
       const flags=classes.split(' ').filter(name=>name!=='scene'&&name!==page);
       return prefix+[...new Set([...original.split(' '),...flags])].join(' ')+suffix;

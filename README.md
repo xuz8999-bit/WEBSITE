@@ -117,3 +117,9 @@ ABOUT preserves the original sidebar/facades/card shape and source title. The ex
 Scoped rules in `front-pages.css` retain reduced-motion support. Source WELCOME textures preload, and matching fallback gradients prevent white backgrounds while texture images load. All source vectors remain foreground SVG geometry, not whole-page screenshot images.
 
 `tests/front-original.cjs` verifies source loading/screenshots, English tabs/food retention, START/shop/back/browser history, stationary navigation hit areas during local movement, fruit/window responses, reduced-motion and 12 mobile/desktop layouts. Screenshots are `artifacts/front-original-<page>.png`. `npm test` also runs the complete ten-page and real-receipt regression suite.
+
+## Requested combined version
+
+The first four scenes keep the newly supplied four-page PDF artwork (`front-art.js` / `front-pages.js`). CONSUMPTION and all five subsequent scenes now match deployment `e3c147f` (the user's selected original-PDF deployment), including the original later-page styling, illustration grouping, receipt illustration and interactions. The later-scene files/assets/extractor are restored directly from that commit. The temporary receipt-to-shop routing change was discarded; navigation matches the selected deployment. Stored consumption records are not cleared.
+
+The subsequent v5 printed-receipt check is retained only as a historical feature test in `tests/archive/receipt-records-v5.cjs`, excluded from the current version's test command. Earlier documentation for those later refinements is historical and superseded by this selected-version restoration. The original later-page, complete flow and transition tests are active alongside the new first-four-page checks.

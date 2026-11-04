@@ -48,10 +48,10 @@
 .has-live-debt .source-debt-glyph { visibility: hidden; }
 .source-avatar { animation: source-avatar-bob 6s ease-in-out -2s infinite; }
 .source-story .source-time-input { position: absolute; border: 0; padding: 0 .8cqw; background: transparent; text-align: right; font: 2.3cqw 'Source Britannic',serif; color: #231815; z-index: 3; }
-.source-worker-arms { transform-origin: 850px 413px; animation: source-work-arms 3.6s ease-in-out infinite; }
-.source-worker-leg-29 { transform-origin: 825px 480px; animation: source-work-leg 3.6s ease-in-out -1.8s infinite; }
-.source-worker-leg-30 { transform-origin: 809px 480px; animation: source-work-leg 3.6s ease-in-out infinite; }
-.source-cart { animation: source-cart-roll 3.6s ease-in-out infinite; }
+.source-worker-arms { transform-origin: 850px 413px; animation: source-work-arms 3s ease-in-out infinite; }
+.source-worker-leg-29 { transform-origin: 825px 480px; animation: source-work-leg 3s ease-in-out -1.5s infinite; }
+.source-worker-leg-30 { transform-origin: 809px 480px; animation: source-work-leg 3s ease-in-out infinite; }
+.source-cart { animation: source-cart-roll 8s ease-in-out -2.5s infinite; }
 .source-leaf-43, .source-leaf-44, .source-leaf-45, .source-leaf-46, .source-leaf-47 { transform-origin: 1115px 370px; animation: source-leaf-sway 6s ease-in-out -2.8s infinite; }
 .source-leaf-44 { animation-duration: 5.3s; animation-delay: -1.2s; }
 .source-leaf-45 { animation-duration: 7s; animation-delay: -4s; }
@@ -70,10 +70,10 @@
 @keyframes source-product-float { 0%,100% { translate: 0 0; rotate: -.45deg; } 50% { translate: 0 -4px; rotate: .45deg; } }
 @keyframes source-record-bob { 0%,75%,100% { translate: 0 0; } 88% { translate: 0 -1.5px; } }
 @keyframes source-avatar-bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -2.5px; } }
-@keyframes source-work-arms { 0%,100% { rotate: -1.8deg; } 50% { rotate: 1.8deg; } }
-@keyframes source-work-leg { 0%,100% { rotate: -1.6deg; } 50% { rotate: 1.6deg; } }
-@keyframes source-cart-roll { 0%,100% { translate: 0 0; } 50% { translate: 6px 0; } }
-@keyframes source-leaf-sway { 0%,100% { rotate: -4deg; } 50% { rotate: 4deg; } }
+@keyframes source-work-arms { 0%,100% { rotate: -.8deg; } 50% { rotate: .8deg; } }
+@keyframes source-work-leg { 0%,100% { rotate: -.5deg; } 50% { rotate: .5deg; } }
+@keyframes source-cart-roll { 0%,100% { translate: 0 0; } 50% { translate: 2px 0; } }
+@keyframes source-leaf-sway { 0%,100% { rotate: -1.2deg; } 50% { rotate: 1.2deg; } }
 @keyframes source-paper-print { from { scale: 1 0; } to { scale: 1 1; } }
 @keyframes source-printer-tap { 0%,100% { translate: 0 0; } 25%,75% { translate: .8px 0; } 50% { translate: -.8px 0; } }
 @keyframes source-paper-roll { to { scale: 1 0; opacity: 0; } }
@@ -102,43 +102,3 @@
 
 .source-labor.task-chosen .source-task-hit[aria-pressed="true"] { outline: .15cqw dashed #7f4477; outline-offset: .3cqw; border-radius: .3cqw; }
 .source-part { transition: scale var(--hover-time,240ms) ease; }
-
-/* LABOR: each original item sways about its base; its button stays stationary. */
-.source-labor-object-cup { transform-origin: 98px 578px; animation: source-labor-item-sway 4.8s ease-in-out -.8s infinite; }
-.source-labor-object-carton { transform-origin: 245px 570px; animation: source-labor-item-sway 5.7s ease-in-out -3.2s infinite; }
-.source-labor-object-bag { transform-origin: 442px 575px; animation: source-labor-item-sway 5.2s ease-in-out -1.7s infinite; }
-.source-labor-object-phone { transform-origin: 654px 570px; animation: source-labor-item-sway 6.1s ease-in-out -4.3s infinite; }
-@keyframes source-labor-item-sway { 0%,100% { rotate: -2.2deg; translate: 0 0; } 50% { rotate: 2.2deg; translate: 0 -4px; } }
-
-/* Feed a rigid original sheet through a fixed outlet mask; never stretch it. */
-.source-receipt .source-replay-control { z-index: 5; }
-.source-receipt.receipt-printing:not(.exiting) .source-paper { animation: source-receipt-feed 2.8s cubic-bezier(.28,.05,.22,1) both; }
-.source-receipt.receipt-printing:not(.exiting) .source-printer { animation: source-printer-feed-tap 160ms ease-in-out 12; }
-@keyframes source-receipt-feed { 0%,5% { translate: 0 -496px; } 100% { translate: 0 0; } }
-@keyframes source-printer-feed-tap { 0%,100% { translate: 0 0; } 35% { translate: .45px 0; } 70% { translate: -.45px 0; } }
-@media (prefers-reduced-motion: reduce) { .source-receipt.receipt-printing .source-part { animation: none !important; } }
-
-/* Account groceries respond separately; basket, handles and labels stay still. */
-.source-account-stock-red { transform-origin: 225px 445px; }
-.source-account:has([data-account-stock="red"]:hover) .source-account-stock-red, .source-account:has([data-account-stock="red"]:focus-visible) .source-account-stock-red, .source-account:has([data-account-stock="red"].stock-tapped) .source-account-stock-red { animation: source-account-package-wiggle 850ms ease-in-out; }
-.source-account-stock-yellow { transform-origin: 280px 445px; }
-.source-account:has([data-account-stock="yellow"]:hover) .source-account-stock-yellow, .source-account:has([data-account-stock="yellow"]:focus-visible) .source-account-stock-yellow, .source-account:has([data-account-stock="yellow"].stock-tapped) .source-account-stock-yellow { animation: source-account-package-wiggle 850ms ease-in-out; }
-.source-account-stock-pickle { transform-origin: 115px 445px; }
-.source-account:has([data-account-stock="pickle"]:hover) .source-account-stock-pickle, .source-account:has([data-account-stock="pickle"]:focus-visible) .source-account-stock-pickle, .source-account:has([data-account-stock="pickle"].stock-tapped) .source-account-stock-pickle { animation: source-account-package-wiggle 850ms ease-in-out; }
-.source-account-stock-blue { transform-origin: 360px 445px; }
-.source-account:has([data-account-stock="blue"]:hover) .source-account-stock-blue, .source-account:has([data-account-stock="blue"]:focus-visible) .source-account-stock-blue, .source-account:has([data-account-stock="blue"].stock-tapped) .source-account-stock-blue { animation: source-account-package-wiggle 850ms ease-in-out; }
-.source-account-stock-front { transform-origin: 160px 445px; }
-.source-account:has([data-account-stock="front"]:hover) .source-account-stock-front, .source-account:has([data-account-stock="front"]:focus-visible) .source-account-stock-front, .source-account:has([data-account-stock="front"].stock-tapped) .source-account-stock-front { animation: source-account-package-wiggle 850ms ease-in-out; }
-@keyframes source-account-package-wiggle { 0%,100% { rotate: 0deg; translate: 0 0; scale: 1; } 22% { rotate: -2.8deg; translate: 0 -3px; scale: 1.025; } 52% { rotate: 2.1deg; translate: 0 -4px; scale: 1.035; } 76% { rotate: -1deg; translate: 0 -1px; scale: 1.01; } }
-
-/* Actual consumption and repayment data travel with the original paper. */
-.receipt-ink { color: #47483e; }
-.receipt-printed-title { font-weight: 700; letter-spacing: .3px; }
-.source-receipt-summary { max-height: 55%; overflow: auto; }
-.source-receipt-summary ul { padding-left: 1.2cqw; }
-.source-receipt .source-receipt-pagination { position: absolute; inset: 0; pointer-events: none; z-index: 6; }
-.source-receipt .source-receipt-pagination .source-hit { pointer-events: auto; }
-.source-receipt-page-prev::after { content: '‹'; }
-.source-receipt-page-next::after { content: '›'; }
-.source-receipt-pagination .source-hit::after { font: 1.5cqw/1 monospace; color: #47483e; }
-.source-receipt-pagination .source-tip { max-width: 14cqw; }
