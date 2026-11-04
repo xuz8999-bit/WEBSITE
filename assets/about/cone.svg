@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 180">
+<defs><clipPath id="wafer"><path d="m25 61 72 14-43 97q-13 7-28-2l3-77-15-6z"/></clipPath></defs>
+<path fill="#b75b20" d="m25 61 72 14-43 97q-13 7-28-2l3-77-15-6z"/>
+<g clip-path="url(#wafer)" stroke="#e49a4e" stroke-width="4" fill="none" stroke-linecap="round"><path d="m18 94 57 53M17 109l51 47m-51-32 44 37m-45-21 38 33m-35-66 60 54M87 97l-57 47m50-33-49 44m41-26-43 36m32-23-29 29m39-79-43 37"/></g>
+<g fill="#f2ae5a"><ellipse cx="35" cy="112" rx="4" ry="3"/><ellipse cx="47" cy="121" rx="4" ry="3"/><ellipse cx="35" cy="129" rx="3" ry="4"/><ellipse cx="58" cy="136" rx="3" ry="4"/><ellipse cx="42" cy="144" rx="4" ry="3"/></g>
+<path fill="#e3b2f2" d="M17 64Q8 45 18 31 31 6 53 8q26 2 36 24 16 20 4 43z"/>
+<path fill="#d37a2b" d="m17 62 76 15-6 29-71-16q-4-2-2-9z"/>
+<g stroke="#f3b264" stroke-width="5" stroke-linecap="round"><path d="m24 67-7 21m18-19-7 21m18-19-6 21m18-18-7 22m18-19-7 21m18-18-7 21m17-18-6 20"/></g>
+<g fill="#514781"><ellipse cx="37" cy="19" rx="8" ry="9" transform="rotate(24 37 19)"/><ellipse cx="59" cy="13" rx="8" ry="10"/><ellipse cx="60" cy="25" rx="8" ry="9"/><ellipse cx="77" cy="26" rx="8" ry="9"/><ellipse cx="87" cy="43" rx="7" ry="9" transform="rotate(12 87 43)"/></g>
+</svg>

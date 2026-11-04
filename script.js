@@ -103,10 +103,10 @@
     const page = route === '/' ? 'welcome' : route === '/about' ? 'about' : 'home';
     let markup = BUREAU_SCENES[page].replace(`scene ${page}`, `scene ${page}${phase === 'leaving' && page === 'welcome' ? ' start-playing' : ''}${entering && page === 'home' ? ' entering' : ''}`);
     const aboutCopy = {
-      History: '随着科技与便利服务的发展，人们获得了更多个人时间，但消费背后的垃圾处理、资源消耗与公共劳动成本逐渐成为社会负担。为重新分配这些被隐藏的劳动成本，政府建立了“便利税”制度。',
-      Background: '时序联邦是一个以“时间”为核心资源的未来国家。便利税将消费背后的公共劳动成本转化为时间债务，记入个人账户；公民通过劳动偿还，让时间在社会中循环。',
-      Regulation: '政府建立“便利税”制度，将每一次便利消费转化为可计算的时间债务，并记录在公民的个人时间账户中。公民通过劳动偿还自己享受便利所产生的时间成本。',
-      Structure: '便利消费产生的时间债务记录在公民的个人时间账户中，公民通过劳动偿还债务。个人时间、消费与公共劳动由此相互连接，形成一个依靠时间循环维持运转的社会系统。'
+      History: 'As technology and convenience services developed, people gained more personal time. Yet waste, resource use and public labor became a shared burden. The government introduced the Convenience Tax to redistribute these hidden costs.',
+      Background: 'The Temporal Federation is a future state built around time as a shared resource. The Convenience Tax turns the public labor behind consumption into time debt in personal accounts. Citizens repay it through work, keeping time in circulation.',
+      Regulation: 'Each convenience purchase creates a measurable time debt, recorded in the citizen’s personal time account. Citizens repay the time costs of the convenience they enjoy through labor.',
+      Structure: 'Personal time accounts connect consumption with public labor. Citizens repay the time debt created by convenience through work, forming a social system sustained by the circulation of time.'
     };
     if (page === 'about') {
       markup = markup.replace('{{ABOUT_TITLE}}', aboutTab === 'Background' ? 'Temporal Federation' : aboutTab).replace('{{ABOUT_COPY}}', aboutCopy[aboutTab]);

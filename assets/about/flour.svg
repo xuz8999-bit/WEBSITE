@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 175">
+<path fill="#96b50c" d="M8 32 91 8 103 50l13 57 7 44q-39 13-83 24C20 148 18 133 14 105L6 53z"/>
+<path fill="#cb6600" d="M6 31 88 6q5-1 6 4l2 11L8 46q-5-2-5-7z"/>
+<path fill="#b8c323" d="m10 46 86-25 4 15-87 28z"/>
+<path fill="#315d08" d="M22 56q21-18 57-24l16 1 5 25-66 23Q22 72 22 56"/>
+<g transform="rotate(-17 63 53)" fill="#ebf0b0" font-family="Arial,sans-serif" font-weight="900" font-size="19"><text x="26" y="61" textLength="70" lengthAdjust="spacingAndGlyphs">FLOUR</text></g>
+<path fill="#e3cf0e" d="M34 85q22-23 56-20l16 54-53 31-23-40z"/>
+<path fill="#f5e849" d="m35 91 14-11 8 54-14-8zM61 76l12-5 7 58-15 6zM84 70l10 9-4 36-9 1z"/>
+<path fill="#ddaa05" d="m45 85 14-10 6 11-9 11-1 14-10 6-7-7zM69 75l14-9 7 9-5 12-4 18-12 10-3-13 8-12z"/>
+<path fill="#fff09b" d="M37 100 50 81l5 9-5 14 6 13-9 17zM64 91l13-18 7 9-7 17 6 9-12 15z"/>
+<g fill="none" stroke="#ae9413" stroke-width="3" stroke-linecap="round"><path d="m47 82-2 9m9-12-2 12m6-11-1 13m-13 5-2 9m12-9-2 8m21-31-3 12m12-10-3 11m-9 6-2 10m12-12-2 8"/></g>
+<path fill="#759312" d="M35 113q7 12 22 16l13-22-5 31-20 11zM60 143q12-25 33-31l-7 23 22-1-19 17z"/>
+<path fill="#7a3a00" d="M76 117c-7-6 2-18 14-28s23-12 26-6c8 13-25 45-40 34"/>
+<path fill="#b6b90e" d="M22 122q7 6 15 18l8 5 10-2 10 6 9-8 9 3 13-10 13 1 8-6 7 22-83 24q-13-17-19-53"/>
+<path fill="#123e00" d="M41 152q10-9 19-4 10 6 17-3 7-8 15-3l24-12 8 21q1 7-5 9l-71 23q-7 1-10-6l-7-17z"/>
+</svg>

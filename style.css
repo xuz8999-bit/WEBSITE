@@ -182,13 +182,13 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .about-card { position: absolute; left: 36.33%; top: 13.6%; width: 61.33%; min-height: 21.3%; padding: 2.1cqw 2.6cqw 1.3cqw; background: linear-gradient(#ffe36c 0%, #ffe36cbb 65%, #ffe36c00 100%); border-radius: 1.5cqw 1.5cqw 0 0; color: #080705; }
 .about-card::before { content: ''; position: absolute; left: -6cqw; top: 4.6cqw; width: 0; height: 0; border-top: 4cqw solid transparent; border-bottom: 4cqw solid transparent; border-right: 6cqw solid #ffd329; }
 .about-card h2 { margin: 0 0 .5cqw; font: 900 3.9cqw / 1 'Bureau Serif', serif; white-space: nowrap; letter-spacing: -.13cqw; }
-.about-card p { margin: .8cqw 0 0; font: 500 2cqw / 1.5 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif; overflow-wrap: anywhere; }
+.about-card p { margin: .8cqw 0 0; font: 600 1.8cqw / 1.4 'Times New Roman', Georgia, serif; overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: reduce) { .about-sections button:active { transform: none; } }
 
 /* Four foreground objects follow the supplied final ABOUT composition. */
 .about-floating-items { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
 .about-item { position: absolute; }
-.about-item svg { display: block; width: 100%; height: 100%; }
+.about-item svg, .about-item img { display: block; width: 100%; height: 100%; }
 .about-flour { left: 2%; top: 21%; width: 13%; height: 34%; animation: about-flour-float 7s ease-in-out -2s infinite; }
 .about-donuts { left: 16.5%; top: 59%; width: 29%; height: 43%; animation: about-donut-float 8s ease-in-out -5s infinite; }
 .about-sundae { left: 59%; top: 57%; width: 16%; height: 41%; animation: about-sundae-float 6.5s ease-in-out -3s infinite; }
@@ -201,3 +201,15 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 
 .about-back { position: absolute; left: 1.67%; bottom: 6%; width: 7.67%; height: 7.7%; padding: 0; border: 0; border-radius: 0; background: #fff9e8; color: #241b18; font: 900 3cqw / 1 'Bureau Serif', serif; cursor: pointer; z-index: 3; }
 .about-back:active { transform: scale(.96); }
+
+.about-sections button { transition: transform 180ms ease, background-color 180ms ease; transform-origin: center; }
+@media (hover: hover) {
+  .about-sections button:hover { position: relative; z-index: 3; background: #fff8c5; transform: scale(1.05); animation: about-tab-nudge 420ms ease-in-out; }
+}
+.about-sections button:focus-visible { background: #fff8c5; transform: scale(1.05); }
+.about-sections button:active { transform: scale(.97); }
+@keyframes about-tab-nudge { 0%,100% { rotate: 0deg; } 30% { rotate: -1deg; } 65% { rotate: 1deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .about-sections button { transition: none; }
+  .about-sections button:hover, .about-sections button:focus-visible, .about-sections button:active { animation: none; transform: none; rotate: none; }
+}

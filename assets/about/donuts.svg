@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 200">
+<defs><g id="cake">
+<path fill="#af747e" d="M-29-19Q-18-34-2-31q21-3 31 13 9 12 1 31Q21 32 4 32-15 36-29 19q-12-20 0-38"/>
+<path fill="#916a78" d="M-30-9q8-13 10-20l8 1-2 11 16 9 10-20 10 6 3 16 11 6-7 15-13-3-7 14-16 4-7-14-15 3z"/>
+<path fill="#b798a7" d="m-22-22 14-7 9 2 2 12 17-9 9 9-5 16 8 10-9 12-10-4-10 8-16-5-2-10-13-3 7-10-6-9z"/>
+<path fill="#d9c3c6" d="m-21-20 9-8 5 3-8 12-1 11-6 5-5-5 9-10zm23-7 11 4 1 9-5 4-7-9zm14 24 11-4 3 9-8 5-6-4zM-5 14l11-1 4 10-7 5-9-5zm-25-3 11 2 1 9-5 1z"/>
+<path d="m-20-11-6 11m15-25-4 9m24-7 4 7m13 8-7 5M-21 15l9 6m18 4 9-4m8-7 4-7" stroke="#f4e8d9" stroke-width="3" stroke-linecap="round" fill="none"/>
+<path fill="#ece9d5" d="M-5-8Q4-15 9-7q5 9-5 17-9 4-13-3-2-8 4-15"/>
+<path fill="#5da27d" d="M-1-7q5-4 7 0 2 8-5 13-4 0-3-6z"/><path d="m2-5-2 8" stroke="#bed6ae" stroke-width="2"/>
+<g fill="#765965"><path d="m-24-17 4-5 3 2-4 5zm27-12 5-1 1 4-5 1zm21 12 3 3-3 4-2-2zM-11 23l4 2-1 4-5-2z"/></g>
+</g></defs>
+<path fill="#c4fcff" d="M49 3Q36 1 29 13C18 30 6 65 4 87q-5 29 17 41l173 64q14 5 19-10l31-90q8-25-12-33L69 7z"/>
+<path fill="#9ee9f3" d="M45 12 231 70q10 5 7 19l-31 93q-3 6-12 3L22 122Q7 114 10 94L31 28z"/>
+<path fill="#d5f9f9" d="M42 18 224 76 196 173 17 111z"/>
+<use href="#cake" transform="translate(68 48) rotate(17) scale(.96)"/>
+<use href="#cake" transform="translate(126 72) rotate(37) scale(.94)"/>
+<use href="#cake" transform="translate(191 93) rotate(15) scale(.96)"/>
+<use href="#cake" transform="translate(50 105) rotate(10) scale(1 .97)"/>
+<use href="#cake" transform="translate(111 128) rotate(-12) scale(.98 .92)"/>
+<use href="#cake" transform="translate(172 151) rotate(20) scale(.97 .95)"/>
+<path d="m24 34 193 74m-201-8 190 65" stroke="#efffff" stroke-width="5" opacity=".7" fill="none"/>
+<path d="m53 9 177 57q12 5 11 18l-29 91M17 79l12-42" stroke="#eaffff" stroke-width="4" opacity=".8" fill="none"/>
+</svg>
