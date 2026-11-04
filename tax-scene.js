@@ -58,5 +58,4 @@ window.BUREAU_SCENES.tax = `
   <h2 class="tax-subheading">How It Operates</h2>
   <button class="tax-card-hotspot tax-shop-hotspot" data-route="/consumption" aria-label="Open the convenience shop"></button>
   <button class="tax-card-hotspot tax-product-hotspot" data-route="/consumption" aria-label="Choose convenience products"></button>
-  <div class="story-controls tax-controls"><button data-route="/consumption" class="tax-continue">Continue</button></div>
 </main>`;
