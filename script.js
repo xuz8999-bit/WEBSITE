@@ -80,7 +80,7 @@
         receipt:{id:`TF-${Date.now().toString().slice(-8)}`,date:new Date().toLocaleString('en-GB'),minutes:amount,task:tasks[d.task]},receiptExpanded:false}));navigate('/receipt');
     };
     const onClick=e=>{
-      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle]');
+      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle],[data-reprint-receipt],[data-account-stock]');
       if(!control)return;e.preventDefault();if(locked.current)return;
       if(control.hasAttribute('data-toggle-sound')){BUREAU_SOUND.toggle();return;}
       if(control.dataset.aboutSound){BUREAU_SOUND.play(control.dataset.aboutSound);return;}
@@ -93,7 +93,9 @@
       if(control.dataset.product){setData(d=>({...d,selected:control.dataset.product,productReady:true}));navigate('/products',control);return;}
       if(control.dataset.select){setData(d=>({...d,selected:control.dataset.select,productReady:true}));return;}
       if(control.hasAttribute('data-purchase')){purchase();return;}
-      if(control.hasAttribute('data-receipt-toggle')){setData(d=>({...d,receiptExpanded:!d.receiptExpanded}));return;}
+      if(control.hasAttribute('data-receipt-toggle')){const card=document.querySelector('.source-receipt-summary');const open=card?.classList.toggle('is-open');document.querySelectorAll('[data-receipt-toggle]').forEach(el=>el.setAttribute('aria-expanded',String(!!open)));return;}
+      if(control.dataset.accountStock){const part=control.dataset.accountStock;control.classList.add('stock-tapped');document.querySelectorAll('.source-account-stock-'+part).forEach(el=>{el.style.animation='none';void el.getBoundingClientRect();el.style.animation='';});schedule(()=>control.classList.remove('stock-tapped'),900);return;}
+      if(control.hasAttribute('data-reprint-receipt')){const scene=control.closest('.source-receipt');scene.classList.remove('receipt-printing');void scene.offsetWidth;scene.classList.add('receipt-printing');return;}
       if(control.dataset.setMinutes){setData(d=>({...d,minutes:control.dataset.setMinutes,calculatorUsed:true}));return;}
       if(control.dataset.key){const key=control.dataset.key;setData(d=>({...d,calculatorUsed:true,minutes:key==='C'?'':key==='⌫'?d.minutes.slice(0,-1):(d.minutes+key).slice(-3)}));return;}
       if(control.dataset.task!==undefined){setData(d=>({...d,task:Number(control.dataset.task),taskChosen:true}));return;}
@@ -127,7 +129,7 @@
     },[page,data.debt]);
     useLayoutEffect(()=>{if(page!=='account'||!inputFocus.current)return;const el=document.querySelector('[data-repayment-minutes]');if(el){el.focus({preventScroll:true});el.setSelectionRange(inputFocus.current.start,inputFocus.current.end);}inputFocus.current=null;},[page,data.minutes,data.calculatorUsed]);
     let markup=page==='about'?BUREAU_SCENES.about.replace('{{ABOUT_TITLE}}','Temporal Federation').replace('{{ABOUT_COPY}}',aboutCopy.Background):BUREAU_SCENES[page]||BUREAU_WORLD.render(page,data);
-    const classes=`scene ${page}${page==='home'&&arrival==='home'?' entering':''}${page==='about'&&arrival==='about'?' about-entering':''}${!['welcome','home','about'].includes(page)&&arrival===page?' world-entering':''}${motion?.variant==='clock'&&page==='welcome'?' start-playing':''}${motion&&route===motion.from?' exiting exit-'+motion.variant:''}`;
+    const classes=`scene ${page}${page==='home'&&arrival==='home'?' entering':''}${page==='about'&&arrival==='about'?' about-entering':''}${!['welcome','home','about','receipt'].includes(page)&&arrival===page?' world-entering':''}${motion?.variant==='clock'&&page==='welcome'?' start-playing':''}${motion&&route===motion.from?' exiting exit-'+motion.variant:''}`;
     markup=markup.replace(/(<main\b[^>]*\bclass=")([^"]*)(")/,(_,prefix,original,suffix)=>{
       const flags=classes.split(' ').filter(name=>name!=='scene'&&name!==page);
       return prefix+[...new Set([...original.split(' '),...flags])].join(' ')+suffix;

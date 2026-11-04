@@ -109,3 +109,24 @@
 .source-labor-object-bag { transform-origin: 442px 575px; animation: source-labor-item-sway 5.2s ease-in-out -1.7s infinite; }
 .source-labor-object-phone { transform-origin: 654px 570px; animation: source-labor-item-sway 6.1s ease-in-out -4.3s infinite; }
 @keyframes source-labor-item-sway { 0%,100% { rotate: -2.2deg; translate: 0 0; } 50% { rotate: 2.2deg; translate: 0 -4px; } }
+
+/* Feed a rigid original sheet through a fixed outlet mask; never stretch it. */
+.source-receipt .source-replay-control { z-index: 5; }
+.source-receipt.receipt-printing:not(.exiting) .source-paper { animation: source-receipt-feed 2.8s cubic-bezier(.28,.05,.22,1) both; }
+.source-receipt.receipt-printing:not(.exiting) .source-printer { animation: source-printer-feed-tap 160ms ease-in-out 12; }
+@keyframes source-receipt-feed { 0%,5% { translate: 0 -496px; } 100% { translate: 0 0; } }
+@keyframes source-printer-feed-tap { 0%,100% { translate: 0 0; } 35% { translate: .45px 0; } 70% { translate: -.45px 0; } }
+@media (prefers-reduced-motion: reduce) { .source-receipt.receipt-printing .source-part { animation: none !important; } }
+
+/* Account groceries respond separately; basket, handles and labels stay still. */
+.source-account-stock-red { transform-origin: 225px 445px; }
+.source-account:has([data-account-stock="red"]:hover) .source-account-stock-red, .source-account:has([data-account-stock="red"]:focus-visible) .source-account-stock-red, .source-account:has([data-account-stock="red"].stock-tapped) .source-account-stock-red { animation: source-account-package-wiggle 850ms ease-in-out; }
+.source-account-stock-yellow { transform-origin: 280px 445px; }
+.source-account:has([data-account-stock="yellow"]:hover) .source-account-stock-yellow, .source-account:has([data-account-stock="yellow"]:focus-visible) .source-account-stock-yellow, .source-account:has([data-account-stock="yellow"].stock-tapped) .source-account-stock-yellow { animation: source-account-package-wiggle 850ms ease-in-out; }
+.source-account-stock-pickle { transform-origin: 115px 445px; }
+.source-account:has([data-account-stock="pickle"]:hover) .source-account-stock-pickle, .source-account:has([data-account-stock="pickle"]:focus-visible) .source-account-stock-pickle, .source-account:has([data-account-stock="pickle"].stock-tapped) .source-account-stock-pickle { animation: source-account-package-wiggle 850ms ease-in-out; }
+.source-account-stock-blue { transform-origin: 360px 445px; }
+.source-account:has([data-account-stock="blue"]:hover) .source-account-stock-blue, .source-account:has([data-account-stock="blue"]:focus-visible) .source-account-stock-blue, .source-account:has([data-account-stock="blue"].stock-tapped) .source-account-stock-blue { animation: source-account-package-wiggle 850ms ease-in-out; }
+.source-account-stock-front { transform-origin: 160px 445px; }
+.source-account:has([data-account-stock="front"]:hover) .source-account-stock-front, .source-account:has([data-account-stock="front"]:focus-visible) .source-account-stock-front, .source-account:has([data-account-stock="front"].stock-tapped) .source-account-stock-front { animation: source-account-package-wiggle 850ms ease-in-out; }
+@keyframes source-account-package-wiggle { 0%,100% { rotate: 0deg; translate: 0 0; scale: 1; } 22% { rotate: -2.8deg; translate: 0 -3px; scale: 1.025; } 52% { rotate: 2.1deg; translate: 0 -4px; scale: 1.035; } 76% { rotate: -1deg; translate: 0 -1px; scale: 1.01; } }

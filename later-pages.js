@@ -40,7 +40,8 @@
     const counter=state.debt===63?`<span class="sr-only" data-debt-counter>63</span>`:`<svg class="illustration source-live-debt" viewBox="0 0 1366 768"><text x="333.5" y="233.2" fill="#231815" font-family="Source Britannic,serif" font-size="43.5047"><tspan data-debt-counter>${state.debt}</tspan>Min</text></svg>`;
     const input=`<input class="account-time-input source-time-input" style="${boxStyle([910,260,1230,310])}" aria-label="Labor repayment minutes" value="${state.calculatorUsed?esc(state.minutes):''}" inputmode="numeric" maxlength="3" data-repayment-minutes>`;
     const controls=nativeControls(hit([679,205,790,347],'data-route="/record"','Back to records'),hit([684,657,1233,710],'data-route="/labor"','Account status — repay time'));
-    return frame('account','ACCOUNT',counter+input+keypad+controls+hit([684,563,1233,617],'data-route="/record"','Borrowed time — view records')+hit([31,476,426,692],'data-route="/record"','Current status — view records')+hit([1117,416,1251,445],'data-key="C"','Clear minutes','source-key-hit')+hit([1117,454,1251,483],'data-route="/labor"','Repay selected time','source-key-hit'),state.debt===63?'':'has-live-debt');
+    const packages=[['red',[175,251,318,391],'red snack packet'],['yellow',[227,402,312,444],'yellow packet'],['pickle',[43,291,185,444],'green food packet'],['blue',[318,280,431,444],'blue food packet'],['front',[94,390,226,444],'orange snack packet']].map(([id,b,label])=>hit(b,`data-account-stock="${id}"`,'Move '+label,'source-account-stock-hit')).join('');
+    return frame('account','ACCOUNT',packages+counter+input+keypad+controls+hit([684,563,1233,617],'data-route="/record"','Borrowed time — view records')+hit([31,476,426,692],'data-route="/record"','Current status — view records')+hit([1117,416,1251,445],'data-key="C"','Clear minutes','source-key-hit')+hit([1117,454,1251,483],'data-route="/labor"','Repay selected time','source-key-hit'),state.debt===63?'':'has-live-debt');
   };
   const labor=state=>{
     const names=['Paper cup recycling','Carton disassembly','Plastic bag sorting','E-waste disassembly'];
@@ -53,7 +54,7 @@
   const receipt=state=>{
     const r=state.receipt;
     const summary=`<article class="source-receipt-summary${state.receiptExpanded?' is-open':''}" aria-label="Printed time repayment receipt"><h2>TIME REPAYMENT RECEIPT</h2><p>${r?esc(r.id):'PREVIEW'}</p><p>${r?esc(r.task):'Complete a labor task to issue a receipt.'}</p><p>REPAID ${r?r.minutes:0} MIN</p><p>BALANCE ${state.debt} MIN</p>${r?`<small>${esc(r.date)}</small>`:''}<button data-receipt-toggle aria-expanded="${!!state.receiptExpanded}">Close</button></article>`;
-    return frame('receipt','RECEIPT',hit([512,245,820,737],'data-receipt-toggle aria-expanded="'+!!state.receiptExpanded+'"','View repayment details')+summary+nativeControls(hit([483,117,847,242],'data-route="/labor"','Back to labor'),hit([597,32,748,86],'data-route="/home"','Return home')));
+    return frame('receipt','RECEIPT',hit([512,245,820,737],'data-receipt-toggle aria-expanded="'+!!state.receiptExpanded+'"','View repayment details')+summary+nativeControls(hit([483,117,847,242],'data-route="/labor"','Back to labor'),hit([597,32,748,86],'data-route="/home"','Return home'))+hit([513,209,816,237],'data-reprint-receipt','Print receipt again','source-replay-control'),'receipt-printing');
   };
   const renderOld=BUREAU_WORLD.render;
   const renderers={products,record,account,labor,receipt};

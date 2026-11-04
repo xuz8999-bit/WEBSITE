@@ -34,9 +34,11 @@ def wrap(root,paths,labels):
    i=indexes.get(child);label=labels.get(i)
    if label is None:children.append(child);active=None;last=None;continue
    if last!=label or active is None:
-    active=ET.Element(NS+'g',{'class':'source-part '+label,'data-source-part':label});children.append(active);last=label
+    active=ET.Element(NS+'g',{'class':'source-part '+label,'data-source-part':label});last=label
+    if label=='source-paper':
+     window=ET.Element(NS+'g',{'class':'source-paper-window','clip-path':'url(#story-paper-reveal)'});window.append(active);children.append(window)
+    else:children.append(active)
     if label.startswith('source-product-'):active.set('style',f'--part-delay:-{list(regions).index(label[15:])*.73}s')
-    if label=='source-paper':active.set('clip-path','url(#story-paper-reveal)')
    active.append(child)
   parent[:]=children
 
@@ -85,6 +87,17 @@ for pn,name in enumerate(['products','record','account','labor','receipt'],1):
    v=[float(x) for x in re.findall(r'[-+]?(?:\d*\.?\d+)(?:[eE][-+]?\d+)?',e.get('transform',''))]
    if len(v)==6 and 920<v[4]<1130 and 110<v[5]<160:e.set('class','source-record-date-glyph')
  if name=='account':
+  # MuPDF emits fill+stroke drawings as two SVG paths. Map those explicitly
+  # so the five food packages move independently of the basket and its handles.
+  path_cursor=0
+  runs={'red':(42,92),'yellow':(93,144),'pickle':(145,579),'blue':(580,843),'front':(845,930)}
+  for drawing_index,drawing in enumerate(ds):
+   count=2 if drawing['type']=='fs' else 1
+   for stock,(start,end) in runs.items():
+    if start<=drawing_index<=end:
+     for path_index in range(path_cursor,path_cursor+count):labels[path_index]='source-account-stock-'+stock
+   path_cursor+=count
+  assert path_cursor==len(paths)
   labels[40]='source-avatar'
   for i in range(11,33):keys.append({'index':i,'bounds':bound(ds,[i])});labels[i]='source-key-'+str(i)
   for e in root.iter(NS+'use'):
