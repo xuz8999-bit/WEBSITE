@@ -495,3 +495,27 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .tax .tax-controls { bottom: 3.7%; }
 .tax .tax-controls .tax-continue { transform: scaleX(.82); }
 .tax .tax-controls .tax-continue:active { transform: scaleX(.82) scale(.96); }
+
+/* Fifth-page shop reference: shelf bodies stay still; only individual goods breathe. */
+.shop-reference-item { cursor: pointer; transform-box: fill-box; transform-origin: center; }
+.shop-reference-item > g { transform-box: fill-box; transform-origin: center; }
+.shop-reference-item { animation: shop-stock-breathe 7s ease-in-out var(--item-delay,0s) infinite; }
+.shop-reference-item:hover { scale: 1.035; }
+.shop-reference-item:active { scale: .97; }
+.shop-reference-item:focus-visible { outline: .3px solid #324961; outline-offset: 1px; }
+.shop-reference-heading { position: absolute; margin: 0; left: 60.2%; top: 86.4%; width: 34.2%; height: 10.36%; }
+.shop-reference-heading button { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; }
+.shop-reference-heading svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.shop-reference-heading text { fill: #000; font: 400 31.2px 'Tax Fatface','Bureau Serif',serif; }
+.shop-blue-basket { animation: shop-basket-breathe 7s ease-in-out -2s infinite; }
+.shop-basket-back-handle { transform-origin: 335px 180px; animation: shop-handle-sway 6s ease-in-out -2.5s infinite; }
+.shop-basket-front-handle { transform-origin: 312px 195px; animation: shop-handle-sway 7s ease-in-out -5s infinite; }
+.world-entering .shop-reference-item { animation: small-arrive 650ms ease-out both; }
+.world-entering .shop-blue-basket { animation: small-arrive 750ms ease-out both; }
+@keyframes shop-stock-breathe { 0%,72%,100% { translate: 0 0; } 84% { translate: 0 -.65px; } }
+@keyframes shop-basket-breathe { 0%,100% { translate: 0 0; } 50% { translate: 0 -.8px; } }
+@keyframes shop-handle-sway { 0%,100% { rotate: -.4deg; } 50% { rotate: .4deg; } }
+@media (prefers-reduced-motion: reduce) {
+ .shop-reference-item, .shop-blue-basket, .shop-basket-front-handle, .shop-basket-back-handle { animation: none; }
+ .shop-reference-item:hover, .shop-reference-item:active { scale: none; }
+}

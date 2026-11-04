@@ -66,7 +66,7 @@
       const target=e.target.closest('[data-fruit],[data-window]');if(target&&!target.contains(e.relatedTarget))respond(target);
     };
     const onFocus=e=>{const item=e.target.closest('[data-about-sound]');if(item)BUREAU_SOUND.play(item.dataset.aboutSound);const tab=e.target.closest('[data-about]');if(tab)setAboutTab(tab.dataset.about);};
-    const onKeyDown=e=>{if(!['Enter',' '].includes(e.key))return;const item=e.target.closest('[data-about-sound]');if(item){e.preventDefault();BUREAU_SOUND.play(item.dataset.aboutSound);return;}const target=e.target.closest('[data-fruit],[data-window]');if(target){e.preventDefault();respond(target);}};
+    const onKeyDown=e=>{if(!['Enter',' '].includes(e.key))return;const product=e.target.closest('[data-product]');if(product){e.preventDefault();setData(d=>({...d,selected:product.dataset.product}));navigate('/products',product);return;}const item=e.target.closest('[data-about-sound]');if(item){e.preventDefault();BUREAU_SOUND.play(item.dataset.aboutSound);return;}const target=e.target.closest('[data-fruit],[data-window]');if(target){e.preventDefault();respond(target);}};
     const purchase=()=>{
       const item=BUREAU_WORLD.items.find(p=>p.id===data.selected)||BUREAU_WORLD.items[2],now=new Date();
       const entry={...item,id:`purchase-${Date.now()}-${Math.random().toString(36).slice(2,6)}`,date:now.toLocaleDateString('en-CA'),time:now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),paid:false};
