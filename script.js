@@ -8,7 +8,7 @@
     return routes[value]?value:(location.pathname.endsWith('/home.html')?'/home':'/');
   };
   const initial=()=>{
-    const defaults={debt:63,selected:'chips',minutes:'10',records:[],receipt:null,filterDate:'',task:0,productReady:false,calculatorUsed:false,receiptExpanded:false,taskChosen:false,receiptPage:0};
+    const defaults={debt:63,selected:'chips',minutes:'10',records:[],receipt:null,filterDate:'',task:0,productReady:false,calculatorUsed:false,receiptExpanded:false,taskChosen:false,receiptPage:0,receiptPrinted:false};
     try{
       const saved=JSON.parse(localStorage.getItem('temporal-federation-v1')||'null');
       if(!saved)return defaults;
@@ -26,7 +26,7 @@
     const schedule=(fn,ms)=>{const id=setTimeout(()=>{timers.current.delete(id);fn();},ms);timers.current.add(id);return id;};
     const clearTimers=()=>{timers.current.forEach(clearTimeout);timers.current.clear();cancelAnimationFrame(frame.current);};
     const showNotice=text=>{setNotice(text);schedule(()=>setNotice(''),2400);};
-    const commit=(next,push=true)=>{if(push&&routeNow()!==next)history.pushState({},'',`#${next}`);setRoute(next);};
+    const commit=(next,push=true)=>{if(next==='/receipt')setData(d=>({...d,receiptPrinted:false}));if(push&&routeNow()!==next)history.pushState({},'',`#${next}`);setRoute(next);};
     const beginArrival=next=>{
       if(reduced()){setArrival('');return;}
       const page=routes[next].page;setArrival(page);
@@ -47,9 +47,9 @@
       schedule(()=>{setMotion(null);pending.current=null;locked.current=false;},duration);
     };
     useEffect(()=>{
-      const sync=()=>{clearTimers();locked.current=false;pending.current=null;setMotion(null);setArrival('');setNotice('');setRoute(routeNow());};
+      const sync=()=>{setData(d=>({...d,receiptPrinted:false}));clearTimers();locked.current=false;pending.current=null;setMotion(null);setArrival('');setNotice('');setRoute(routeNow());};
       const preference=matchMedia('(prefers-reduced-motion: reduce)');
-      const stop=()=>{if(!preference.matches)return;const next=pending.current?.next;clearTimers();if(next)commit(next);pending.current=null;locked.current=false;setMotion(null);setArrival('');document.querySelectorAll('.fruit-falling,.window-wiggle,.menu-pressed').forEach(e=>e.classList.remove('fruit-falling','window-wiggle','menu-pressed'));};
+      const stop=()=>{if(!preference.matches)return;const next=pending.current?.next;clearTimers();document.querySelector('.source-receipt')?.classList.remove('receipt-sounding','receipt-printing');if(next)commit(next);pending.current=null;locked.current=false;setMotion(null);setArrival('');document.querySelectorAll('.fruit-falling,.window-wiggle,.menu-pressed').forEach(e=>e.classList.remove('fruit-falling','window-wiggle','menu-pressed'));};
       window.addEventListener('popstate',sync);window.addEventListener('hashchange',sync);preference.addEventListener('change',stop);
       return()=>{clearTimers();window.removeEventListener('popstate',sync);window.removeEventListener('hashchange',sync);preference.removeEventListener('change',stop);};
     },[]);
@@ -80,6 +80,11 @@
       setData(d=>({...d,debt:remaining,records:remaining===0?d.records.map(r=>({...r,paid:true})):d.records,
         receipt:{id:`TF-${Date.now().toString().slice(-8)}`,date:issuedAt.toLocaleString('en-GB'),issuedAt:issuedAt.toISOString(),minutes:amount,task:tasks[d.task],balanceBefore:d.debt,balance:remaining,records:d.records.map(r=>({...r,paid:remaining===0?true:r.paid}))},receiptExpanded:false,receiptPage:0}));navigate('/receipt');
     };
+    const runPrinter=()=>{
+      const scene=document.querySelector('.source-receipt');if(!scene)return;
+      scene.classList.remove('receipt-printing');scene.classList.add('receipt-sounding');void scene.offsetWidth;scene.classList.add('receipt-printing');
+      schedule(()=>scene.classList.remove('receipt-sounding'),2800);
+    };
     const onClick=e=>{
       const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle],[data-reprint-receipt],[data-receipt-page],[data-account-stock]');
       if(!control)return;e.preventDefault();if(locked.current)return;
@@ -97,7 +102,7 @@
       if(control.hasAttribute('data-receipt-toggle')){const card=document.querySelector('.source-receipt-summary');const open=card?.classList.toggle('is-open');document.querySelectorAll('[data-receipt-toggle]').forEach(el=>el.setAttribute('aria-expanded',String(!!open)));return;}
       if(control.dataset.receiptPage!==undefined){setData(d=>({...d,receiptPage:Math.max(0,Number(control.dataset.receiptPage)||0)}));return;}
       if(control.dataset.accountStock){const part=control.dataset.accountStock;control.classList.add('stock-tapped');document.querySelectorAll('.source-account-stock-'+part).forEach(el=>{el.style.animation='none';void el.getBoundingClientRect();el.style.animation='';});schedule(()=>control.classList.remove('stock-tapped'),900);return;}
-      if(control.hasAttribute('data-reprint-receipt')){const scene=control.closest('.source-receipt');scene.classList.remove('receipt-printing');void scene.offsetWidth;scene.classList.add('receipt-printing');return;}
+      if(control.hasAttribute('data-reprint-receipt')){if(control.closest('.source-receipt').classList.contains('receipt-sounding'))return;if(data.receiptPrinted)runPrinter();else setData(d=>({...d,receiptPrinted:true}));return;}
       if(control.dataset.setMinutes){setData(d=>({...d,minutes:control.dataset.setMinutes,calculatorUsed:true}));return;}
       if(control.dataset.key){const key=control.dataset.key;setData(d=>({...d,calculatorUsed:true,minutes:key==='C'?'':key==='⌫'?d.minutes.slice(0,-1):(d.minutes+key).slice(-3)}));return;}
       if(control.dataset.task!==undefined){setData(d=>({...d,task:Number(control.dataset.task),taskChosen:true}));return;}
@@ -113,6 +118,7 @@
       Regulation: 'Each convenience purchase creates a measurable time debt, recorded in the citizen’s personal time account. Citizens repay the time costs of the convenience they enjoy through labor.',
       Structure: 'Personal time accounts connect consumption with public labor. Citizens repay the time debt created by convenience through work, forming a social system sustained by the circulation of time.'
     };    const page=routes[route].page;
+    useLayoutEffect(()=>{if(page==='receipt'&&data.receiptPrinted)runPrinter();},[page,data.receiptPrinted,data.receiptPage]);
     // Updating section text does not replace the illustration DOM or restart its animations.
     useLayoutEffect(()=>{
       if(page==='about'){

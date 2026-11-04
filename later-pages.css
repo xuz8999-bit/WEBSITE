@@ -149,3 +149,15 @@
 .source-story .labor-continue { left: 73.94%; top: 84.94%; width: 20.94%; height: 10.55%; border-radius: 1.05cqw; background: #f8f5ec; color: #231815; font: 2.8cqw/1 'Source Britannic',serif; transition: scale 240ms ease; }
 .source-story .labor-continue:hover { scale: 1.04; }
 .source-story .labor-continue:active { scale: .96; }
+
+/* Printing is explicitly requested; an unprinted sheet stays inside the machine. */
+.source-receipt:not(.receipt-printed) .source-paper { visibility: hidden; }
+.source-receipt:not(.receipt-printed) [data-receipt-toggle], .source-receipt:not(.receipt-printed) .source-receipt-pagination { visibility: hidden; pointer-events: none; }
+.source-story .receipt-back-labor { left: 5.05%; top: 84.94%; width: 14.8%; height: 10.55%; border-radius: 1.05cqw; background: #f8f5ec; color: #231815; font: 3cqw/1 'Source Britannic',serif; }
+.receipt-sound-symbol { pointer-events: none; }
+.receipt-sound-lines { opacity: 0; }
+.receipt-sounding .receipt-sound-lines { opacity: 1; animation: receipt-sound-ticks 350ms ease-in-out 8 both; }
+@keyframes receipt-sound-ticks { 0%,100% { opacity: .25; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .receipt-sounding .receipt-sound-lines { opacity: 1; animation: none; } }
+.receipt-sounding .source-receipt-pagination { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) { .source-receipt.receipt-printed .source-receipt-pagination { visibility: visible; } }
