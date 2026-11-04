@@ -1,0 +1,135 @@
+/* First four native PDF artboards. Only local shapes/glyphs receive motion. */
+@font-face { font-family: Source Broadway; src: url('assets/front/original/broadway.ttf') format('truetype'); font-display: swap; }
+.transition-stage:has(.source-front) { width: min(100vw, calc(100vh * 1366 / 768)); aspect-ratio: 1366 / 768; }
+.source-front.scene { aspect-ratio: 1366 / 768; background: white; }
+.front-source-svg, .front-smoke-layer { pointer-events: none; }
+.source-front .front-hit { position: absolute; display: block; padding: 0; margin: 0; border: 0; border-radius: 0; background: transparent; z-index: 4; cursor: pointer; }
+.source-front .front-hit:active { transform: none; }
+.source-front .front-hit:focus-visible { outline: .18cqw solid #322d24; outline-offset: .25cqw; }
+.source-front .front-hit[data-fruit] { border-radius: 50%; }
+.front-part { transition: scale var(--hover-time,240ms) ease; }
+.front-clock-tower { animation: front-clock-float 5s ease-in-out infinite; }
+.front-clock-hands { transform-origin: 185.5px 192px; animation: front-clock-turn 12s linear infinite, front-clock-float 5s ease-in-out infinite; }
+.source-front.start-playing .front-clock-hands { animation: front-clock-turn 380ms ease-in-out both, front-clock-float 5s ease-in-out infinite; }
+.front-welcome-house, .front-welcome-chimney { animation: front-house-float 6s ease-in-out -1.3s infinite; }
+.front-welcome-roof { transform-origin: 1126px 464px; animation: front-house-float 6s ease-in-out -1.3s infinite, front-roof-sway 7s ease-in-out -2s infinite; }
+.front-welcome-start { transform-origin: 700px 338px; }
+.front-welcome-continue { transform-origin: 700px 458px; }
+.front-welcome-record { transform-origin: 700px 590px; }
+.source-front:has([data-start]:hover) .front-welcome-start, .source-front:has([data-action="continue"]:hover) .front-welcome-continue, .source-front:has([data-action="record"]:hover) .front-welcome-record { scale: 1.04; }
+.source-front:has([data-start]:active) .front-welcome-start, .source-front:has([data-action="continue"]:active) .front-welcome-continue, .source-front:has([data-action="record"]:active) .front-welcome-record { scale: .96; }
+.front-smoke { fill: #fbf6e7; opacity: 0; transform-origin: 1212px 203px; animation: front-smoke-rise 3.6s ease-out infinite; }
+.front-nav-Home { transform-origin: 315px 160px; animation: front-nav-drift 7s ease-in-out -1s infinite; }
+.front-nav-About { transform-origin: 868px 170px; animation: front-nav-drift 8s ease-in-out -3.2s infinite; }
+.front-nav-Consume { transform-origin: 1225px 180px; animation: front-nav-drift 7.5s ease-in-out -4.8s infinite; }
+.front-nav-Tax-System { transform-origin: 608px 327px; animation: front-nav-drift 6.5s ease-in-out -2.1s infinite; }
+.front-home-sun { transform-origin: 1167px 106px; animation: front-sun-breathe 7s ease-in-out -2s infinite; }
+.front-home-dome { transform-origin: 60px 184px; animation: front-sun-breathe 8s ease-in-out -5s infinite; }
+.front-home-leaf-50, .front-home-leaf-51, .front-home-leaf-52, .front-home-leaf-53, .front-home-leaf-54 { transform-origin: 951px 524px; animation: front-leaf-sway 5s ease-in-out -2s infinite; }
+.front-home-leaf-51 { animation-delay: -3.1s; animation-duration: 6s; }
+.front-home-leaf-52 { animation-delay: -.8s; animation-duration: 5.7s; }
+.front-home-leaf-53 { animation-delay: -4s; animation-duration: 6.5s; }
+.front-home-leaf-54 { animation-delay: -1.5s; animation-duration: 4.7s; }
+.front-home-pink-stem { animation: front-stem-bob 7s ease-in-out -2s infinite; }
+.home.entering .front-home-bush, .home.entering .front-home-tree, .home.entering .front-home-pink-stem, .home.entering [data-front-part^="front-home-leaf"] { transform-origin: center 768px; animation: front-plant-grow 1700ms ease-in-out both; }
+.home.entering .front-home-building, .home.entering .front-home-menu-building, .home.entering [data-front-part^="front-menu-"], .home.entering [data-front-part^="front-home-window-"] { animation: front-building-appear 2100ms ease-in-out 350ms both; }
+.home.entering .front-home-sun { animation: front-sun-rise 1900ms ease-in-out 600ms both; }
+.home.entering .front-nav-Home { animation: front-cloud-enter 1900ms ease-in-out 100ms both; }
+.home.entering .front-nav-About { animation: front-cloud-enter 1900ms ease-in-out 250ms both; }
+.home.entering .front-nav-Consume { animation: front-cloud-enter 1900ms ease-in-out 450ms both; }
+.home.entering .front-nav-Tax-System { animation: front-cloud-enter 1900ms ease-in-out 600ms both; }
+.front-about-original-title { visibility: hidden; }
+.background-copy .front-about-original-title { visibility: visible; }
+.source-front.about .about-card { left: 39.7%; top: 19.0%; width: 56.5%; min-height: 0; padding: 0; background: none; border-radius: 0; color: #080705; z-index: 1; }
+.source-front.about .about-card::before { display: none; }
+.source-front.about .about-card h2 { margin: 0; white-space: nowrap; font: 400 3.674cqw/1.1 'Source Broadway',serif; letter-spacing: 0; }
+.source-front.about.background-copy .about-card h2 { visibility: hidden; }
+.source-front.about .about-card p { position: absolute; top: 5.2cqw; left: 0; width: 100%; margin: 0; font: 400 1.9cqw/1.18 'Times New Roman',serif; overflow-wrap: normal; }
+.source-front.about .about-card:hover { translate: none; }
+.front-about-tab-History { transform-origin: 306px 123px; }
+.front-about-tab-Background { transform-origin: 307px 227px; }
+.front-about-tab-Regulation { transform-origin: 307px 330px; }
+.front-about-tab-Structure { transform-origin: 308px 429px; }
+.front-about-sections { display: contents; }
+.front-tax-phone { transform-origin: 174px 644px; animation: front-tax-phone-tilt 6s ease-in-out -1s infinite; }
+.front-tax-box { animation: front-tax-box-float 7s ease-in-out -2.8s infinite; }
+.front-tax-bag { transform-origin: 520px 335px; animation: front-tax-phone-tilt 8s ease-in-out -4s infinite; }
+.front-tax-citizen { transform-origin: 1190px 365px; animation: front-tax-phone-tilt 5s ease-in-out -2s infinite; }
+.front-tax-link path { animation: front-link-pulse 6s ease-in-out infinite; }
+.front-tax-link-52 path { animation-delay: -2s; }
+.front-tax-link-53 path { animation-delay: -4s; }
+.source-front.tax.world-entering .front-tax-link path { animation: line-draw 650ms ease-out both; }
+.source-front.tax.world-entering .front-tax-link-52 path { animation-delay: 100ms; }
+.source-front.tax.world-entering .front-tax-link-53 path { animation-delay: 200ms; }
+@keyframes front-clock-turn { to { rotate: 360deg; } }
+@keyframes front-clock-float { 0%,100% { translate: 0 0; } 50% { translate: 0 -3px; } }
+@keyframes front-house-float { 0%,100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+@keyframes front-roof-sway { 0%,100% { rotate: -.35deg; } 50% { rotate: .35deg; } }
+@keyframes front-smoke-rise { 0% { translate: 0 -8px; scale: .55; opacity: 0; } 12% { opacity: .8; } 100% { translate: 24px -105px; scale: 2; opacity: 0; } }
+@keyframes front-nav-drift { 0%,100% { translate: 0 0; rotate: -.5deg; } 50% { translate: 3px -12px; rotate: .5deg; } }
+@keyframes front-sun-breathe { 0%,100% { scale: 1; } 50% { scale: 1.025; } }
+@keyframes front-leaf-sway { 0%,100% { rotate: -2.5deg; } 50% { rotate: 2.5deg; } }
+@keyframes front-stem-bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -2px; } }
+@keyframes front-plant-grow { from { scale: 1 .03; opacity: 0; } to { scale: 1 1; opacity: 1; } }
+@keyframes front-building-appear { from { opacity: 0; } to { opacity: 1; } }
+@keyframes front-sun-rise { from { translate: 0 240px; opacity: 0; } to { translate: 0 0; opacity: 1; } }
+@keyframes front-cloud-enter { from { translate: -210px 0; opacity: 0; } to { translate: 0 0; opacity: 1; } }
+@keyframes front-window-tap { 0%,100% { rotate: 0deg; } 30% { rotate: -1.8deg; } 65% { rotate: 1.5deg; } }
+@keyframes front-fruit-drop { 0% { translate: 0 0; opacity: 1; } 85% { opacity: 1; } 100% { translate: 5px 175px; opacity: 0; } }
+@keyframes front-tax-phone-tilt { 0%,100% { rotate: -.5deg; } 50% { rotate: .5deg; } }
+@keyframes front-tax-box-float { 0%,100% { translate: 0 0; } 50% { translate: 0 -1.8px; } }
+@keyframes front-link-pulse { 0%,100% { opacity: 1; } 50% { opacity: .72; } }
+@media (prefers-reduced-motion: reduce) {
+ .source-front .front-part, .source-front .front-smoke { animation: none !important; scale: none !important; }
+ .front-smoke-layer { display: none; }
+}
+.source-front:has([data-nav="Home"]:hover) .front-nav-Home, .source-front:has([data-nav="Home"]:focus-visible) .front-nav-Home { scale: 1.05; }
+.source-front:has([data-nav="Home"]:active) .front-nav-Home { scale: .96; }
+.source-front:has([data-nav="About"]:hover) .front-nav-About, .source-front:has([data-nav="About"]:focus-visible) .front-nav-About { scale: 1.05; }
+.source-front:has([data-nav="About"]:active) .front-nav-About { scale: .96; }
+.source-front:has([data-nav="Consume"]:hover) .front-nav-Consume, .source-front:has([data-nav="Consume"]:focus-visible) .front-nav-Consume { scale: 1.05; }
+.source-front:has([data-nav="Consume"]:active) .front-nav-Consume { scale: .96; }
+.source-front:has([data-nav="Tax System"]:hover) .front-nav-Tax-System, .source-front:has([data-nav="Tax System"]:focus-visible) .front-nav-Tax-System { scale: 1.05; }
+.source-front:has([data-nav="Tax System"]:active) .front-nav-Tax-System { scale: .96; }
+.source-front:has([data-about="History"]:hover) .front-about-tab-History, .source-front:has([data-about="History"]:focus-visible) .front-about-tab-History { scale: 1.04; }
+.source-front:has([data-about="Background"]:hover) .front-about-tab-Background, .source-front:has([data-about="Background"]:focus-visible) .front-about-tab-Background { scale: 1.04; }
+.source-front:has([data-about="Regulation"]:hover) .front-about-tab-Regulation, .source-front:has([data-about="Regulation"]:focus-visible) .front-about-tab-Regulation { scale: 1.04; }
+.source-front:has([data-about="Structure"]:hover) .front-about-tab-Structure, .source-front:has([data-about="Structure"]:focus-visible) .front-about-tab-Structure { scale: 1.04; }
+.front-home-window-3 { transform-origin: 296px 548px; }
+.source-front:has([data-window="3"].window-wiggle) .front-home-window-3 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-4 { transform-origin: 297px 652px; }
+.source-front:has([data-window="4"].window-wiggle) .front-home-window-4 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-22 { transform-origin: 54px 295px; }
+.source-front:has([data-window="22"].window-wiggle) .front-home-window-22 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-24 { transform-origin: 54px 398px; }
+.source-front:has([data-window="24"].window-wiggle) .front-home-window-24 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-26 { transform-origin: 54px 489px; }
+.source-front:has([data-window="26"].window-wiggle) .front-home-window-26 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-28 { transform-origin: 54px 585px; }
+.source-front:has([data-window="28"].window-wiggle) .front-home-window-28 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-31 { transform-origin: 1134px 337px; }
+.source-front:has([data-window="31"].window-wiggle) .front-home-window-31 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-32 { transform-origin: 1134px 387px; }
+.source-front:has([data-window="32"].window-wiggle) .front-home-window-32 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-33 { transform-origin: 1134px 440px; }
+.source-front:has([data-window="33"].window-wiggle) .front-home-window-33 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-34 { transform-origin: 1130px 489px; }
+.source-front:has([data-window="34"].window-wiggle) .front-home-window-34 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-36 { transform-origin: 1275px 542px; }
+.source-front:has([data-window="36"].window-wiggle) .front-home-window-36 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-37 { transform-origin: 1275px 623px; }
+.source-front:has([data-window="37"].window-wiggle) .front-home-window-37 { animation: front-window-tap 480ms ease-in-out; }
+.front-home-window-38 { transform-origin: 1275px 703px; }
+.source-front:has([data-window="38"].window-wiggle) .front-home-window-38 { animation: front-window-tap 480ms ease-in-out; }
+.source-front:has([data-fruit="46"].fruit-falling) .front-home-fruit-46 { animation: front-fruit-drop 950ms ease-in forwards; }
+.source-front:has([data-fruit="47"].fruit-falling) .front-home-fruit-47 { animation: front-fruit-drop 950ms ease-in forwards; }
+.source-front:has([data-fruit="48"].fruit-falling) .front-home-fruit-48 { animation: front-fruit-drop 950ms ease-in forwards; }
+.source-front:has([data-menu="Record"]:hover) .front-menu-Record { translate: 3px 0; }
+.source-front:has([data-menu="Account"]:hover) .front-menu-Account { translate: 3px 0; }
+.source-front:has([data-menu="Labor"]:hover) .front-menu-Labor { translate: 3px 0; }
+.source-front:has([data-menu="Receipt"]:hover) .front-menu-Receipt { translate: 3px 0; }
+
+/* Matching fallback colors keep slow-loading source textures from flashing white. */
+.source-front.welcome { background: linear-gradient(#ef3d0b 12%,#f9f6ed 94%); }
+.source-front.home { background: linear-gradient(#68adf1,#edf1e6); }
+.source-front.tax { background: radial-gradient(ellipse at 50% 48%,#fa662f,#fffbed 76%); }

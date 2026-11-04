@@ -116,6 +116,7 @@
     // Updating section text does not replace the illustration DOM or restart its animations.
     useLayoutEffect(()=>{
       if(page==='about'){
+        document.querySelector('.source-front.about')?.classList.toggle('background-copy',aboutTab==='Background');
         const card=document.querySelector('.about-card');if(card){card.querySelector('h2').textContent=aboutTab==='Background'?'Temporal Federation':aboutTab;card.querySelector('p').textContent=aboutCopy[aboutTab];}
         document.querySelectorAll('[data-about]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.about===aboutTab)));
       }

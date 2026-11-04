@@ -1,0 +1,55 @@
+{
+  "source_sha256": "815bebc6423bbc2066de8c20b3ceacfa4dfda94b4900571504df34710050b08f",
+  "pages": {
+    "welcome": {
+      "page": 1,
+      "original_drawings": 27,
+      "original_paths": 27,
+      "textures": [
+        "691687303aa2e2fd.png",
+        "f3619aafbfb20927.png",
+        "b95adbda0bb38e90.png",
+        "872dbd19cdcaa2e5.png"
+      ],
+      "bytes": 25013
+    },
+    "home": {
+      "page": 2,
+      "original_drawings": 225,
+      "original_paths": 230,
+      "textures": [
+        "184b8522c816d589.png",
+        "9cbbee74c942819b.png",
+        "eef3119fbe696e77.png",
+        "a5b00167532defbd.png"
+      ],
+      "bytes": 114496
+    },
+    "about": {
+      "page": 3,
+      "original_drawings": 35,
+      "original_paths": 35,
+      "textures": [
+        "5854062fb2a24249.png",
+        "f3619aafbfb20927.png",
+        "00c3520343183a7c.png",
+        "7fbbc53eb22fe5a4.png",
+        "872dbd19cdcaa2e5.png",
+        "6b4c43371e585486.png"
+      ],
+      "bytes": 43138
+    },
+    "tax": {
+      "page": 4,
+      "original_drawings": 67,
+      "original_paths": 67,
+      "textures": [
+        "8cccd4a7467825ce.png",
+        "9cbbee74c942819b.png",
+        "586df69868b6b982.png",
+        "b636e9e60f6f1622.png"
+      ],
+      "bytes": 39235
+    }
+  }
+}
