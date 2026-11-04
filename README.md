@@ -129,3 +129,7 @@ The subsequent v5 printed-receipt check is retained only as a historical feature
 The requested original later-page deployment remains the baseline, with one explicit exception: RECEIPT again uses the approved v5 real-record content and 2.8-second paper-feed animation. Only that source SVG template, receipt renderer/styles/events and repayment snapshot are restored; CONSUMPTION, products, RECORD, ACCOUNT and LABOR keep the selected deployment. The real-record receipt test is active again.
 
 HOME's beige foreground bush completes its 1.7-second growth before the red fruit fades/scales in at 1.75, 1.88 and 2.01 seconds. All fruit settles before the existing 2.6-second entry ends, retaining hover-to-drop behaviour and reduced-motion. `tests/front-original.cjs` samples actual animation states during growth, after the beige bush finishes but before fruit appears, and after fruit settles.
+
+## Retained illustration motion
+
+The selected original layouts now also retain the previously approved account-package hover/focus/tap feedback and LABOR object/worker/cart/leaf motion. Each account package wiggles individually; the basket and labels stay still. LABOR's four objects sway independently about their bases, with fixed hit regions. The real-record receipt/printing and HOME bush-before-fruit timing remain unchanged. The normal-motion test checks every account package and all four LABOR objects, including stationary hit areas.

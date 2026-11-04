@@ -87,12 +87,25 @@ for pn,name in enumerate(['products','record','account','labor','receipt'],1):
    v=[float(x) for x in re.findall(r'[-+]?(?:\d*\.?\d+)(?:[eE][-+]?\d+)?',e.get('transform',''))]
    if len(v)==6 and 920<v[4]<1130 and 110<v[5]<160:e.set('class','source-record-date-glyph')
  if name=='account':
+  # MuPDF emits fill+stroke drawings as two SVG paths. Map those explicitly
+  # so the five food packages move independently of the basket and its handles.
+  path_cursor=0
+  runs={'red':(42,92),'yellow':(93,144),'pickle':(145,579),'blue':(580,843),'front':(845,930)}
+  for drawing_index,drawing in enumerate(ds):
+   count=2 if drawing['type']=='fs' else 1
+   for stock,(start,end) in runs.items():
+    if start<=drawing_index<=end:
+     for path_index in range(path_cursor,path_cursor+count):labels[path_index]='source-account-stock-'+stock
+   path_cursor+=count
+  assert path_cursor==len(paths)
   labels[40]='source-avatar'
   for i in range(11,33):keys.append({'index':i,'bounds':bound(ds,[i])});labels[i]='source-key-'+str(i)
   for e in root.iter(NS+'use'):
    v=[float(x) for x in re.findall(r'[-+]?(?:\d*\.?\d+)(?:[eE][-+]?\d+)?',e.get('transform',''))]
    if len(v)==6 and 330<v[4]<460 and 190<v[5]<246:e.set('class','source-debt-glyph')
  if name=='labor':
+  for label,indexes in {'carton':range(1,6),'cup':range(8,13),'bag':range(13,19),'phone':range(19,27)}.items():
+   for i in indexes:labels[i]='source-labor-object-'+label
   for i in [29,30]:labels[i]='source-worker-leg-'+str(i)
   for i in range(32,37):labels[i]='source-worker-arms'
   for i in range(37,42):labels[i]='source-cart'

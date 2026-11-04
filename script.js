@@ -81,7 +81,7 @@
         receipt:{id:`TF-${Date.now().toString().slice(-8)}`,date:issuedAt.toLocaleString('en-GB'),issuedAt:issuedAt.toISOString(),minutes:amount,task:tasks[d.task],balanceBefore:d.debt,balance:remaining,records:d.records.map(r=>({...r,paid:remaining===0?true:r.paid}))},receiptExpanded:false,receiptPage:0}));navigate('/receipt');
     };
     const onClick=e=>{
-      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle],[data-reprint-receipt],[data-receipt-page]');
+      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle],[data-reprint-receipt],[data-receipt-page],[data-account-stock]');
       if(!control)return;e.preventDefault();if(locked.current)return;
       if(control.hasAttribute('data-toggle-sound')){BUREAU_SOUND.toggle();return;}
       if(control.dataset.aboutSound){BUREAU_SOUND.play(control.dataset.aboutSound);return;}
@@ -96,6 +96,7 @@
       if(control.hasAttribute('data-purchase')){purchase();return;}
       if(control.hasAttribute('data-receipt-toggle')){const card=document.querySelector('.source-receipt-summary');const open=card?.classList.toggle('is-open');document.querySelectorAll('[data-receipt-toggle]').forEach(el=>el.setAttribute('aria-expanded',String(!!open)));return;}
       if(control.dataset.receiptPage!==undefined){setData(d=>({...d,receiptPage:Math.max(0,Number(control.dataset.receiptPage)||0)}));return;}
+      if(control.dataset.accountStock){const part=control.dataset.accountStock;control.classList.add('stock-tapped');document.querySelectorAll('.source-account-stock-'+part).forEach(el=>{el.style.animation='none';void el.getBoundingClientRect();el.style.animation='';});schedule(()=>control.classList.remove('stock-tapped'),900);return;}
       if(control.hasAttribute('data-reprint-receipt')){const scene=control.closest('.source-receipt');scene.classList.remove('receipt-printing');void scene.offsetWidth;scene.classList.add('receipt-printing');return;}
       if(control.dataset.setMinutes){setData(d=>({...d,minutes:control.dataset.setMinutes,calculatorUsed:true}));return;}
       if(control.dataset.key){const key=control.dataset.key;setData(d=>({...d,calculatorUsed:true,minutes:key==='C'?'':key==='⌫'?d.minutes.slice(0,-1):(d.minutes+key).slice(-3)}));return;}
