@@ -155,3 +155,7 @@ Recording the selection creates an actual consumption row per chosen unit and ad
 ## Preserve the original sixth page
 
 The selected-only gallery is removed. Opening the blue bag now shows the original complete seven-object sixth-page illustration and layout, with no selected-only replacement or gallery pagination. Pending selections still feed the existing Record action accurately. On the shop itself, actual selected product artwork is shown inside the bag opening, behind its original front handles/rim and clipped above the front fabric; the top eight units are visible, while the count and bag tooltip describe the full pending selection. Flight and selection sound remain. The shop test asserts the sixth-page SVG is identical before/after selection and checks that actual product copies appear inside the bag.
+
+## Remove pending goods from the bag
+
+Each visible selected unit in the blue bag now has a stationary native removal hit area, with a small cream × on hover/focus (always shown on touch). Clicking it removes that exact pending unit and updates the miniature contents and count, without navigating or altering existing records, debt or issued receipts. Repeated products are removed one unit at a time. Clearing the last pending item leaves the original empty bag. The original sixth-page artwork is unchanged.

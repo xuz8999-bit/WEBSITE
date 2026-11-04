@@ -191,3 +191,11 @@
 @media (prefers-reduced-motion: reduce) { .shop-flying-product, .bag-count-pop { animation: none; } }
 
 .source-story.source-products { background: linear-gradient(90deg,#ffe163,#faf8ef 52%,#ffe163); }
+
+/* Remove a pending item directly from the bag without opening the next page. */
+.bag-item-controls { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.bag-item-remove { position: absolute; pointer-events: auto; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.bag-item-remove span { position: absolute; top: -.3cqw; right: -.3cqw; display: grid; place-items: center; width: 1.65cqw; height: 1.65cqw; border-radius: 50%; background: #fff8dc; color: #231815; font: 1.3cqw/1 'Bureau Serif',serif; opacity: 0; transition: opacity 180ms ease; }
+.bag-item-remove:hover span, .bag-item-remove:focus-visible span { opacity: 1; }
+.bag-item-remove:focus-visible { outline: .15cqw solid #fff8dc; outline-offset: .15cqw; }
+@media (hover: none) { .bag-item-remove span { opacity: 1; min-width: 20px; min-height: 20px; } }

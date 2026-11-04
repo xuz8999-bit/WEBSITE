@@ -115,7 +115,7 @@
       if(control.dataset.nav){navigate({Home:'/',About:'/about',Consume:'/consumption','Tax System':'/tax-system'}[control.dataset.nav]);return;}
       if(control.dataset.menu){navigate({Record:'/record',Account:'/account',Labor:'/labor',Receipt:'/receipt'}[control.dataset.menu]);return;}
       if(control.hasAttribute('data-open-bag')){setData(d=>({...d,basketView:true,basketPage:0,productReady:true}));navigate('/products',control);return;}
-      if(control.dataset.removeBasket){setData(d=>{const basket=[...d.basket],index=basket.indexOf(control.dataset.removeBasket);if(index>=0)basket.splice(index,1);return {...d,basket};});return;}
+      if(control.dataset.removeBasket){setData(d=>{const basket=[...d.basket],requested=Number(control.dataset.removeIndex),index=Number.isInteger(requested)&&basket[requested]===control.dataset.removeBasket?requested:basket.indexOf(control.dataset.removeBasket);if(index>=0)basket.splice(index,1);return {...d,basket};});return;}
       if(control.dataset.basketPage!==undefined){setData(d=>({...d,basketPage:Math.max(0,Number(control.dataset.basketPage)||0)}));return;}
       if(control.dataset.product){if(route==='/consumption'){addToBag(control.dataset.product,control);return;}setData(d=>({...d,selected:control.dataset.product,productReady:true,basketView:false}));navigate('/products',control);return;}
       if(control.dataset.select){setData(d=>({...d,selected:control.dataset.select,productReady:true,basketView:false}));return;}
@@ -141,7 +141,7 @@
     };    const page=routes[route].page;
     useLayoutEffect(()=>{if(page==='receipt'&&data.receiptPrinted)runPrinter();},[page,data.receiptPrinted,data.receiptPage]);
     useLayoutEffect(()=>{
-      const bag=document.querySelector('[data-open-bag]'),count=document.querySelector('[data-bag-count]'),pocket=document.querySelector('[data-bag-contents]');
+      const bag=document.querySelector('[data-open-bag]'),count=document.querySelector('[data-bag-count]'),pocket=document.querySelector('[data-bag-contents]'),removers=document.querySelector('[data-bag-removers]');
       const quantities=new Map();data.basket.forEach(id=>quantities.set(id,(quantities.get(id)||0)+1));
       const names=[...quantities].map(([id,qty])=>`${BUREAU_WORLD.items.find(p=>p.id===id)?.name} × ${qty}`).join(', ');
       if(bag){bag.setAttribute('aria-label',`Open shopping bag, ${data.basket.length} items`);bag.title=names?`${names}. Click bag to continue.`:'Open bag and continue';}
@@ -151,7 +151,8 @@
       if(pocket){
         const visible=data.basket.slice(-8),step=visible.length>1?Math.min(53,275/(visible.length-1)):0;
         const content=visible.map((id,i)=>{const art=BUREAU_SHOP.art[id];if(!art)return '';const x=visible.length===1?729:610+i*step,y=318+(i%2)*11,angle=[-7,5,-3,7][i%4];return `<g data-bag-item="${id}" transform="rotate(${angle} ${x+38} 425)"><svg x="${x}" y="${y}" width="76" height="116" viewBox="${art.box}">${art.body}</svg></g>`;}).join('');
-        const paint=()=>{if(pocket.isConnected&&version===bagPreview.current.version)pocket.innerHTML=content;};
+        const controls=visible.map((id,i)=>{const x=visible.length===1?729:610+i*step,y=318+(i%2)*11,index=data.basket.length-visible.length+i,name=BUREAU_WORLD.items.find(p=>p.id===id)?.name||'item';return `<button class="bag-item-remove" data-remove-basket="${id}" data-remove-index="${index}" aria-label="${BUREAU_WORLD.esc('Remove one '+name+' from bag')}" title="${BUREAU_WORLD.esc('Remove one '+name+' from bag')}" style="left:${(x+7)/13.66}%;top:${(y+4)/7.68}%;width:${Math.min(63,step||63)/13.66}%;height:${65/7.68}%"><span aria-hidden="true">×</span></button>`;}).join('');
+        const paint=()=>{if(pocket.isConnected&&version===bagPreview.current.version){pocket.innerHTML=content;if(removers)removers.innerHTML=controls;}};
         if(adding&&!reduced())schedule(paint,500);else paint();
       }
     },[page,data.basket]);
