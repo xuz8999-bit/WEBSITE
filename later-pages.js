@@ -49,7 +49,7 @@
     const textBounds=[[377,42,515,119],[208,39,317,176],[55,39,155,145],[575,40,751,115]];
     const tasks=objectBounds.map((b,i)=>hit(b,`data-task="${i}" aria-pressed="${state.task===i}"`,'Select '+names[i],'source-task-hit')).join('')+textBounds.map((b,i)=>hit(b,`data-task="${i}" aria-pressed="${state.task===i}"`,'Select '+names[i])).join('');
     const completeLabel=state.debt?`Complete ${names[state.task]} · repay ${Math.min(Number(state.minutes)||10,state.debt)} min`:'Task complete · print receipt';
-    return frame('labor','LABOR',tasks+hit([740,301,1111,579],'data-complete-labor',completeLabel,'source-complete-labor')+nativeControls(hit([69,652,272,734],'data-route="/account"','Back to account'),hit([1133,55,1254,112],'data-route="/receipt"','View receipt')),state.taskChosen?'task-chosen':'');
+    return frame('labor','LABOR',tasks+hit([740,301,1111,579],'data-complete-labor',completeLabel,'source-complete-labor')+nativeControls(hit([69,652,272,734],'data-route="/account"','Back to account'),`<button class="source-hit labor-continue" data-route="/receipt" aria-label="Continue to receipt">Continue <span aria-hidden="true">→</span></button>`)+hit([1133,55,1254,112],'data-route="/receipt"','View receipt'),state.taskChosen?'task-chosen':'');
   };
   const receipt=state=>{
     const savedReceipt=state.receipt;

@@ -144,3 +144,8 @@
 .source-account-stock-front { transform-origin: 160px 445px; }
 .source-account:has([data-account-stock="front"]:hover) .source-account-stock-front, .source-account:has([data-account-stock="front"]:focus-visible) .source-account-stock-front, .source-account:has([data-account-stock="front"].stock-tapped) .source-account-stock-front { animation: source-account-package-wiggle 850ms ease-in-out; }
 @keyframes source-account-package-wiggle { 0%,100% { rotate: 0deg; translate: 0 0; scale: 1; } 22% { rotate: -2.8deg; translate: 0 -3px; scale: 1.025; } 52% { rotate: 2.1deg; translate: 0 -4px; scale: 1.035; } 76% { rotate: -1deg; translate: 0 -1px; scale: 1.01; } }
+
+/* Continue sits on the blue ground, aligned with the original Back button. */
+.source-story .labor-continue { left: 73.94%; top: 84.94%; width: 20.94%; height: 10.55%; border-radius: 1.05cqw; background: #f8f5ec; color: #231815; font: 2.8cqw/1 'Source Britannic',serif; transition: scale 240ms ease; }
+.source-story .labor-continue:hover { scale: 1.04; }
+.source-story .labor-continue:active { scale: .96; }

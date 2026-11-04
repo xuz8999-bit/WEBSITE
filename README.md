@@ -133,3 +133,5 @@ HOME's beige foreground bush completes its 1.7-second growth before the red frui
 ## Retained illustration motion
 
 The selected original layouts now also retain the previously approved account-package hover/focus/tap feedback and LABOR object/worker/cart/leaf motion. Each account package wiggles individually; the basket and labels stay still. LABOR's four objects sway independently about their bases, with fixed hit regions. The real-record receipt/printing and HOME bush-before-fruit timing remain unchanged. The normal-motion test checks every account package and all four LABOR objects, including stationary hit areas.
+
+LABOR also has a visible cream Continue → button on the blue ground, aligned with Back, which navigates to RECEIPT. It is navigation only; it does not fabricate completed labor or change debt. The existing worker/cart action still completes a selected task and issues its real repayment receipt.
