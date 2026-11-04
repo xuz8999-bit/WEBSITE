@@ -12,7 +12,7 @@ window.BUREAU_SCENES.about = `
     <path fill="#ffd42a" d="M0 104h76v234H0z"/>
     <path fill="#df86cc" d="M12 152h44v46H12zm0 86h44v46H12z"/>
     <path fill="#fff3ae" d="M12 200h44v34H12zm0 86h44v40H12z"/>
-    <path fill="#5798e6" d="M76 242h172v96H76z"/>
+    <path fill="#5798e6" d="M76 242 248 217.4V338H76z"/>
     <path fill="#dc4b2e" d="m76 218 204-30 6 26-210 30z"/>
     <path fill="#f7f6ef" d="M96 252h38v62H96zm55 0h37v62h-37zm54 0h38v62h-38z"/>
 
