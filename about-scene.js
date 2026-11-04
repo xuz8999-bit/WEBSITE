@@ -25,6 +25,7 @@ window.BUREAU_SCENES.about = `
     <path fill="#00a600" d="m390 239 71-49 139-9v58z"/>
     <path fill="#5896e5" d="M471 263h49v49h-49zm59 0h48v49h-48z"/>
   </svg>
+  <button class="about-back" data-route="/home">Back</button>
   <button class="about-heading" data-route="/home" aria-label="ABOUT — return to HOME" title="Return to HOME">ABOUT</button>
   <nav class="about-sections" aria-label="About sections">
     <button data-about="History" aria-pressed="true">History</button>

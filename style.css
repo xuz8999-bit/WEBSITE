@@ -198,3 +198,6 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 @keyframes about-sundae-float { 0%,100% { translate: 0 0; } 50% { translate: 1px -2px; } }
 @keyframes about-cone-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @media (prefers-reduced-motion: reduce) { .about-item, .about-cone-motion { animation: none; } }
+
+.about-back { position: absolute; left: 1.67%; bottom: 6%; width: 7.67%; height: 7.7%; padding: 0; border: 0; border-radius: 0; background: #fff9e8; color: #241b18; font: 900 3cqw / 1 'Bureau Serif', serif; cursor: pointer; z-index: 3; }
+.about-back:active { transform: scale(.96); }
