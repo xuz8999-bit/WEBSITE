@@ -482,3 +482,16 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .tax .tax-controls .tax-continue:active { transform: scaleX(.9) scale(.96); }
 .tax .tax-title button { transform: scaleX(.84); }
 .tax .tax-title button:active { transform: scaleX(.84) scale(.96); }
+
+/* Latest TAX SYSTEM reference includes its textured backdrop and fat-face type. */
+@font-face { font-family: Tax Fatface; src: url('fonts/abril-fatface.ttf') format('truetype'); font-weight: 400 900; font-display: swap; }
+.tax .world-heading { font-family: 'Tax Fatface', 'Bureau Title', serif; font-weight: 400; }
+.tax .tax-subheading { font-family: 'Tax Fatface', 'Bureau Serif',serif; font-weight: 400; }
+.tax .tax-controls .tax-continue { font-family: 'Tax Fatface','Bureau Title',serif; font-weight: 400; }
+.tax .world-heading { top: 2.85%; font-size: 4.4cqw; }
+.tax .tax-title button { transform: scaleX(.9); }
+.tax .tax-title button:active { transform: scaleX(.9) scale(.96); }
+.tax .tax-subheading { top: 15.4%; font-size: 3.45cqw; transform: scaleX(1.26); }
+.tax .tax-controls { bottom: 3.7%; }
+.tax .tax-controls .tax-continue { transform: scaleX(.82); }
+.tax .tax-controls .tax-continue:active { transform: scaleX(.82) scale(.96); }

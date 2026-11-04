@@ -3,9 +3,10 @@ window.BUREAU_SCENES.tax = `
 <main class="scene world tax" aria-label="Tax System">
   <svg class="illustration tax-illustration" viewBox="0 0 600 338" aria-hidden="true">
     <defs>
-      <radialGradient id="tax-reference-sky" cx="46%" cy="47%" r="67%"><stop stop-color="#ff6834"/><stop offset=".48" stop-color="#ffa077"/><stop offset="1" stop-color="#fffdf5"/></radialGradient>
+      <radialGradient id="tax-reference-sky" cx="44%" cy="46%" r="58%"><stop stop-color="#fa5818"/><stop offset=".4" stop-color="#ff844c"/><stop offset=".78" stop-color="#fff5e9"/><stop offset="1" stop-color="#ffffff"/></radialGradient>
+      <filter id="tax-reference-grain" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="1.65" numOctaves="1" seed="18" stitchTiles="stitch"/><feComponentTransfer result="color-grain"><feFuncR type="linear" slope="2.4" intercept="-.7"/><feFuncG type="linear" slope="2.4" intercept="-.7"/><feFuncB type="linear" slope="2.4" intercept="-.7"/></feComponentTransfer><feComposite in="SourceGraphic" in2="color-grain" operator="arithmetic" k1="0" k2="1" k3=".72" k4="-.28"/></filter>
     </defs>
-    <path fill="url(#tax-reference-sky)" d="M0 0h600v338H0z"/>
+    <path fill="url(#tax-reference-sky)" filter="url(#tax-reference-grain)" d="M0 0h600v338H0z"/>
     <g class="tax-color-bars">
       <path fill="#ffd329" d="M172 178h17v104h-17zM302.5 125h18v104h-18z"/>
       <path fill="#5896e5" d="M219.5 156h18v70.5h-18zM368.5 160.5H386V310h-17.5z"/>
@@ -36,7 +37,7 @@ window.BUREAU_SCENES.tax = `
     <g class="tax-card-art" style="--step:1">
       <g class="tax-hourglass-sand"><path fill="#5896e5" d="M193 107h13q0 8-6.5 8t-6.5-8z"/><path fill="#ffd329" d="M193 123q0-8 6.5-8t6.5 8z"/></g>
       <path fill="#de4b2c" d="M191 104h17v3h-17z"/><path fill="#00a600" d="M190.5 123.5h18v3h-18z"/>
-      <g class="tax-product-motif tax-plastic-bag"><path fill="#e74d2e" d="M223 122c-5 3-5 9-1 13-8 4-2 13 6 11 8-3 9 2 13-1l-4-20-3-4-2 1 2 6q-5 4-8 0l1-5q-1-3-4-1z"/></g>
+      <g class="tax-product-motif tax-plastic-bag"><path fill="#e74d2e" d="M223 122c-2-2-4 0-4 3-2 4 0 8 2 10-5 3-2 10 3 11 4 1 7-2 12 0h4l-1-11-3-12q-1-3-3-1l2 6q-6 5-11 0l1-4q1-3-2-2z"/></g>
       <g class="tax-product-motif tax-open-box"><path fill="#5896e5" d="M236.5 135h23v12h-23z"/><path fill="#db87cf" d="m259.5 135 3-5v11l-3 6z"/><path fill="#00a600" d="m237 130 10-4h15l-5 4z"/><path fill="#f4edb0" d="m234.5 136 2.5-6h23l-2.5 6z"/><path fill="#ffd329" d="m260 130 2-4 3 4-2.5 5.5z"/></g>
     </g>
     <g class="tax-card-art" style="--step:2">
