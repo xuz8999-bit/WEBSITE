@@ -29,6 +29,13 @@ window.BUREAU_SCENES.about = `
     <button data-about="Structure" aria-pressed="false">Structure</button>
   </nav>
 
+  <div class="about-floating-items" aria-hidden="true">
+    <svg class="about-cone-sprite" viewBox="0 0 600 338"><defs><clipPath id="about-roof-front"><path d="M0 0h600v180l-142 8-72 48H0z"/></clipPath></defs><g clip-path="url(#about-roof-front)"><g class="about-cone-motion"><image href="assets/about/original/cone.svg?v=pdf-original-1" x="514" y="144" width="51" height="96"/></g></g></svg>
+    <div class="about-item about-flour"><img src="assets/about/original/flour.svg?v=pdf-original-1" alt="" draggable="false"></div>
+    <div class="about-item about-donuts"><img src="assets/about/original/donuts.svg?v=pdf-original-1" alt="" draggable="false"></div>
+    <div class="about-item about-sundae"><img src="assets/about/original/sundae.svg?v=pdf-original-1" alt="" draggable="false"></div>
+  </div>
+
   <article class="about-card" aria-live="polite">
     <h2>{{ABOUT_TITLE}}</h2>
     <p>{{ABOUT_COPY}}</p>

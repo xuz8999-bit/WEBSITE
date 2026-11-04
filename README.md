@@ -57,3 +57,7 @@ Screenshot overview: `artifacts/story-overview-v1.png`. Individual scenes: `arti
 ## ABOUT review revision
 
 The latest clean ABOUT reference supersedes the floating-food composition. ABOUT now contains only the purple sidebar, two pink facade panels, yellow introduction card, red/blue left building, green-roof right building and small Back button. Four section hover/click interactions and English summaries remain. Extra foods and the Tax System header shortcut are removed; Back returns to HOME, where Tax System remains available. Further page design work is paused pending this page’s review.
+
+## ABOUT original artwork
+
+The user subsequently supplied `甜点.pdf`. Four independent transparent SVGs were extracted directly from its 343 original vector paths and restored to ABOUT. These replace hand-drawn approximations on ABOUT only; other pages continue using their existing assets. Files and extraction provenance: `assets/about/original/`. The clean reference layout, English card, section interactions and Back remain. The cone is drawn in a foreground SVG layer clipped behind the green roof, preserving its PDF colors without the card gradient tinting it.
