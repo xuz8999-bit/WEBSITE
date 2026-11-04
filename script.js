@@ -11,7 +11,7 @@
     const [phase, setPhase] = useState('idle');
     const [entering, setEntering] = useState(false);
     const [notice, setNotice] = useState('');
-    const [aboutTab, setAboutTab] = useState('History');
+    const [aboutTab, setAboutTab] = useState('Background');
     const locked = useRef(false);
     const timers = useRef(new Set());
     const schedule = (fn, ms) => {
@@ -57,6 +57,8 @@
       }
     };
     const onPointerOver = (event) => {
+      const section = event.target.closest('[data-about]');
+      if (section && !section.contains(event.relatedTarget)) { setAboutTab(section.dataset.about); return; }
       const target = event.target.closest('[data-fruit], [data-window]');
       if (target && !target.contains(event.relatedTarget)) respondToIllustration(target);
     };
@@ -101,13 +103,13 @@
     const page = route === '/' ? 'welcome' : route === '/about' ? 'about' : 'home';
     let markup = BUREAU_SCENES[page].replace(`scene ${page}`, `scene ${page}${phase === 'leaving' && page === 'welcome' ? ' start-playing' : ''}${entering && page === 'home' ? ' entering' : ''}`);
     const aboutCopy = {
-      History: '时序联邦是一个以“时间”为核心资源的未来国家。便利税将消费背后的公共劳动成本转化为时间债务，记入个人账户；公民通过劳动偿还，让时间在社会中循环。',
-      Background: '科技与便利服务为人们节省了个人时间，但消费之后的垃圾处理、资源消耗与公共劳动成本，却逐渐成为社会共同承担的负担。时序联邦由此开始重新分配便利背后被隐藏的劳动成本。',
+      History: '随着科技与便利服务的发展，人们获得了更多个人时间，但消费背后的垃圾处理、资源消耗与公共劳动成本逐渐成为社会负担。为重新分配这些被隐藏的劳动成本，政府建立了“便利税”制度。',
+      Background: '时序联邦是一个以“时间”为核心资源的未来国家。便利税将消费背后的公共劳动成本转化为时间债务，记入个人账户；公民通过劳动偿还，让时间在社会中循环。',
       Regulation: '政府建立“便利税”制度，将每一次便利消费转化为可计算的时间债务，并记录在公民的个人时间账户中。公民通过劳动偿还自己享受便利所产生的时间成本。',
       Structure: '便利消费产生的时间债务记录在公民的个人时间账户中，公民通过劳动偿还债务。个人时间、消费与公共劳动由此相互连接，形成一个依靠时间循环维持运转的社会系统。'
     };
     if (page === 'about') {
-      markup = markup.replace('{{ABOUT_TITLE}}', aboutTab === 'History' ? 'Temporal Federation' : aboutTab).replace('{{ABOUT_COPY}}', aboutCopy[aboutTab]);
+      markup = markup.replace('{{ABOUT_TITLE}}', aboutTab === 'Background' ? 'Temporal Federation' : aboutTab).replace('{{ABOUT_COPY}}', aboutCopy[aboutTab]);
       markup = markup.replace(/data-about="([^"]+)" aria-pressed="(?:true|false)"/g, (_, label) => `data-about="${label}" aria-pressed="${label === aboutTab}"`);
     }
     return h('div', { className: 'transition-stage', onClick, onPointerOver, onKeyDown, 'aria-busy': phase !== 'idle' },
