@@ -519,3 +519,16 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
  .shop-reference-item, .shop-blue-basket, .shop-basket-front-handle, .shop-basket-back-handle { animation: none; }
  .shop-reference-item:hover, .shop-reference-item:active { scale: none; }
 }
+
+/* Original PDF artboard: keep its native proportions and stable click regions. */
+.transition-stage:has(.source-shop) { width: min(100vw, calc(100vh * 1366 / 768)); aspect-ratio: 1366 / 768; }
+.source-shop.scene { aspect-ratio: 1366 / 768; background: #fff; }
+.original-shop-svg { pointer-events: none; }
+.original-shop-hit, .original-shop-back { position: absolute; display: block; border: 0; padding: 0; background: transparent; cursor: pointer; z-index: 3; }
+.original-shop-back { left: 59.9%; top: 87.8%; width: 35.6%; height: 9%; }
+.original-shop-hit:focus-visible, .original-shop-back:focus-visible { outline: .2cqw solid #34607b; outline-offset: .3cqw; border-radius: .4cqw; }
+.pdf-shop-stock { animation: original-stock-breathe 7s ease-in-out var(--stock-delay,0s) infinite; transition: scale var(--hover-time,240ms) ease; }
+@keyframes original-stock-breathe { 0%,72%,100% { translate: 0 0; } 84% { translate: 0 -.7px; } }
+@media (prefers-reduced-motion: reduce) {
+ .source-shop .pdf-shop-stock { animation: none; transition: none; scale: none !important; }
+}

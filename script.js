@@ -124,8 +124,10 @@
     },[page,data.debt]);
     let markup=page==='about'?BUREAU_SCENES.about.replace('{{ABOUT_TITLE}}','Temporal Federation').replace('{{ABOUT_COPY}}',aboutCopy.Background):BUREAU_SCENES[page]||BUREAU_WORLD.render(page,data);
     const classes=`scene ${page}${page==='home'&&arrival==='home'?' entering':''}${page==='about'&&arrival==='about'?' about-entering':''}${!['welcome','home','about'].includes(page)&&arrival===page?' world-entering':''}${motion?.variant==='clock'&&page==='welcome'?' start-playing':''}${motion&&route===motion.from?' exiting exit-'+motion.variant:''}`;
-    markup=markup.replace(`scene ${page==='tax'?'world tax':!['welcome','home','about'].includes(page)?'world '+page:page}`,`${!['welcome','home','about'].includes(page)?'scene world '+page:classes}`);
-    if(!['welcome','home','about'].includes(page))markup=markup.replace(`class="scene world ${page}"`,`class="${classes} world"`);
+    markup=markup.replace(/(<main\b[^>]*\bclass=")([^"]*)(")/,(_,prefix,original,suffix)=>{
+      const flags=classes.split(' ').filter(name=>name!=='scene'&&name!==page);
+      return prefix+[...new Set([...original.split(' '),...flags])].join(' ')+suffix;
+    });
     const motif=motion?({clock:'',book:'',flow:'— · —',shelves:BUREAU_WORLD.icon(data.selected)+BUREAU_WORLD.icon('soda'),product:BUREAU_WORLD.icon(data.selected),file:BUREAU_WORLD.icon(data.selected),debt:`${data.debt} min`,task:`<span class="task-time">${data.debt} min</span><svg class="task-broom" viewBox="0 0 100 140"><path d="m65 12-30 77" stroke="#00a600" stroke-width="8"/><path fill="#ffd329" d="m25 74 26 10 5 37-49-17z"/><path d="m21 89-6 20m16-17-6 20m16-17-6 20" stroke="#d58232" stroke-width="3"/></svg>`,print:'',return:''}[motion.variant]||''):'';
     return h('div',{className:`transition-stage${motion?' is-transitioning':''}`,onClick,onPointerOver,onFocus,onKeyDown,onChange,onInput:onChange,'aria-busy':!!motion,
       style:{'--route-duration':`${M.transition}ms`,'--hover-time':`${M.hover}ms`,'--float-time':`${M.float}ms`,'--cloud-time':`${M.cloud}ms`,'--person-time':`${M.person}ms`,'--source-x':`${motion?.anchor?.x||0}px`,'--source-y':`${motion?.anchor?.y||0}px`,'--source-scale':motion?.anchor?.scale||.35}},

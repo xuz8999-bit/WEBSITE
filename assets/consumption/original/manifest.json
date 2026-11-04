@@ -1,0 +1,313 @@
+{
+  "source_sha256": "872cecf857cb01668f5f6e08467cd378613bbf4a6cdfc04578320d61ee3e3b53",
+  "page": 1,
+  "original_paths": 1696,
+  "textures": [
+    {
+      "file": "image_3.png",
+      "size": [
+        1366,
+        768
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "image_8.png",
+      "size": [
+        22,
+        768
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "image_4.png",
+      "size": [
+        1366,
+        768
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "image_9.png",
+      "size": [
+        22,
+        768
+      ],
+      "mode": "RGB"
+    }
+  ],
+  "items": {
+    "shop-orange": {
+      "name": "Orange",
+      "tax": 2,
+      "width": 85.48900604248047,
+      "height": 84.07107543945312,
+      "paths": 3,
+      "file": "assets/consumption/original/items/shop-orange.svg"
+    },
+    "shop-orange-blue": {
+      "name": "Orange",
+      "tax": 2,
+      "width": 111.56698608398438,
+      "height": 105.01071166992188,
+      "paths": 3,
+      "file": "assets/consumption/original/items/shop-orange-blue.svg"
+    },
+    "shop-purple-snack": {
+      "name": "Purple snack bag",
+      "tax": 5,
+      "width": 107.86599731445312,
+      "height": 130.56289672851562,
+      "paths": 5,
+      "file": "assets/consumption/original/items/shop-purple-snack.svg"
+    },
+    "shop-star-snack": {
+      "name": "Blue snack bag",
+      "tax": 5,
+      "width": 92.4219970703125,
+      "height": 110.59060668945312,
+      "paths": 5,
+      "file": "assets/consumption/original/items/shop-star-snack.svg"
+    },
+    "shop-pink-bag": {
+      "name": "Shopping bag",
+      "tax": 7,
+      "width": 103.66592407226562,
+      "height": 135.28720474243164,
+      "paths": 6,
+      "file": "assets/consumption/original/items/shop-pink-bag.svg"
+    },
+    "shop-cup": {
+      "name": "Paper cup",
+      "tax": 5,
+      "width": 57.9010009765625,
+      "height": 94.71161270141602,
+      "paths": 5,
+      "file": "assets/consumption/original/items/shop-cup.svg"
+    },
+    "shop-books": {
+      "name": "Wrapped carton pack",
+      "tax": 6,
+      "width": 100.70477294921875,
+      "height": 84.91175842285156,
+      "paths": 5,
+      "file": "assets/consumption/original/items/shop-books.svg"
+    },
+    "shop-blue-fish": {
+      "name": "Blue fish",
+      "tax": 3,
+      "width": 121.447021484375,
+      "height": 55.208984375,
+      "paths": 13,
+      "file": "assets/consumption/original/items/shop-blue-fish.svg"
+    },
+    "shop-butter": {
+      "name": "Butter",
+      "tax": 4,
+      "width": 97.37451171875,
+      "height": 60.4456787109375,
+      "paths": 45,
+      "file": "assets/consumption/original/items/shop-butter.svg"
+    },
+    "shop-red-fish": {
+      "name": "Red fish",
+      "tax": 3,
+      "width": 104.51602172851562,
+      "height": 47.108001708984375,
+      "paths": 21,
+      "file": "assets/consumption/original/items/shop-red-fish.svg"
+    },
+    "shop-saba": {
+      "name": "Saba can",
+      "tax": 4,
+      "width": 68.37701416015625,
+      "height": 51.57489013671875,
+      "paths": 64,
+      "file": "assets/consumption/original/items/shop-saba.svg"
+    },
+    "shop-sardines": {
+      "name": "Sardine tin",
+      "tax": 4,
+      "width": 67.24502563476562,
+      "height": 75.11297607421875,
+      "paths": 67,
+      "file": "assets/consumption/original/items/shop-sardines.svg"
+    },
+    "shop-fish-carton": {
+      "name": "Fresh fish carton",
+      "tax": 5,
+      "width": 64.12300109863281,
+      "height": 51.35900115966797,
+      "paths": 68,
+      "file": "assets/consumption/original/items/shop-fish-carton.svg"
+    },
+    "shop-squid": {
+      "name": "Squid in ink",
+      "tax": 5,
+      "width": 114.9859619140625,
+      "height": 60.656005859375,
+      "paths": 33,
+      "file": "assets/consumption/original/items/shop-squid.svg"
+    },
+    "shop-crab": {
+      "name": "Crab tin",
+      "tax": 5,
+      "width": 92.64559555053711,
+      "height": 88.42437744140625,
+      "paths": 45,
+      "file": "assets/consumption/original/items/shop-crab.svg"
+    },
+    "shop-chips": {
+      "name": "Potato chips",
+      "tax": 5,
+      "width": 83.48486328125,
+      "height": 103.3948974609375,
+      "paths": 79,
+      "file": "assets/consumption/original/items/shop-chips.svg"
+    },
+    "shop-pickles": {
+      "name": "Baby dill pickles",
+      "tax": 5,
+      "width": 68.5584716796875,
+      "height": 105.13565826416016,
+      "paths": 84,
+      "file": "assets/consumption/original/items/shop-pickles.svg"
+    },
+    "shop-apple": {
+      "name": "Apple",
+      "tax": 2,
+      "width": 41.4580078125,
+      "height": 49.7099609375,
+      "paths": 2,
+      "file": "assets/consumption/original/items/shop-apple.svg"
+    },
+    "shop-sugar": {
+      "name": "Sugar",
+      "tax": 4,
+      "width": 62.165000915527344,
+      "height": 86.4947509765625,
+      "paths": 26,
+      "file": "assets/consumption/original/items/shop-sugar.svg"
+    },
+    "shop-crackers": {
+      "name": "Fish shaped crackers",
+      "tax": 5,
+      "width": 78.1551513671875,
+      "height": 96.13900184631348,
+      "paths": 85,
+      "file": "assets/consumption/original/items/shop-crackers.svg"
+    },
+    "shop-flour": {
+      "name": "Flour packet",
+      "tax": 4,
+      "width": 78.586181640625,
+      "height": 87.22906494140625,
+      "paths": 57,
+      "file": "assets/consumption/original/items/shop-flour.svg"
+    },
+    "shop-rice": {
+      "name": "Brown rice",
+      "tax": 4,
+      "width": 115.26969146728516,
+      "height": 128.06384658813477,
+      "paths": 55,
+      "file": "assets/consumption/original/items/shop-rice.svg"
+    },
+    "shop-jam": {
+      "name": "Strawberry jam",
+      "tax": 5,
+      "width": 55.9342041015625,
+      "height": 88.18373107910156,
+      "paths": 32,
+      "file": "assets/consumption/original/items/shop-jam.svg"
+    },
+    "shop-olive": {
+      "name": "Olive oil",
+      "tax": 5,
+      "width": 46.22039794921875,
+      "height": 125.15299987792969,
+      "paths": 34,
+      "file": "assets/consumption/original/items/shop-olive.svg"
+    },
+    "shop-pasta": {
+      "name": "Pasta packet",
+      "tax": 5,
+      "width": 157.14301300048828,
+      "height": 101.199951171875,
+      "paths": 78,
+      "file": "assets/consumption/original/items/shop-pasta.svg"
+    },
+    "shop-beans": {
+      "name": "Baked beans",
+      "tax": 4,
+      "width": 74.03399658203125,
+      "height": 107.19366455078125,
+      "paths": 63,
+      "file": "assets/consumption/original/items/shop-beans.svg"
+    },
+    "shop-fish-can": {
+      "name": "Canned fish",
+      "tax": 4,
+      "width": 54.7174072265625,
+      "height": 76.19207763671875,
+      "paths": 37,
+      "file": "assets/consumption/original/items/shop-fish-can.svg"
+    },
+    "shop-mug": {
+      "name": "Coffee mug",
+      "tax": 3,
+      "width": 107.530029296875,
+      "height": 75.48599243164062,
+      "paths": 6,
+      "file": "assets/consumption/original/items/shop-mug.svg"
+    },
+    "shop-coffee": {
+      "name": "Coffee pouch",
+      "tax": 6,
+      "width": 65.278076171875,
+      "height": 72.2139892578125,
+      "paths": 14,
+      "file": "assets/consumption/original/items/shop-coffee.svg"
+    },
+    "shop-tomato-tray": {
+      "name": "Packed tomatoes",
+      "tax": 6,
+      "width": 115.29200744628906,
+      "height": 71.67800903320312,
+      "paths": 202,
+      "file": "assets/consumption/original/items/shop-tomato-tray.svg"
+    },
+    "shop-mug-dots": {
+      "name": "Spotted mug",
+      "tax": 3,
+      "width": 88.76527404785156,
+      "height": 73.13424682617188,
+      "paths": 21,
+      "file": "assets/consumption/original/items/shop-mug-dots.svg"
+    },
+    "shop-mug-blue": {
+      "name": "Blue spotted mug",
+      "tax": 3,
+      "width": 84.77880096435547,
+      "height": 63.09093475341797,
+      "paths": 24,
+      "file": "assets/consumption/original/items/shop-mug-blue.svg"
+    },
+    "shop-mitten": {
+      "name": "Kitchen mitten",
+      "tax": 2,
+      "width": 62.51361083984375,
+      "height": 49.27850341796875,
+      "paths": 53,
+      "file": "assets/consumption/original/items/shop-mitten.svg"
+    },
+    "shop-small-oil": {
+      "name": "Bottled drink",
+      "tax": 4,
+      "width": 38.9630126953125,
+      "height": 73.91607666015625,
+      "paths": 8,
+      "file": "assets/consumption/original/items/shop-small-oil.svg"
+    }
+  }
+}

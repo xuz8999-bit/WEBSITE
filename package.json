@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "python3 -m http.server 5173 --bind 0.0.0.0",
-    "test": "node tests/world-flow.cjs && node tests/transitions.cjs && node tests/tax-and-audio.cjs && node tests/consumption-reference.cjs"
+    "test": "node tests/world-flow.cjs && node tests/transitions.cjs && node tests/tax-and-audio.cjs && node tests/consumption-reference.cjs && node tests/consumption-original.cjs"
   },
   "dependencies": {
     "react": "18.3.1",

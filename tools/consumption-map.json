@@ -1,0 +1,443 @@
+{
+  "page": 1,
+  "size": [
+    1366,
+    768
+  ],
+  "placements": [
+    [
+      "shop-rice",
+      7,
+      0,
+      51,
+      58,
+      5
+    ],
+    [
+      "shop-mug-blue",
+      25,
+      39,
+      40,
+      26,
+      0
+    ],
+    [
+      "shop-olive",
+      62,
+      8,
+      18,
+      55,
+      0
+    ],
+    [
+      "shop-fish-carton",
+      106,
+      38,
+      26,
+      23,
+      0
+    ],
+    [
+      "shop-pickles",
+      132,
+      14,
+      28,
+      49,
+      0
+    ],
+    [
+      "shop-pink-bag",
+      170,
+      2,
+      47,
+      61,
+      0
+    ],
+    [
+      "shop-orange",
+      8,
+      120,
+      37,
+      39,
+      0
+    ],
+    [
+      "shop-star-snack",
+      59,
+      105,
+      41,
+      52,
+      -4
+    ],
+    [
+      "shop-tomato-tray",
+      103,
+      128,
+      50,
+      30,
+      0
+    ],
+    [
+      "shop-purple-snack",
+      172,
+      103,
+      47,
+      55,
+      0
+    ],
+    [
+      "shop-saba",
+      198,
+      138,
+      31,
+      23,
+      0
+    ],
+    [
+      "shop-red-fish",
+      151,
+      169,
+      48,
+      23,
+      0
+    ],
+    [
+      "shop-crab",
+      5,
+      207,
+      43,
+      41,
+      0
+    ],
+    [
+      "shop-pasta",
+      50,
+      205,
+      70,
+      47,
+      -4
+    ],
+    [
+      "shop-mug-dots",
+      97,
+      216,
+      43,
+      33,
+      0
+    ],
+    [
+      "shop-sardines",
+      157,
+      213,
+      31,
+      35,
+      0
+    ],
+    [
+      "shop-orange-blue",
+      181,
+      204,
+      44,
+      45,
+      0
+    ],
+    [
+      "shop-sugar",
+      17,
+      290,
+      30,
+      42,
+      0
+    ],
+    [
+      "shop-mitten",
+      48,
+      307,
+      29,
+      24,
+      0
+    ],
+    [
+      "shop-apple",
+      129,
+      309,
+      18,
+      23,
+      0
+    ],
+    [
+      "shop-apple",
+      150,
+      309,
+      18,
+      23,
+      0
+    ],
+    [
+      "shop-apple",
+      171,
+      309,
+      18,
+      23,
+      0
+    ],
+    [
+      "shop-beans",
+      188,
+      286,
+      36,
+      48,
+      0
+    ],
+    [
+      "shop-crackers",
+      286,
+      7,
+      38,
+      44,
+      0
+    ],
+    [
+      "shop-small-oil",
+      335,
+      14,
+      19,
+      35,
+      0
+    ],
+    [
+      "shop-books",
+      273,
+      77,
+      46,
+      39,
+      0
+    ],
+    [
+      "shop-jam",
+      333,
+      81,
+      30,
+      41,
+      0
+    ],
+    [
+      "shop-cup",
+      507,
+      15,
+      28,
+      40,
+      0
+    ],
+    [
+      "shop-chips",
+      547,
+      6,
+      37,
+      48,
+      0
+    ],
+    [
+      "shop-coffee",
+      511,
+      69,
+      31,
+      34,
+      0
+    ],
+    [
+      "shop-fish-can",
+      563,
+      65,
+      27,
+      38,
+      0
+    ],
+    [
+      "shop-squid",
+      500,
+      132,
+      53,
+      27,
+      0
+    ],
+    [
+      "shop-cup",
+      564,
+      116,
+      27,
+      43,
+      0
+    ],
+    [
+      "shop-flour",
+      503,
+      173,
+      33,
+      42,
+      0
+    ],
+    [
+      "shop-mug",
+      540,
+      177,
+      49,
+      36,
+      0
+    ],
+    [
+      "shop-blue-fish",
+      514,
+      232,
+      41,
+      25,
+      0
+    ],
+    [
+      "shop-butter",
+      549,
+      231,
+      45,
+      29,
+      0
+    ]
+  ],
+  "metadata": {
+    "shop-rice": {
+      "name": "Brown rice",
+      "tax": 4
+    },
+    "shop-mug-blue": {
+      "name": "Blue spotted mug",
+      "tax": 3
+    },
+    "shop-mug-dots": {
+      "name": "Spotted mug",
+      "tax": 3
+    },
+    "shop-olive": {
+      "name": "Olive oil",
+      "tax": 5
+    },
+    "shop-fish-carton": {
+      "name": "Fresh fish carton",
+      "tax": 5
+    },
+    "shop-pickles": {
+      "name": "Baby dill pickles",
+      "tax": 5
+    },
+    "shop-pink-bag": {
+      "name": "Shopping bag",
+      "tax": 7
+    },
+    "shop-orange": {
+      "name": "Orange",
+      "tax": 2
+    },
+    "shop-orange-blue": {
+      "name": "Orange",
+      "tax": 2
+    },
+    "shop-star-snack": {
+      "name": "Blue snack bag",
+      "tax": 5
+    },
+    "shop-tomato-tray": {
+      "name": "Packed tomatoes",
+      "tax": 6
+    },
+    "shop-purple-snack": {
+      "name": "Purple snack bag",
+      "tax": 5
+    },
+    "shop-saba": {
+      "name": "Saba can",
+      "tax": 4
+    },
+    "shop-red-fish": {
+      "name": "Red fish",
+      "tax": 3
+    },
+    "shop-blue-fish": {
+      "name": "Blue fish",
+      "tax": 3
+    },
+    "shop-crab": {
+      "name": "Crab tin",
+      "tax": 5
+    },
+    "shop-pasta": {
+      "name": "Pasta packet",
+      "tax": 5
+    },
+    "shop-sardines": {
+      "name": "Sardine tin",
+      "tax": 4
+    },
+    "shop-sugar": {
+      "name": "Sugar",
+      "tax": 4
+    },
+    "shop-mitten": {
+      "name": "Kitchen mitten",
+      "tax": 2
+    },
+    "shop-apple": {
+      "name": "Apple",
+      "tax": 2
+    },
+    "shop-beans": {
+      "name": "Baked beans",
+      "tax": 4
+    },
+    "shop-crackers": {
+      "name": "Fish shaped crackers",
+      "tax": 5
+    },
+    "shop-small-oil": {
+      "name": "Bottled drink",
+      "tax": 4
+    },
+    "shop-books": {
+      "name": "Wrapped carton pack",
+      "tax": 6
+    },
+    "shop-jam": {
+      "name": "Strawberry jam",
+      "tax": 5
+    },
+    "shop-cup": {
+      "name": "Paper cup",
+      "tax": 5
+    },
+    "shop-chips": {
+      "name": "Potato chips",
+      "tax": 5
+    },
+    "shop-coffee": {
+      "name": "Coffee pouch",
+      "tax": 6
+    },
+    "shop-fish-can": {
+      "name": "Canned fish",
+      "tax": 4
+    },
+    "shop-squid": {
+      "name": "Squid in ink",
+      "tax": 5
+    },
+    "shop-flour": {
+      "name": "Flour packet",
+      "tax": 4
+    },
+    "shop-mug": {
+      "name": "Coffee mug",
+      "tax": 3
+    },
+    "shop-butter": {
+      "name": "Butter",
+      "tax": 4
+    }
+  }
+}
