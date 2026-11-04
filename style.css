@@ -425,3 +425,16 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 
 .about-item { transform-origin: center; }
 .about-cone-motion { transform-origin: 540px 190px; }
+
+/* HOME refinement from the user's clear city reference. */
+.home .nav-home span { left: 20%; }
+.home .nav-consume span { left: 18%; font-size: 2.25cqw; }
+.home .nav-tax span { left: 10%; font-size: 2.2cqw; }
+.home .building-labels { left: 43.5%; top: 62.72%; width: 14%; font-size: 2.3cqw; }
+.home .building-labels .menu-item { padding-top: .4cqw; }
+.home .building-labels .menu-item:first-child { height: 4.5cqw; }
+.home .building-labels .menu-item:last-child { height: 3.6cqw; }
+.home .leaf-motion { transform-origin: 418px 230px; }
+.home .nav-home span, .home .nav-about span { font-size: 2.2cqw; }
+.home .building-labels { font-size: 2.05cqw; }
+.home .building-labels .menu-item { padding-top: .9cqw; }
