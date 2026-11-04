@@ -3,10 +3,14 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "dev": "python3 -m http.server 5173 --bind 0.0.0.0"
+    "dev": "python3 -m http.server 5173 --bind 0.0.0.0",
+    "test": "node tests/world-flow.cjs && node tests/transitions.cjs"
   },
   "dependencies": {
     "react": "18.3.1",
     "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
   }
 }

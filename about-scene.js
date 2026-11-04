@@ -10,8 +10,8 @@ window.BUREAU_SCENES.about = `
     <path fill="#fff1a9" d="M15 34h72v35H15zm0 45h72v38H15zm0 49h72v35H15zm0 47h72v36H15z"/>
     <path fill="#fff8c5" d="M97 35h72v32H97zm0 44h72v32H97zm0 44h72v32H97zm0 44h72v32H97z"/>
     <path fill="#ffd42a" d="M0 106h75v232H0z"/>
-    <path fill="#df86cc" d="M10 155h46v47H10zm0 71h46v47H10z"/>
-    <path fill="#fff3ae" d="M10 203h46v21H10zm0 71h46v24H10z"/>
+    <path fill="#df86cc" d="M10 130h46v38H10zm0 57h46v38H10zm0 57h46v38H10z"/>
+    <path fill="#fff3ae" d="M10 169h46v17H10zm0 57h46v17H10zm0 57h46v50H10z"/>
     <path fill="#5798e6" d="M75 244h174v94H75z"/>
     <path fill="#dc4b2e" d="m75 220 205-30 5 26-210 32z"/>
     <path fill="#f7f6ef" d="M96 254h39v60H96zm55 0h37v60h-37zm54 0h38v60h-38z"/>
@@ -20,6 +20,7 @@ window.BUREAU_SCENES.about = `
     <path fill="#00a600" d="m390 239 71-49 139-9v58z"/>
     <path fill="#5896e5" d="M471 263h49v49h-49zm59 0h48v49h-48z"/>
   </svg>
+  <button class="about-next" data-route="/tax-system">Tax System →</button>
   <button class="about-back" data-route="/home">Back</button>
   <button class="about-heading" data-route="/home" aria-label="ABOUT — return to HOME" title="Return to HOME">ABOUT</button>
   <nav class="about-sections" aria-label="About sections">
