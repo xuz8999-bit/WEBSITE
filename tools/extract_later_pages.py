@@ -113,7 +113,15 @@ for pn,name in enumerate(['products','record','account','labor','receipt'],1):
  if name=='receipt':
   for i,d in enumerate(ds):labels[i]='source-printer' if i in [0,1,9] or d['rect'].y1<244.5 else 'source-paper'
   defs=root.find(NS+'defs');clip=ET.SubElement(defs,NS+'clipPath',{'id':'story-paper-reveal','clipPathUnits':'userSpaceOnUse'});ET.SubElement(clip,NS+'rect',{'class':'source-paper-clip','x':'510','y':'244','width':'313','height':'494'})
+  # The reference's sample print is replaced by real consumption/labor data.
+  # Keep only its paper silhouette and edge details; the raw SVG stays archived.
+  for i,label in labels.items():
+   if label=='source-paper' and i not in range(2,9):parents[paths[i]].remove(paths[i])
  wrap(root,paths,labels)
+ if name=='receipt':
+  window=ET.SubElement(root,NS+'g',{'class':'source-paper-window','clip-path':'url(#story-paper-reveal)'})
+  content=ET.SubElement(window,NS+'g',{'class':'source-part source-paper source-printed-content'})
+  content.text='{{RECEIPT_CONTENT}}'
  for e in root.iter(NS+'image'):e.set('href','assets/story/original/'+e.get('href'))
  root.set('class','illustration source-story-svg');root.set('aria-hidden','true')
  scenes[name]=ET.tostring(root,encoding='unicode')

@@ -8,7 +8,7 @@
     return routes[value]?value:(location.pathname.endsWith('/home.html')?'/home':'/');
   };
   const initial=()=>{
-    const defaults={debt:63,selected:'chips',minutes:'10',records:[],receipt:null,filterDate:'',task:0,productReady:false,calculatorUsed:false,receiptExpanded:false,taskChosen:false};
+    const defaults={debt:63,selected:'chips',minutes:'10',records:[],receipt:null,filterDate:'',task:0,productReady:false,calculatorUsed:false,receiptExpanded:false,taskChosen:false,receiptPage:0};
     try{
       const saved=JSON.parse(localStorage.getItem('temporal-federation-v1')||'null');
       if(!saved)return defaults;
@@ -74,13 +74,14 @@
       setData(d=>({...d,records:[entry,...d.records].slice(0,100),debt:d.debt+item.tax}));navigate('/record',document.querySelector('.selected-product .product-icon'));
     };
     const complete=()=>{
+      const issuedAt=new Date();
       const amount=Math.min(Math.max(1,Number(data.minutes)||10),data.debt),remaining=data.debt-amount;
       const tasks=['Paper cup recycling','Carton disassembly','Plastic bag sorting','E-waste disassembly'];
       setData(d=>({...d,debt:remaining,records:remaining===0?d.records.map(r=>({...r,paid:true})):d.records,
-        receipt:{id:`TF-${Date.now().toString().slice(-8)}`,date:new Date().toLocaleString('en-GB'),minutes:amount,task:tasks[d.task]},receiptExpanded:false}));navigate('/receipt');
+        receipt:{id:`TF-${Date.now().toString().slice(-8)}`,date:issuedAt.toLocaleString('en-GB'),issuedAt:issuedAt.toISOString(),minutes:amount,task:tasks[d.task],balanceBefore:d.debt,balance:remaining,records:d.records.map(r=>({...r,paid:remaining===0?true:r.paid}))},receiptExpanded:false,receiptPage:0}));navigate('/receipt');
     };
     const onClick=e=>{
-      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle],[data-reprint-receipt],[data-account-stock]');
+      const control=e.target.closest('[data-start],[data-nav],[data-route],[data-about],[data-action],[data-menu],[data-fruit],[data-window],[data-product],[data-select],[data-purchase],[data-key],[data-task],[data-complete-labor],[data-filter-all],[data-toggle-sound],[data-about-sound],[data-set-minutes],[data-receipt-toggle],[data-reprint-receipt],[data-account-stock],[data-receipt-page]');
       if(!control)return;e.preventDefault();if(locked.current)return;
       if(control.hasAttribute('data-toggle-sound')){BUREAU_SOUND.toggle();return;}
       if(control.dataset.aboutSound){BUREAU_SOUND.play(control.dataset.aboutSound);return;}
@@ -94,6 +95,7 @@
       if(control.dataset.select){setData(d=>({...d,selected:control.dataset.select,productReady:true}));return;}
       if(control.hasAttribute('data-purchase')){purchase();return;}
       if(control.hasAttribute('data-receipt-toggle')){const card=document.querySelector('.source-receipt-summary');const open=card?.classList.toggle('is-open');document.querySelectorAll('[data-receipt-toggle]').forEach(el=>el.setAttribute('aria-expanded',String(!!open)));return;}
+      if(control.dataset.receiptPage!==undefined){setData(d=>({...d,receiptPage:Math.max(0,Number(control.dataset.receiptPage)||0)}));return;}
       if(control.dataset.accountStock){const part=control.dataset.accountStock;control.classList.add('stock-tapped');document.querySelectorAll('.source-account-stock-'+part).forEach(el=>{el.style.animation='none';void el.getBoundingClientRect();el.style.animation='';});schedule(()=>control.classList.remove('stock-tapped'),900);return;}
       if(control.hasAttribute('data-reprint-receipt')){const scene=control.closest('.source-receipt');scene.classList.remove('receipt-printing');void scene.offsetWidth;scene.classList.add('receipt-printing');return;}
       if(control.dataset.setMinutes){setData(d=>({...d,minutes:control.dataset.setMinutes,calculatorUsed:true}));return;}
