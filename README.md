@@ -53,3 +53,7 @@ Under `prefers-reduced-motion`, transitions commit immediately and nonessential 
 `tests/transitions.cjs` exercises all ten story transitions with real mouse coordinates, verifies one mounted scene throughout, busy/lock cleanup, cancellation on browser back, and switching reduced-motion during a turn. Browser runtime errors are collected as failures.
 
 Screenshot overview: `artifacts/story-overview-v1.png`. Individual scenes: `artifacts/story-<route>.png`. These are local validation outputs, not page background assets. The new seven scenes are hand-drawn implementations from the small reference, not pixel-identical extracted artwork.
+
+## ABOUT review revision
+
+The latest clean ABOUT reference supersedes the floating-food composition. ABOUT now contains only the purple sidebar, two pink facade panels, yellow introduction card, red/blue left building, green-roof right building and small Back button. Four section hover/click interactions and English summaries remain. Extra foods and the Tax System header shortcut are removed; Back returns to HOME, where Tax System remains available. Further page design work is paused pending this page’s review.

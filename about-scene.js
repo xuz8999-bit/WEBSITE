@@ -6,21 +6,20 @@ window.BUREAU_SCENES.about = `
     <path fill="#f4f4f2" d="M0 0h600v338H0z"/>
     <path fill="#fff" d="M0 0h600v49H0z"/>
     <path fill="url(#about-paper)" d="M218 50h368v222H218z"/>
-    <path fill="#d3bfd9" d="M9 26h167v312H9z"/>
-    <path fill="#fff1a9" d="M15 34h72v35H15zm0 45h72v38H15zm0 49h72v35H15zm0 47h72v36H15z"/>
-    <path fill="#fff8c5" d="M97 35h72v32H97zm0 44h72v32H97zm0 44h72v32H97zm0 44h72v32H97z"/>
-    <path fill="#ffd42a" d="M0 106h75v232H0z"/>
-    <path fill="#df86cc" d="M10 130h46v38H10zm0 57h46v38H10zm0 57h46v38H10z"/>
-    <path fill="#fff3ae" d="M10 169h46v17H10zm0 57h46v17H10zm0 57h46v50H10z"/>
-    <path fill="#5798e6" d="M75 244h174v94H75z"/>
-    <path fill="#dc4b2e" d="m75 220 205-30 5 26-210 32z"/>
-    <path fill="#f7f6ef" d="M96 254h39v60H96zm55 0h37v60h-37zm54 0h38v60h-38z"/>
-<g class="about-cone-motion"><image href="assets/about/cone.svg" x="514" y="144" width="51" height="84"/></g>
-    <path fill="#f7efb0" d="M449 239h151v99H449z"/>
-    <path fill="#00a600" d="m390 239 71-49 139-9v58z"/>
-    <path fill="#5896e5" d="M471 263h49v49h-49zm59 0h48v49h-48z"/>
+    <path fill="#d3bfd9" d="M8 24h164v314H8z"/>
+    <path fill="#fff1a9" d="M14 32h68v35H14zm0 45h68v38H14zm0 49h68v35H14zm0 47h68v36H14z"/>
+    <path fill="#fff8c5" d="M94 32h68v32H94zm0 44h68v32H94zm0 44h68v32H94zm0 44h68v32H94z"/>
+    <path fill="#ffd42a" d="M0 104h76v234H0z"/>
+    <path fill="#df86cc" d="M12 152h44v46H12zm0 86h44v46H12z"/>
+    <path fill="#fff3ae" d="M12 200h44v34H12zm0 86h44v40H12z"/>
+    <path fill="#5798e6" d="M76 242h172v96H76z"/>
+    <path fill="#dc4b2e" d="m76 218 204-30 6 26-210 30z"/>
+    <path fill="#f7f6ef" d="M96 252h38v62H96zm55 0h37v62h-37zm54 0h38v62h-38z"/>
+
+    <path fill="#f7efb0" d="M442 236h158v102H442z"/>
+    <path fill="#00a600" d="m386 236 72-48 142-8v56z"/>
+    <path fill="#5896e5" d="M464 260h49v50h-49zm59 0h48v50h-48z"/>
   </svg>
-  <button class="about-next" data-route="/tax-system">Tax System →</button>
   <button class="about-back" data-route="/home">Back</button>
   <button class="about-heading" data-route="/home" aria-label="ABOUT — return to HOME" title="Return to HOME">ABOUT</button>
   <nav class="about-sections" aria-label="About sections">
@@ -29,12 +28,6 @@ window.BUREAU_SCENES.about = `
     <button data-about="Regulation" aria-pressed="false">Regulation</button>
     <button data-about="Structure" aria-pressed="false">Structure</button>
   </nav>
-
-  <div class="about-floating-items" aria-hidden="true">
-    <div class="about-item about-flour"><img src="assets/about/flour.svg" alt="" draggable="false"></div>
-    <div class="about-item about-donuts"><img src="assets/about/donuts.svg" alt="" draggable="false"></div>
-    <div class="about-item about-sundae"><img src="assets/about/sundae.svg" alt="" draggable="false"></div>
-  </div>
 
   <article class="about-card" aria-live="polite">
     <h2>{{ABOUT_TITLE}}</h2>

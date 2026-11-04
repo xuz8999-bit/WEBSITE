@@ -398,3 +398,18 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 @keyframes time-to-task-in { 0%,35% { opacity: 0; transform: scale(.4); } 70%,100% { opacity: 1; transform: scale(1); } }
 @keyframes debt-transfer { from { translate: -50% 0; scale: .8; } to { translate: 40% -10%; scale: 1; } }
 @media (prefers-reduced-motion:reduce) { .task-time, .task-broom, .transition-debt .transition-motif { animation: none; } }
+
+/* ABOUT reset matched to the latest clean reference. */
+.about-heading { left: 38%; top: .7%; width: 24%; font-size: 4cqw; }
+.about-sections { left: 15.67%; top: 9.47%; width: 11.33%; gap: 2cqw; }
+.about-sections button { height: 5.33cqw; font-size: 1.65cqw; }
+.about-card { left: 36%; top: 13%; width: 62%; min-height: 25%; padding: 2.1cqw 2.2cqw 1.3cqw; }
+.about-card h2 { font-size: 3.9cqw; }
+.about-card p { font-size: 1.65cqw; line-height: 1.2; margin-top: .65cqw; }
+.about-card::before { animation: none; }
+.about-back { left: 2%; bottom: 3.55%; width: 7.33%; height: 7.1%; font-size: 2.1cqw; }
+.about-heading { top: 2.5%; font-size: 3.4cqw; }
+.about-card { padding-top: 4cqw; padding-left: 3cqw; padding-right: 2.2cqw; }
+.about-card h2 { font-size: 4.2cqw; }
+.about-card p { font-size: 1.9cqw; line-height: 1.1; }
+.about-card { left: 36.67%; width: 61.33%; padding-left: 2.33cqw; }
