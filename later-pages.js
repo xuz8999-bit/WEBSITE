@@ -14,15 +14,16 @@
   const nativeControls=(back,next)=>`<nav class="story-controls source-native-controls" aria-label="Page navigation">${back}${next}</nav>`;
   const frame=(page,label,body='',flags='',art=scenes[page])=>`<main class="scene world ${page} source-story source-${page} ${flags}" aria-label="${label}"><h1 class="sr-only">${label}</h1>${art}${body}</main>`;
   const products=state=>{
-    const displayId=state.basketView&&!sourceIds.includes(state.selected)?'chips':state.selected;
+    const displayId=!sourceIds.includes(state.selected)?'chips':state.selected;
     const item=BUREAU_WORLD.items.find(p=>p.id===displayId)||BUREAU_WORLD.items[2];
+    const checkoutItem=BUREAU_WORLD.items.find(p=>p.id===state.selected)||item;
     const replacement=!sourceIds.includes(item.id);
     const body=sourceIds.map(id=>{
       const shown=id==='chips'&&replacement?item.id:id;
       const p=BUREAU_WORLD.items.find(p=>p.id===shown);
       return `<button class="source-hit source-product-hit${shown===item.id?' selected-product':''}" data-select="${shown}" data-gallery-slot="${id}" aria-label="Select ${esc(p.name)}" aria-pressed="${shown===item.id}" style="${boxStyle(goods[id].bounds)}">${id==='chips'&&replacement?BUREAU_WORLD.icon(item.id,'source-chosen-product'):''}<span class="source-tip">${esc(p.name)} · ${p.tax} min</span></button>`;
     }).join('');
-    const actions=`<nav class="source-product-actions${state.productReady?' is-ready':''}" aria-label="Product actions"><button data-route="/consumption">Back</button><button data-purchase ${state.basketView&&!state.basket.length?'disabled':''}>${state.basketView?`Record selection · ${state.basket.reduce((sum,id)=>sum+(BUREAU_WORLD.items.find(p=>p.id===id)?.tax||0),0)} min`:`Record ${esc(item.name)} · ${item.tax} min`}</button><button data-route="/record">Records →</button></nav>`;
+    const actions=`<nav class="source-product-actions${state.productReady?' is-ready':''}" aria-label="Product actions"><button data-route="/consumption">Back</button><button data-purchase ${state.basketView&&!state.basket.length?'disabled':''}>${state.basketView?`Record selection · ${state.basket.reduce((sum,id)=>sum+(BUREAU_WORLD.items.find(p=>p.id===id)?.tax||0),0)} min`:`Record ${esc(checkoutItem.name)} · ${checkoutItem.tax} min`}</button><button data-route="/record">Records →</button></nav>`;
     return frame('products','Product display',body+actions, replacement?'source-replaced-product':'');
   };
   const record=state=>{
