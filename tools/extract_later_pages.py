@@ -91,6 +91,8 @@ for pn,name in enumerate(['products','record','account','labor','receipt'],1):
    v=[float(x) for x in re.findall(r'[-+]?(?:\d*\.?\d+)(?:[eE][-+]?\d+)?',e.get('transform',''))]
    if len(v)==6 and 330<v[4]<460 and 190<v[5]<246:e.set('class','source-debt-glyph')
  if name=='labor':
+  for label,indexes in {'carton':range(1,6),'cup':range(8,13),'bag':range(13,19),'phone':range(19,27)}.items():
+   for i in indexes:labels[i]='source-labor-object-'+label
   for i in [29,30]:labels[i]='source-worker-leg-'+str(i)
   for i in range(32,37):labels[i]='source-worker-arms'
   for i in range(37,42):labels[i]='source-cart'
