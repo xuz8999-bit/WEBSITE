@@ -415,3 +415,10 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .about-card { left: 36.67%; width: 61.33%; padding-left: 2.33cqw; }
 
 .about-cone-sprite { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+
+/* ABOUT buildings measured from the user's full-resolution house reference. */
+.about-sections { left: 16.62%; top: 11.04%; width: 11.67%; gap: 1.95cqw; }
+.about-sections button { height: 5.5cqw; font-size: 2.15cqw; }
+.about-back { left: 2.58%; top: 86.1%; bottom: auto; width: 7.42%; height: 7.25%; font-size: 2.1cqw; }
+.about-sections [data-about="Background"] { font-size: 1.9cqw; letter-spacing: -.04cqw; }
+.about-sections [data-about="Regulation"] { font-size: 2.05cqw; }
