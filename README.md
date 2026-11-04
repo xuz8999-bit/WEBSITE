@@ -61,3 +61,9 @@ The latest clean ABOUT reference supersedes the floating-food composition. ABOUT
 ## ABOUT original artwork
 
 The user subsequently supplied `甜点.pdf`. Four independent transparent SVGs were extracted directly from its 343 original vector paths and restored to ABOUT. These replace hand-drawn approximations on ABOUT only; other pages continue using their existing assets. Files and extraction provenance: `assets/about/original/`. The clean reference layout, English card, section interactions and Back remain. The cone is drawn in a foreground SVG layer clipped behind the green roof, preserving its PDF colors without the card gradient tinting it.
+
+## Fourth-page reference and ABOUT audio
+
+TAX SYSTEM now uses `tax-scene.js`, a separately drawn four-step reference composition: hands holding a phone; hourglass, plastic bag and open box; a nine-key calculator with arithmetic symbols; and a citizen portrait. Six fixed color bars and three independently animated white links sit behind the cards. The background is an orange-to-cream gradient without grain, preserving the user's earlier texture preference. The bottom-right Continue opens CONSUMPTION; the TAX SYSTEM title also returns to ABOUT. Node illustrations have only small local idle movement.
+
+`illustration-sound.js` generates four short local Web Audio cues for ABOUT: paper rustle, wrapper crinkle, glass ding and a soft cone tap. No audio files, autoplay loops or external services are used. A genuine pointer/keyboard gesture must unlock audio; the small music-note button enables or mutes it and remembers the mute setting. Hover/focus/tap the original objects to play, with a cooldown to prevent overlap. Text and audio-state changes preserve the illustration DOM and floating animations. `tests/tax-and-audio.cjs` verifies the fourth-page layout/Continue/return and all four real hover cues, gesture gating, mute and keyboard behavior.

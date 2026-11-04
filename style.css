@@ -438,3 +438,47 @@ button:focus-visible, a:focus-visible { outline: .5cqw solid #25201c; outline-of
 .home .nav-home span, .home .nav-about span { font-size: 2.2cqw; }
 .home .building-labels { font-size: 2.05cqw; }
 .home .building-labels .menu-item { padding-top: .9cqw; }
+
+/* TAX SYSTEM: measured layout from the user's fourth-page reference. */
+@font-face { font-family: Bureau Title; src: url('fonts/bureau-serif-bold.otf') format('opentype'); font-weight: 700 900; font-display: swap; }
+.tax .world-heading { left: 24%; top: 2.8%; width: 44%; font: 900 4.5cqw/1 'Bureau Title', 'Times New Roman', serif; letter-spacing: -.08cqw; }
+.tax-title button { border: 0; padding: 0; background: transparent; font: inherit !important; letter-spacing: inherit; }
+.tax .tax-subheading { left: 5.4%; top: 15.3%; font: 900 3.55cqw/1 'Bureau Serif',serif; }
+.tax .tax-controls { inset: auto 4.3% 3.6% auto; display: block; }
+.tax .tax-controls .tax-continue { background: transparent; padding: 0; font: 900 3.2cqw/1 'Bureau Title','Times New Roman',serif; }
+.tax-card-hotspot { position: absolute; padding: 0; border: 0; border-radius: 2.3cqw; background: transparent; width: 14.75%; height: 18.35%; }
+.tax-shop-hotspot { left: 6.75%; top: 67.6%; }
+.tax-product-hotspot { left: 30.33%; top: 28.1%; }
+.tax-card-hotspot:hover { outline: .15cqw solid #fffbed99; }
+.tax-phone-breathe { transform-origin: 77px 260px; animation: tax-phone-tilt 6s ease-in-out -2s infinite; }
+.tax-plastic-bag { transform-origin: 228px 143px; animation: tax-item-float 5.5s ease-in-out -1s infinite; }
+.tax-open-box { transform-origin: 247px 143px; animation: tax-item-float 7s ease-in-out -4s infinite; }
+.tax-avatar-head { transform-origin: 523px 132px; animation: tax-head-nod 4s ease-in-out -1.5s infinite; }
+.tax-hourglass-sand { animation: tax-sand-breathe 6s ease-in-out -3s infinite; }
+.tax.world-entering .tax-card-shape, .tax.world-entering .tax-card-art { animation: tax-card-arrive 450ms ease-out both; animation-delay: calc(100ms + var(--step) * 100ms); }
+.tax.world-entering .tax-reference-lines path { animation: line-draw 600ms ease-out both; animation-delay: calc(var(--link) * 110ms); }
+.tax.exit-shelves .tax-plastic-bag { animation: goods-scatter-left 380ms ease-in both; }
+.tax.exit-shelves .tax-open-box { animation: goods-scatter-right 380ms ease-in both; }
+@keyframes tax-phone-tilt { 0%,100% { transform: rotate(-.5deg); } 50% { transform: rotate(.5deg); } }
+@keyframes tax-item-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-.8px); } }
+@keyframes tax-head-nod { 0%,100% { transform: rotate(-.7deg); } 50% { transform: rotate(.7deg); } }
+@keyframes tax-sand-breathe { 0%,100% { opacity: 1; } 50% { opacity: .88; } }
+@keyframes tax-card-arrive { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+ .tax-phone-breathe, .tax-plastic-bag, .tax-open-box, .tax-avatar-head, .tax-hourglass-sand, .tax.world-entering .tax-card-shape, .tax.world-entering .tax-card-art { animation: none; }
+}
+.about-audio-toggle { position: absolute; top: 2.5%; right: 2.2%; z-index: 5; padding: .25cqw .6cqw; border: 0; border-radius: .5cqw; background: transparent; color: #30291d; font: 700 2.7cqw/1 serif; cursor: pointer; }
+.about-audio-toggle:hover { background: #fff8d7; }
+.about-audio-toggle:active { transform: scale(.96); }
+.about-cone-motion[data-about-sound] { pointer-events: visiblePainted; cursor: pointer; }
+.about-item[data-about-sound] { cursor: pointer; }
+.about-item[data-about-sound]:focus-visible { outline: .2cqw solid #8b6a35; outline-offset: .5cqw; }
+.tax .world-heading { top: 4.3%; }
+.tax-title button { transform: scaleX(.84); transform-origin: center; }
+.tax-title button:active { transform: scaleX(.84) scale(.96); }
+.tax .tax-subheading { top: 16%; transform: scaleX(1.08); transform-origin: left center; }
+.tax .tax-controls { bottom: 2.6%; }
+.tax .tax-controls .tax-continue { transform: scaleX(.9); transform-origin: right center; }
+.tax .tax-controls .tax-continue:active { transform: scaleX(.9) scale(.96); }
+.tax .tax-title button { transform: scaleX(.84); }
+.tax .tax-title button:active { transform: scaleX(.84) scale(.96); }

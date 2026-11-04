@@ -21,6 +21,7 @@ window.BUREAU_SCENES.about = `
     <path fill="#00a600" d="M393 239 461 190 600 181.5V239z"/>
     <path fill="#5896e5" d="M469 264h55v50h-55zm70 0h55v50h-55z"/>
   </svg>
+  <button class="about-audio-toggle" data-toggle-sound aria-label="Enable illustration sounds" aria-pressed="false" title="Click to enable illustration sounds">♪</button>
   <button class="about-back" data-route="/home">Back</button>
   <button class="about-heading" data-route="/home" aria-label="ABOUT — return to HOME" title="Return to HOME">ABOUT</button>
   <nav class="about-sections" aria-label="About sections">
@@ -30,11 +31,11 @@ window.BUREAU_SCENES.about = `
     <button data-about="Structure" aria-pressed="false">Structure</button>
   </nav>
 
-  <div class="about-floating-items" aria-hidden="true">
-    <svg class="about-cone-sprite" viewBox="0 0 600 338"><defs><clipPath id="about-roof-front"><path d="M0 0h600v181.5L461 190 393 239H0z"/></clipPath></defs><g clip-path="url(#about-roof-front)"><g class="about-cone-motion"><image href="assets/about/original/cone.svg?v=pdf-original-1" x="514" y="144" width="51" height="96"/></g></g></svg>
-    <div class="about-item about-flour"><img src="assets/about/original/flour.svg?v=pdf-original-1" alt="" draggable="false"></div>
-    <div class="about-item about-donuts"><img src="assets/about/original/donuts.svg?v=pdf-original-1" alt="" draggable="false"></div>
-    <div class="about-item about-sundae"><img src="assets/about/original/sundae.svg?v=pdf-original-1" alt="" draggable="false"></div>
+  <div class="about-floating-items">
+    <svg aria-hidden="false" class="about-cone-sprite" viewBox="0 0 600 338"><defs><clipPath id="about-roof-front"><path d="M0 0h600v181.5L461 190 393 239H0z"/></clipPath></defs><g clip-path="url(#about-roof-front)"><g class="about-cone-motion" data-about-sound="cone" tabindex="0" role="button" aria-label="Play ice cream cone sound"><image href="assets/about/original/cone.svg?v=pdf-original-1" x="514" y="144" width="51" height="96"/></g></g></svg>
+    <div class="about-item about-flour" data-about-sound="flour" tabindex="0" role="button" aria-label="Play flour sound"><img src="assets/about/original/flour.svg?v=pdf-original-1" alt="" draggable="false"></div>
+    <div class="about-item about-donuts" data-about-sound="donuts" tabindex="0" role="button" aria-label="Play donuts sound"><img src="assets/about/original/donuts.svg?v=pdf-original-1" alt="" draggable="false"></div>
+    <div class="about-item about-sundae" data-about-sound="sundae" tabindex="0" role="button" aria-label="Play sundae sound"><img src="assets/about/original/sundae.svg?v=pdf-original-1" alt="" draggable="false"></div>
   </div>
 
   <article class="about-card" aria-live="polite">
