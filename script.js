@@ -57,7 +57,11 @@
     useEffect(()=>{if(routeNow()==='/labor')beginArrival('/labor');},[]);
     useEffect(()=>{const update=e=>setSoundState(e.detail);window.addEventListener('bureau-sound-state',update);return()=>window.removeEventListener('bureau-sound-state',update);},[]);
     useEffect(()=>{document.title=`${routes[route].title} — Convenience Tax Bureau`;},[route]);
-    useEffect(()=>{try{localStorage.setItem('temporal-federation-v1',JSON.stringify({debt:data.debt,selected:data.selected,records:data.records,receipt:data.receipt,basket:data.basket,basketView:data.basketView}));}catch{/* Browsing remains functional without storage. */}},[data]);
+    useEffect(()=>{
+      const refresh=e=>{if(e.key==='temporal-federation-v1'&&e.storageArea===localStorage)setData(d=>({...d,...initial(),receiptPrinted:d.receiptPrinted,receiptPrintDate:d.receiptPrintDate}));};
+      window.addEventListener('storage',refresh);return()=>window.removeEventListener('storage',refresh);
+    },[]);
+    useEffect(()=>{try{const saved=JSON.stringify({debt:data.debt,selected:data.selected,records:data.records,receipt:data.receipt,basket:data.basket,basketView:data.basketView});if(localStorage.getItem('temporal-federation-v1')!==saved)localStorage.setItem('temporal-federation-v1',saved);}catch{/* Browsing remains functional without storage. */}},[data]);
     const respond=target=>{
       if(reduced()||arrival||route!=='/home')return;
       const fruit=target.hasAttribute('data-fruit'),cls=fruit?'fruit-falling':'window-wiggle';
@@ -123,7 +127,7 @@
       if(control.hasAttribute('data-receipt-toggle')){const card=document.querySelector('.source-receipt-summary');const open=card?.classList.toggle('is-open');document.querySelectorAll('[data-receipt-toggle]').forEach(el=>el.setAttribute('aria-expanded',String(!!open)));return;}
       if(control.dataset.receiptPage!==undefined){setData(d=>({...d,receiptPage:Math.max(0,Number(control.dataset.receiptPage)||0)}));return;}
       if(control.dataset.accountStock){const part=control.dataset.accountStock;control.classList.add('stock-tapped');document.querySelectorAll('.source-account-stock-'+part).forEach(el=>{el.style.animation='none';void el.getBoundingClientRect();el.style.animation='';});schedule(()=>control.classList.remove('stock-tapped'),900);return;}
-      if(control.hasAttribute('data-reprint-receipt')){if(control.closest('.source-receipt').classList.contains('receipt-sounding'))return;if(data.receiptPrinted)runPrinter();else setData(d=>({...d,receiptPrinted:true}));return;}
+      if(control.hasAttribute('data-reprint-receipt')){if(control.closest('.source-receipt').classList.contains('receipt-sounding'))return;if(data.receiptPrinted){setData(d=>({...d,receiptPrintDate:new Date().toLocaleString('en-GB')}));runPrinter();}else setData(d=>({...d,receiptPrinted:true,receiptPrintDate:new Date().toLocaleString('en-GB')}));return;}
       if(control.dataset.setMinutes){setData(d=>({...d,minutes:control.dataset.setMinutes,calculatorUsed:true}));return;}
       if(control.dataset.key){const key=control.dataset.key;setData(d=>({...d,calculatorUsed:true,minutes:key==='C'?'':key==='⌫'?d.minutes.slice(0,-1):(d.minutes+key).slice(-3)}));return;}
       if(control.dataset.task!==undefined){setData(d=>({...d,task:Number(control.dataset.task),taskChosen:true}));return;}
@@ -139,7 +143,7 @@
       Regulation: 'Each convenience purchase creates a measurable time debt, recorded in the citizen’s personal time account. Citizens repay the time costs of the convenience they enjoy through labor.',
       Structure: 'Personal time accounts connect consumption with public labor. Citizens repay the time debt created by convenience through work, forming a social system sustained by the circulation of time.'
     };    const page=routes[route].page;
-    useLayoutEffect(()=>{if(page==='receipt'&&data.receiptPrinted)runPrinter();},[page,data.receiptPrinted,data.receiptPage]);
+    useLayoutEffect(()=>{if(page==='receipt'&&data.receiptPrinted)runPrinter();},[page,data.receiptPrinted,data.receiptPage,data.receiptPrintDate]);
     useLayoutEffect(()=>{
       const bag=document.querySelector('[data-open-bag]'),count=document.querySelector('[data-bag-count]'),pocket=document.querySelector('[data-bag-contents]'),removers=document.querySelector('[data-bag-removers]');
       const quantities=new Map();data.basket.forEach(id=>quantities.set(id,(quantities.get(id)||0)+1));

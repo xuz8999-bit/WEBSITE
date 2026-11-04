@@ -54,16 +54,13 @@
     return frame('labor','LABOR',tasks+hit([740,301,1111,579],'data-complete-labor',completeLabel,'source-complete-labor')+nativeControls(hit([69,652,272,734],'data-route="/account"','Back to account'),`<button class="source-hit labor-continue" data-route="/receipt" aria-label="Continue to receipt">Continue <span aria-hidden="true">→</span></button>`)+hit([1133,55,1254,112],'data-route="/receipt"','View receipt'),state.taskChosen?'task-chosen':'');
   };
   const receipt=state=>{
-    const savedReceipt=state.receipt;
-    const isCurrent=!Array.isArray(savedReceipt?.records)||(savedReceipt.records.length===state.records.length&&savedReceipt.records.every((p,i)=>p.id===state.records[i]?.id)&&savedReceipt.balance===state.debt);
-    const r=isCurrent?savedReceipt:null;
-    // Issued receipts keep the records/balance at repayment time. New purchases
-    // show a current preview until labor issues a new receipt. Older saved
-    // receipts have no snapshot, so show their actual current records/balance.
-    const records=(Array.isArray(r?.records)?r.records:state.records).filter(p=>p&&typeof p.name==='string'&&Number.isFinite(p.tax));
-    const balance=Number.isFinite(r?.balance)?r.balance:state.debt;
+    const r=state.receipt;
+    // The displayed sheet always reflects the current ledger and balance.
+    // Keep the latest completed labor details without freezing later purchases.
+    const records=state.records.filter(p=>p&&typeof p.name==='string'&&Number.isFinite(p.tax));
+    const balance=state.debt;
     const repaid=r&&Number.isFinite(r.minutes)?r.minutes:0;
-    const before=Number.isFinite(r?.balanceBefore)?r.balanceBefore:balance+repaid;
+    const before=balance+repaid;
     const tax=records.reduce((sum,p)=>sum+p.tax,0);
     const pageCount=Math.max(1,Math.ceil(records.length/8));
     const pageIndex=Math.min(Math.max(0,state.receiptPage||0),pageCount-1);
@@ -71,7 +68,7 @@
     const text=(x,y,value,size=10,anchor='start',cls='')=>`<text class="${cls}" x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}">${esc(value)}</text>`;
     const rule=y=>`<path d="M534 ${y}H798" fill="none" stroke="currentColor" stroke-width=".65" stroke-dasharray="2 2"/>`;
     const money=(y,label,value)=>text(536,y,label,9.5)+text(796,y,value+' MIN',9.5,'end');
-    const stamp=r?.date||'NOT ISSUED — PREVIEW';
+    const stamp=state.receiptPrintDate||r?.date||'NOT ISSUED — PREVIEW';
     const rows=shown.length?shown.map((p,i)=>{
       const y=364+i*26;
       const name=p.name.length>34?p.name.slice(0,33)+'…':p.name;

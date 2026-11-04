@@ -159,3 +159,6 @@ The selected-only gallery is removed. Opening the blue bag now shows the origina
 ## Remove pending goods from the bag
 
 Each visible selected unit in the blue bag now has a stationary native removal hit area, with a small cream × on hover/focus (always shown on touch). Clicking it removes that exact pending unit and updates the miniature contents and count, without navigating or altering existing records, debt or issued receipts. Repeated products are removed one unit at a time. Clearing the last pending item leaves the original empty bag. The original sixth-page artwork is unchanged.
+
+## Live receipt
+The receipt sheet reads the current consumption ledger and debt, retaining the latest completed labor's task and repaid minutes. The saved labor receipt remains a historical snapshot. Each print uses the current local date/time; no clock tick restarts the paper animation. Changes in another tab synchronize through storage events, with identical writes skipped to prevent feedback loops. Manual printing and sound rays are retained.
