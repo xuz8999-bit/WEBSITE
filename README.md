@@ -123,3 +123,9 @@ Scoped rules in `front-pages.css` retain reduced-motion support. Source WELCOME 
 The first four scenes keep the newly supplied four-page PDF artwork (`front-art.js` / `front-pages.js`). CONSUMPTION and all five subsequent scenes now match deployment `e3c147f` (the user's selected original-PDF deployment), including the original later-page styling, illustration grouping, receipt illustration and interactions. The later-scene files/assets/extractor are restored directly from that commit. The temporary receipt-to-shop routing change was discarded; navigation matches the selected deployment. Stored consumption records are not cleared.
 
 The subsequent v5 printed-receipt check is retained only as a historical feature test in `tests/archive/receipt-records-v5.cjs`, excluded from the current version's test command. Earlier documentation for those later refinements is historical and superseded by this selected-version restoration. The original later-page, complete flow and transition tests are active alongside the new first-four-page checks.
+
+## Receipt exception and HOME fruit order
+
+The requested original later-page deployment remains the baseline, with one explicit exception: RECEIPT again uses the approved v5 real-record content and 2.8-second paper-feed animation. Only that source SVG template, receipt renderer/styles/events and repayment snapshot are restored; CONSUMPTION, products, RECORD, ACCOUNT and LABOR keep the selected deployment. The real-record receipt test is active again.
+
+HOME's beige foreground bush completes its 1.7-second growth before the red fruit fades/scales in at 1.75, 1.88 and 2.01 seconds. All fruit settles before the existing 2.6-second entry ends, retaining hover-to-drop behaviour and reduced-motion. `tests/front-original.cjs` samples actual animation states during growth, after the beige bush finishes but before fruit appears, and after fruit settles.

@@ -133,3 +133,9 @@
 .source-front.welcome { background: linear-gradient(#ef3d0b 12%,#f9f6ed 94%); }
 .source-front.home { background: linear-gradient(#68adf1,#edf1e6); }
 .source-front.tax { background: radial-gradient(ellipse at 50% 48%,#fa662f,#fffbed 76%); }
+
+/* Let the beige bush finish growing before its red fruit appears. */
+.home.entering [data-front-part^="front-home-fruit-"] { transform-box: fill-box; transform-origin: center; animation: front-fruit-appear 420ms ease-out 1750ms both; }
+.home.entering .front-home-fruit-48 { animation-delay: 1880ms; }
+.home.entering .front-home-fruit-46 { animation-delay: 2010ms; }
+@keyframes front-fruit-appear { from { opacity: 0; scale: .65; } to { opacity: 1; scale: 1; } }

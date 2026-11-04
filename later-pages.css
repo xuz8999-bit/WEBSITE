@@ -102,3 +102,24 @@
 
 .source-labor.task-chosen .source-task-hit[aria-pressed="true"] { outline: .15cqw dashed #7f4477; outline-offset: .3cqw; border-radius: .3cqw; }
 .source-part { transition: scale var(--hover-time,240ms) ease; }
+
+/* Feed a rigid original sheet through a fixed outlet mask; never stretch it. */
+.source-receipt .source-replay-control { z-index: 5; }
+.source-receipt.receipt-printing:not(.exiting) .source-paper { animation: source-receipt-feed 2.8s cubic-bezier(.28,.05,.22,1) both; }
+.source-receipt.receipt-printing:not(.exiting) .source-printer { animation: source-printer-feed-tap 160ms ease-in-out 12; }
+@keyframes source-receipt-feed { 0%,5% { translate: 0 -496px; } 100% { translate: 0 0; } }
+@keyframes source-printer-feed-tap { 0%,100% { translate: 0 0; } 35% { translate: .45px 0; } 70% { translate: -.45px 0; } }
+@media (prefers-reduced-motion: reduce) { .source-receipt.receipt-printing .source-part { animation: none !important; } }
+
+
+/* Actual consumption and repayment data travel with the original paper. */
+.receipt-ink { color: #47483e; }
+.receipt-printed-title { font-weight: 700; letter-spacing: .3px; }
+.source-receipt-summary { max-height: 55%; overflow: auto; }
+.source-receipt-summary ul { padding-left: 1.2cqw; }
+.source-receipt .source-receipt-pagination { position: absolute; inset: 0; pointer-events: none; z-index: 6; }
+.source-receipt .source-receipt-pagination .source-hit { pointer-events: auto; }
+.source-receipt-page-prev::after { content: '‹'; }
+.source-receipt-page-next::after { content: '›'; }
+.source-receipt-pagination .source-hit::after { font: 1.5cqw/1 monospace; color: #47483e; }
+.source-receipt-pagination .source-tip { max-width: 14cqw; }
