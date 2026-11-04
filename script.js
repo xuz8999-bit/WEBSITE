@@ -11,6 +11,7 @@
     const [phase, setPhase] = useState('idle');
     const [entering, setEntering] = useState(false);
     const [notice, setNotice] = useState('');
+    const [aboutTab, setAboutTab] = useState('History');
     const locked = useRef(false);
     const timers = useRef(new Set());
     const schedule = (fn, ms) => {
@@ -38,7 +39,7 @@
     }, []);
     useEffect(() => {
       document.title = `${titles[route]} — Convenience Tax Bureau`;
-      if (route !== '/' && route !== '/home') {
+      if (route !== '/' && route !== '/home' && route !== '/about') {
         setNotice(`${titles[route]} — coming soon`);
         schedule(() => setNotice(''), 2200);
       }
@@ -65,11 +66,15 @@
       if (target) { event.preventDefault(); respondToIllustration(target); }
     };
     const onClick = (event) => {
-      const control = event.target.closest('[data-start], [data-nav], [data-action], [data-menu], [data-fruit], [data-window]');
+      const control = event.target.closest('[data-start], [data-nav], [data-action], [data-menu], [data-fruit], [data-window], [data-about], [data-route]');
       if (!control) return;
       event.preventDefault();
       if (locked.current) return;
-      if (control.hasAttribute('data-fruit') || control.hasAttribute('data-window')) {
+      if (control.dataset.about) {
+        setAboutTab(control.dataset.about);
+      } else if (control.dataset.route) {
+        setNotice(''); navigate(control.dataset.route);
+      } else if (control.hasAttribute('data-fruit') || control.hasAttribute('data-window')) {
         respondToIllustration(control);
       } else if (control.hasAttribute('data-start')) {
         locked.current = true;
@@ -93,8 +98,18 @@
         control.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(2px)' }, { transform: 'translateY(0)' }], { duration: reduced() ? 0 : 180 });
       }
     };
-    const page = route === '/' ? 'welcome' : 'home';
-    const markup = BUREAU_SCENES[page].replace(`scene ${page}`, `scene ${page}${phase === 'leaving' && page === 'welcome' ? ' start-playing' : ''}${entering && page === 'home' ? ' entering' : ''}`);
+    const page = route === '/' ? 'welcome' : route === '/about' ? 'about' : 'home';
+    let markup = BUREAU_SCENES[page].replace(`scene ${page}`, `scene ${page}${phase === 'leaving' && page === 'welcome' ? ' start-playing' : ''}${entering && page === 'home' ? ' entering' : ''}`);
+    const aboutCopy = {
+      History: '时序联邦是一个以“时间”为核心资源的未来国家。便利税将消费背后的公共劳动成本转化为时间债务，记入个人账户；公民通过劳动偿还，让时间在社会中循环。',
+      Background: '科技与便利服务为人们节省了个人时间，但消费之后的垃圾处理、资源消耗与公共劳动成本，却逐渐成为社会共同承担的负担。时序联邦由此开始重新分配便利背后被隐藏的劳动成本。',
+      Regulation: '政府建立“便利税”制度，将每一次便利消费转化为可计算的时间债务，并记录在公民的个人时间账户中。公民通过劳动偿还自己享受便利所产生的时间成本。',
+      Structure: '便利消费产生的时间债务记录在公民的个人时间账户中，公民通过劳动偿还债务。个人时间、消费与公共劳动由此相互连接，形成一个依靠时间循环维持运转的社会系统。'
+    };
+    if (page === 'about') {
+      markup = markup.replace('{{ABOUT_TITLE}}', aboutTab === 'History' ? 'Temporal Federation' : aboutTab).replace('{{ABOUT_COPY}}', aboutCopy[aboutTab]);
+      markup = markup.replace(/data-about="([^"]+)" aria-pressed="(?:true|false)"/g, (_, label) => `data-about="${label}" aria-pressed="${label === aboutTab}"`);
+    }
     return h('div', { className: 'transition-stage', onClick, onPointerOver, onKeyDown, 'aria-busy': phase !== 'idle' },
       h('div', { className: 'scene-content', dangerouslySetInnerHTML: { __html: markup } }),
       phase !== 'idle' && h('div', { className: 'transition-mask', 'aria-hidden': true }),
