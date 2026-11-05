@@ -42,9 +42,9 @@
 .background-copy .front-about-original-title { visibility: visible; }
 .source-front.about .about-card { left: 39.7%; top: 19.0%; width: 56.5%; min-height: 0; padding: 0; background: none; border-radius: 0; color: #080705; z-index: 1; }
 .source-front.about .about-card::before { display: none; }
-.source-front.about .about-card h2 { margin: 0; white-space: nowrap; font: 400 3.674cqw/1.1 'Source Broadway',serif; letter-spacing: 0; }
+.source-front.about .about-card h2 { margin: 0; white-space: nowrap; font: 400 3.674cqw/1.1 'Tax Fatface',serif; letter-spacing: 0; }
 .source-front.about.background-copy .about-card h2 { visibility: hidden; }
-.source-front.about .about-card p { position: absolute; top: 5.2cqw; left: 0; width: 100%; margin: 0; font: 400 1.9cqw/1.18 'Times New Roman',serif; overflow-wrap: normal; }
+.source-front.about .about-card p { position: absolute; top: 5.2cqw; left: 0; width: 100%; margin: 0; font: 400 1.9cqw/1.18 'Times New Roman',serif; white-space: normal; overflow-wrap: anywhere; }
 .source-front.about .about-card:hover { translate: none; }
 .front-about-tab-History { transform-origin: 306px 123px; }
 .front-about-tab-Background { transform-origin: 307px 227px; }
